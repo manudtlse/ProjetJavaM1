@@ -28,9 +28,9 @@ public class gestionProtocole {
         		try {
                             
             		//creerCompte(param[1], Double.parseDouble(param[2]));
-                        
+                       
                         // ce qui correspond à mettre en base de données
-                                                
+                          // Soit on met les foncion ici, soit on les met dans annuiaire et ici on appel les fonction                       
             		resultat = "OK CREATION";
         		} catch (Exception e) {
         			resultat = "ERREUR CREATION";
