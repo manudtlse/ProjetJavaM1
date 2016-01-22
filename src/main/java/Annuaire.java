@@ -8,20 +8,26 @@
  *
  * @author Emmanuel Ménat
  */
+
+
+//http://blog.paumard.org/cours/jdbc/chap02-apercu-exemple.html
+
+
 import java.sql.*;
 import java.util.*;
 
 
 public class Annuaire {
+   
 	
 	Connection conn;
 	
 	public Annuaire(String nomAnnuaire) {
 		try {
 		    Class.forName("com.mysql.jdbc.Driver");
-		    conn = DriverManager.getConnection("jdbc:mysql://localhost/"+nomAnnuaire+"", "root", "");
+		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/"+nomAnnuaire+"", "root", "");
 		    // on cree un objet Statement qui va permettre l'execution des requetes
-	        Statement s = conn.createStatement();
+	        Statement s = con.createStatement();
 	
 	        // On regarde si la table existe deja
 	        String query = "select * from ANNUAIRE limit 1";
@@ -35,9 +41,6 @@ public class Annuaire {
 	        			" eMail VARCHAR( 256 ) NOT NULL)");
 	        	// on ajoute des entrees de test
 	        	s.executeUpdate("insert into ANNUAIRE values ('Toto', '0561123456', 'toto@ici.com')");
-	        	s.executeUpdate("insert into ANNUAIRE values ('Titi', '0561123457', 'titi@ici.com')");
-	        	s.executeUpdate("insert into ANNUAIRE values ('Tata', '0561123458', 'tata@ici.com')");
-	        	s.executeUpdate("insert into ANNUAIRE values ('Tutu', '0561123459', 'tutu@ici.com')");
 	        }
 		} catch(Exception e) {
 			// il y a eu une erreur
