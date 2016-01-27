@@ -145,25 +145,14 @@ public class IHM extends javax.swing.JFrame {
 
             // Identification de manu! RECUPERER LES DROITS A LA PLACE DE LOLO
             Identification id = new Identification(identifiant, mdp);
-
-
-
-
-
-
-
-
-
-
-            /*
-            // Mise en forme de la requete
-            String sql = "SELECT login FROM Compte WHERE password = "+jTextPane2.getText();
-            // Resultat de la requete
-            ResultSet rs = st.executeQuery(sql);
-            if (rs != null)
-            { 
-                // TRAITEMENT SI OK : OUVERTURE NOUVELLE FENETRE AVEC INFOS
-            }  */
+            if (id.connexion() == -1)
+            {
+                // message erreur
+            }
+            else
+            {
+                // direction page informations
+            }
         }
         catch (ClassNotFoundException | SQLException ex)
         {
