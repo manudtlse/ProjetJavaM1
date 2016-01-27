@@ -36,7 +36,7 @@ public class client extends Object {
       leSocket = new Socket("localhost", 2001); // socket sur echo
       
       // On affiche que la connexion est réalisée
-      System.err.println("ConnectÃ© sur : "+leSocket);
+      System.err.println("Connecte sur : "+leSocket);
       
       // Partie Socket
       fluxSortieSocket = new PrintStream(leSocket.getOutputStream());
