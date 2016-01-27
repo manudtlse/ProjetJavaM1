@@ -36,7 +36,8 @@ public class Inscription
                  try 
                  {
                     Class.forName("com.mysql.jdbc.Driver");
-                    Connection con =null;
+                    Connection con;
+                    con = null;
                     con = DriverManager.getConnection(url1, bdlogin, bdmdp);
                     Statement s = con.createStatement();
                     try {
@@ -59,7 +60,7 @@ public class Inscription
 		} 
                 catch(ClassNotFoundException | SQLException e) 
                 {
-                    System.out.println("Erreur"+e.getMessage());
+                    System.out.println("Erreur : "+e.getMessage());
                 }
                 return resultat;
         }
