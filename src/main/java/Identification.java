@@ -1,8 +1,6 @@
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,109 +15,34 @@ import java.sql.Statement;
 public class Identification {
     Connection conn;
 	
-	public Identification(String login,String mdp) {
+	public Identification(String identifiant,String mdp,String droits) {
 		try {
 		    Class.forName("com.mysql.jdbc.Driver");
 		    Connection con = DriverManager.getConnection("jdbc:mysql://binary-digit.net:3305/ServeurIdentification", "yahimenat", "odaime");
 		    // on cree un objet Statement qui va permettre l'execution des requetes
 	        Statement s = con.createStatement();
-	
-	        // On regarde si la table existe deja
-	        String query = "select * from profil limit 1";
 	        try {
-	        	s.executeQuery(query);
+	        	ResultSet compteID;
+                        compteID = s.executeQuery("SELECT id_compte FROM compte WHERE login = "+identifiant+" AND  password="+mdp+";)");
 	        } catch(Exception e) {
 	        	// sinon on l'a cree
-	        	s.execute("create table ANNUAIRE  ( " +
-	        			" nom VARCHAR( 256 ) NOT NULL PRIMARY KEY, " +
-	        			" telephone VARCHAR( 32 ) NOT NULL , " +
-	        			" eMail VARCHAR( 256 ) NOT NULL)");
-	        	// on ajoute des entrees de test
-	        	s.executeUpdate("insert into ANNUAIRE values ('Toto', '0561123456', 'toto@ici.com')");
+	               
 	        }
-		} catch(Exception e) {
-			// il y a eu une erreur
-			e.printStackTrace();
+		} catch(ClassNotFoundException | SQLException e) {
 		}
 	}
-
-	public String lireInfos(String nom) {
-		try {
-			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery("select * from ANNUAIRE where nom = '"+nom+"'");
-	        if (rs.next()) {
-	        	return rs.getString("nom")+":"+rs.getString("telephone")+":"+rs.getString("eMail");
-	        } else {
-	        	return null;
-	        }
-		} catch(Exception ex) {
-			// il y a eu une erreur
-			ex.printStackTrace();
-			return null;
-		}
-	}
-
-	public boolean ajoutInfos(String infos) {
-		try {
-			String [] tab = infos.split(":");
-			if(tab.length != 3) 
-				return false;
-			String nom = tab[0];
-			String telephone = tab[1];
-			String eMail = tab[2];
-			
-			Statement s = conn.createStatement();
-			if (s.executeUpdate("insert into ANNUAIRE values ('"+nom+"', '"+telephone+"', '"+eMail+"')")==1)
-				return true;
-			else
-				return false;
-		} catch(Exception ex) {
-			// il y a eu une erreur
-			ex.printStackTrace();
-			return false;
-		}
-	}
-
-	public boolean majInfos(String infos) {
-		try {
-			String [] tab = infos.split(":");
-			if(tab.length != 3) 
-				return false;
-			String nom = tab[0];
-			String telephone = tab[1];
-			String eMail = tab[2];
-			
-			Statement s = conn.createStatement();
-			if (s.executeUpdate("update ANNUAIRE set telephone='"+telephone+"', eMail='"+eMail+"' where nom='"+nom+"'")==1)
-				return true;
-			else
-				return false;	
-		} catch(Exception ex) {
-			// il y a eu une erreur
-			ex.printStackTrace();
-			return false;
-		}
-	}
-	
+        //Fermer connection
 	public void fermer() throws Exception {		
 		try {
 			conn.close();
 		} catch(Exception ex) {
-			// il y a eu une erreur
-			ex.printStackTrace();
 		}
 	}
 	
 	public static void main(String[] args) throws Exception {
-		Annuaire annu = new Annuaire("annu");
-		System.out.println(annu.lireInfos("Toto"));
-		System.out.println(annu.lireInfos("Bobby"));
-		annu.ajoutInfos("Bobby:1234:bob@truc.com");
-		System.out.println(annu.lireInfos("Bobby"));
-		annu.majInfos("Bobby:12345678:bob@truc.net");
-		System.out.println(annu.lireInfos("Bobby"));
-		annu.fermer();		
+	    Identification ident;
+            ident = new Identification("profil3","mdp3","admin");
 	}
 }
     
-}
+
