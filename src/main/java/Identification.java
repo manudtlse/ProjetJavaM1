@@ -14,9 +14,15 @@ import java.util.*;
  */
 public class Identification {
     Connection conn;
-	
-	public Identification(String identifiant,String mdp,String droits) {
-		try {
+	private String identifiant;
+        private String mdp;
+	public Identification(String identifiant,String mdp) {
+            this.identifiant=identifiant;
+            this.mdp=mdp;
+		}
+        
+        public void connexion(){  
+                 try {
 		    Class.forName("com.mysql.jdbc.Driver");
 		    Connection con = DriverManager.getConnection("jdbc:mysql://binary-digit.net:3305/ServeurIdentification", "yahimenat", "odaime");
 		    // on cree un objet Statement qui va permettre l'execution des requetes
@@ -30,7 +36,7 @@ public class Identification {
 	        }
 		} catch(ClassNotFoundException | SQLException e) {
 		}
-	}
+}
         //Fermer connection
 	public void fermer() throws Exception {		
 		try {
@@ -41,7 +47,7 @@ public class Identification {
 	
 	public static void main(String[] args) throws Exception {
 	    Identification ident;
-            ident = new Identification("profil3","mdp3","admin");
+            ident = new Identification("profil3","mdp3");
 	}
 }
     
