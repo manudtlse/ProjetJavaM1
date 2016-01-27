@@ -14,7 +14,11 @@ import java.util.*;
  */
 public class Identification 
 {
-    Connection conn;
+        String url1="jdbc:mysql://binary-digit.net:3305/ServeurIdentification";
+        String url2="jdbc:mysql://binary-digit.net:3306/ServeurAnnuaire";
+        String bdlogin="yahimenat";
+        String bdmdp="odaime";
+        Connection conn;
 	private String identifiant;
         private String mdp;
 	
@@ -30,7 +34,7 @@ public class Identification
                  try 
                  {
                     Class.forName("com.mysql.jdbc.Driver");
-                    Connection con = DriverManager.getConnection("jdbc:mysql://binary-digit.net:3305/ServeurIdentification", "yahimenat", "odaime");
+                    Connection con = DriverManager.getConnection(url1,bdlogin,bdmdp);
                     // on cree un objet Statement qui va permettre l'execution des requetes
                      Statement s = con.createStatement();
                     try {
@@ -47,26 +51,33 @@ public class Identification
                         } 
                     catch(Exception e) 
                     {
-                    // sinon on l'a cree
+                        System.out.println("Erreur"+e.getMessage());
 	               
                     }
 		} 
                 catch(ClassNotFoundException | SQLException e) 
                 {
+                     System.out.println("Erreur"+e.getMessage());
 		}
             return resultat;
         }
         //Fermer connection
-	public void fermer() throws Exception {		
-		try {
+	public void fermer() throws Exception 
+        {		
+		try 
+                {
 			conn.close();
-		} catch(Exception ex) {
+		} 
+                catch(Exception ex) 
+                {
 		}
 	}
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception 
+        {
 	    Identification ident;
             ident = new Identification("profil3","mdp3");
+            ident.connexion();
 	}
 }
     
