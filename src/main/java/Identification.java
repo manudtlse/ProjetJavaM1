@@ -76,7 +76,7 @@ public class Identification
 	public static void main(String[] args) throws Exception 
         {
             int res;
-            res = 999;
+            res = 0;
 	    Identification ident;
             ident = new Identification("profil2","mdp1");
             res=ident.connexion();

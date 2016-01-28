@@ -22,38 +22,13 @@ public class Annuaire {
         private String url2="jdbc:mysql://binary-digit.net:3306/yahimenat";//ServeurAnnuaire
         private String bdlogin="yahimenat";
         private String bdmdp="odaime";
-	private String identifiant;
-        
-        private String mdp;
-        private String droits;
+	
 	
 	Connection conn;
 	
-	public Annuaire(String nomAnnuaire) {
-		try {
-		    Class.forName("com.mysql.jdbc.Driver");
-		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/"+nomAnnuaire+"", "root", "");
-		    // on cree un objet Statement qui va permettre l'execution des requetes
-	        Statement s = con.createStatement();
-	
-	        // On regarde si la table existe deja
-	        String query = "select * from ANNUAIRE limit 1";
-	        try {
-	        	s.executeQuery(query);
-	        } catch(Exception e) {
-	        	// sinon on l'a cree
-	        	s.execute("create table ANNUAIRE  ( " +
-	        			" nom VARCHAR( 256 ) NOT NULL PRIMARY KEY, " +
-	        			" telephone VARCHAR( 32 ) NOT NULL , " +
-	        			" eMail VARCHAR( 256 ) NOT NULL)");
-	        	// on ajoute des entrees de test
-	        	s.executeUpdate("insert into ANNUAIRE values ('Toto', '0561123456', 'toto@ici.com')");
-	        }
-		} catch(Exception e) {
-			// il y a eu une erreur
-			e.printStackTrace();
-		}
-	}
+	public Annuaire() 
+        {
+        }
 
 	public String lireInfos(String nom) {
 		try {
