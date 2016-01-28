@@ -14,13 +14,13 @@ import java.util.*;
  */
 public class Identification 
 {
-        String url1="jdbc:mysql://binary-digit.net:3305/ServeurIdentification";
-        String url2="jdbc:mysql://binary-digit.net:3306/ServeurAnnuaire";
-        String bdlogin="yahimenat";
-        String bdmdp="odaime";
-        Connection conn;
+    private String url1="jdbc:mysql://binary-digit.net:3305/yahimenat";//ServeurIdentification
+        private String url2="jdbc:mysql://binary-digit.net:3306/yahimenat";//ServeurAnnuaire
+        private String bdlogin="yahimenat";
+        private String bdmdp="odaime";
 	private String identifiant;
         private String mdp;
+        Connection conn;
 	
        public Identification(String identifiant,String mdp) 
         {

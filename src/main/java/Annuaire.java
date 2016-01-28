@@ -18,7 +18,14 @@ import java.util.*;
 
 
 public class Annuaire {
-   
+        private String url1="jdbc:mysql://binary-digit.net:3305/yahimenat";//ServeurIdentification
+        private String url2="jdbc:mysql://binary-digit.net:3306/yahimenat";//ServeurAnnuaire
+        private String bdlogin="yahimenat";
+        private String bdmdp="odaime";
+	private String identifiant;
+        
+        private String mdp;
+        private String droits;
 	
 	Connection conn;
 	
@@ -115,14 +122,5 @@ public class Annuaire {
 		}
 	}
 	
-	public static void main(String[] args) throws Exception {
-		Annuaire annu = new Annuaire("annu");
-		System.out.println(annu.lireInfos("Toto"));
-		System.out.println(annu.lireInfos("Bobby"));
-		annu.ajoutInfos("Bobby:1234:bob@truc.com");
-		System.out.println(annu.lireInfos("Bobby"));
-		annu.majInfos("Bobby:12345678:bob@truc.net");
-		System.out.println(annu.lireInfos("Bobby"));
-		annu.fermer();		
-	}
+	
 }

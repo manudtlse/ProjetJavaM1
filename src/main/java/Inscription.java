@@ -15,8 +15,8 @@ import java.util.*;
 public class Inscription
 {
     Connection conn;
-        private String url1="jdbc:mysql://binary-digit.net:3305/ServeurIdentification";
-        private String url2="jdbc:mysql://binary-digit.net:3306/ServeurAnnuaire";
+        private String url1="jdbc:mysql://binary-digit.net:3305/yahimenat";//ServeurIdentification
+        private String url2="jdbc:mysql://binary-digit.net:3306/yahimenat";//ServeurAnnuaire
         private String bdlogin="yahimenat";
         private String bdmdp="odaime";
 	private String identifiant;
@@ -35,17 +35,16 @@ public class Inscription
             int resultat = 0;
                  try 
                  {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    Connection con;
-                    con = null;
-                    con = DriverManager.getConnection(url1, bdlogin, bdmdp);
-                    Statement s = con.createStatement();
+                      Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url1,bdlogin,bdmdp);
+                    // on cree un objet Statement qui va permettre l'execution des requetes
+                     Statement s = con.createStatement();
                     try {
                             ResultSet Result;
-                            Result = s.executeQuery("SELECT login,password WHERE login = "+identifiant+" AND  password="+mdp+";)");
+                            Result = s.executeQuery("SELECT login,password FROM compte WHERE login = '"+identifiant+"' AND  password='"+mdp+"';");
                             if (!Result.next())
                             {
-                                s.executeUpdate("insert into COMPTE values (identifiant,mdp,droits)");
+                                s.executeUpdate("insert into COMPTE(login,password,droit) values ('"+identifiant+"','"+mdp+"','"+droits+"');");
                                 resultat=1;              
                             } 
                             else 
@@ -67,7 +66,7 @@ public class Inscription
         public static void main(String[] args) throws Exception 
         {
 	    Inscription in1;
-            in1 = new Inscription("prof1","mdp1","admin");
+            in1 = new Inscription("prof2","mdp2","admin");
             in1.Inscription();
 	}
 }
