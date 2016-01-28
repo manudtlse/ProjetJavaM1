@@ -39,7 +39,7 @@ public class Identification
                      Statement s = con.createStatement();
                     try {
                             ResultSet compteID;
-                            compteID = s.executeQuery("SELECT id_compte FROM compte WHERE login = "+identifiant+" AND  password="+mdp+";)");
+                            compteID = s.executeQuery("SELECT id_compte FROM compte WHERE login = '"+identifiant+"' AND  password='"+mdp+"';");
                             if (!compteID.next())
                             {
                                 resultat=-1;
@@ -75,9 +75,12 @@ public class Identification
 	
 	public static void main(String[] args) throws Exception 
         {
+            int res;
+            res = 999;
 	    Identification ident;
-            ident = new Identification("profil3","mdp3");
-            ident.connexion();
+            ident = new Identification("profil2","mdp1");
+            res=ident.connexion();
+            System.out.println("resultat : "+res);
 	}
 }
     
