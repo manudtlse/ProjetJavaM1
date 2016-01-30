@@ -1,4 +1,5 @@
 
+import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -112,7 +113,9 @@ public class AcceuilConnecte extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-       
+       Annuaire in1=new Annuaire();
+       String text=jTextField1.getText();
+        System.out.println(in1.lireInfos(parseInt(text)));
         
     }//GEN-LAST:event_jTextField1ActionPerformed
 
