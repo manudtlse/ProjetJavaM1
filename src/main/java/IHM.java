@@ -25,9 +25,8 @@ import javax.swing.JPanel;
  */
 public class IHM extends javax.swing.JFrame {
 
-    String url = " jdbc:mysql://binary-digit.net:3305/ServeurIdentification";
-    String url2 = "jdbc:mysql://binary-digit.net:3305/ServeurAnnuaire";
-   
+    String url = "jdbc:mysql://binary-digit.net:3305/yahimenat";
+    String url2 = "jdbc:mysql://binary-digit.net:3306/yahimenat";
     String loginBDD = "yahimenat";
     String passwordBDD = "odaime";
    
@@ -147,7 +146,8 @@ public class IHM extends javax.swing.JFrame {
             Identification id = new Identification(identifiant, mdp);
             if (id.connexion() == -1)
             {
-                // message erreur
+                jTextPane1.setText("");
+                jTextPane2.setText("");
             }
             else
             {
