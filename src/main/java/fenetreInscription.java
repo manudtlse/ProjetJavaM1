@@ -2,6 +2,7 @@
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -146,6 +147,25 @@ public class fenetreInscription extends javax.swing.JFrame {
         String password = jTextField2.getText();        
         String droits = jList1.getSelectedValue();
         
+        
+        Inscription insc = new Inscription(login,password,droits);
+        if(insc.Inscription() == 1)
+        {
+            this.setVisible(false);
+            try 
+            {
+                new IHM().setVisible(true);
+            } 
+            catch (SQLException ex)
+            {
+                Logger.getLogger(fenetreInscription.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Erreur lors de l'inscription, login déjà utilisé");
+        }
+         
         //Faire le insert !!!!!!
         
         

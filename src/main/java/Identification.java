@@ -14,7 +14,7 @@ import java.util.*;
  */
 public class Identification 
 {
-    private String url1="jdbc:mysql://binary-digit.net:3305/yahimenat";//ServeurIdentification
+        private String url1="jdbc:mysql://binary-digit.net:3305/yahimenat";//ServeurIdentification
         private String url2="jdbc:mysql://binary-digit.net:3306/yahimenat";//ServeurAnnuaire
         private String bdlogin="yahimenat";
         private String bdmdp="odaime";

@@ -35,20 +35,21 @@ public class Inscription
             int resultat = 0;
                  try 
                  {
-                      Class.forName("com.mysql.jdbc.Driver");
+                    Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url1,bdlogin,bdmdp);
                     // on cree un objet Statement qui va permettre l'execution des requetes
                      Statement s = con.createStatement();
                     try {
                             ResultSet Result;
-                            Result = s.executeQuery("SELECT login,password FROM compte WHERE login = '"+identifiant+"' AND  password='"+mdp+"';");
+                            Result = s.executeQuery("SELECT login FROM yahimenat.compte WHERE login = '"+identifiant+";");
                             if (!Result.next())
                             {
                                 s.executeUpdate("insert into COMPTE(login,password,droit) values ('"+identifiant+"','"+mdp+"','"+droits+"');");
-                                resultat=1;              
+                                resultat=1;
                             } 
                             else 
                             {
+                                
                                 resultat=-1;
                             }
                         } 
