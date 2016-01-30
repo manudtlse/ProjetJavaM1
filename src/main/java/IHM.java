@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -152,7 +153,7 @@ public class IHM extends javax.swing.JFrame {
             {
                 jTextPane1.setText("");
                 jTextPane2.setText("");
-                //Ajouter text d'erreur (si temps OK)
+                JOptionPane.showMessageDialog(this,"Compte inexistant, veuillez retapez vos identifiants ou inscrivez vous");
             }
             else
             {
