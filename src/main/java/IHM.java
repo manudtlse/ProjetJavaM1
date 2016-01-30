@@ -1,4 +1,5 @@
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -10,6 +11,8 @@ import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+
 
 
 
@@ -33,6 +36,7 @@ public class IHM extends javax.swing.JFrame {
     
     /**
      * Creates new form IHM
+     * @throws java.sql.SQLException
      */
     public IHM() throws SQLException {
         initComponents();
@@ -148,10 +152,12 @@ public class IHM extends javax.swing.JFrame {
             {
                 jTextPane1.setText("");
                 jTextPane2.setText("");
+                //Ajouter text d'erreur (si temps OK)
             }
             else
             {
-                // direction page informations
+                new AcceuilConnecte().setVisible(true);
+                this.setVisible(false); 
             }
         }
         catch (ClassNotFoundException | SQLException ex)
