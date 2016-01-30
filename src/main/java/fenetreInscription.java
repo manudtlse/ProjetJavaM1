@@ -149,7 +149,7 @@ public class fenetreInscription extends javax.swing.JFrame {
         
         
         Inscription insc = new Inscription(login,password,droits);
-        if(insc.Inscription() == 1)
+        if(insc.Inscription()==1)
         {
             this.setVisible(false);
             try 

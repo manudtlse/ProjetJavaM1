@@ -41,7 +41,7 @@ public class Inscription
                      Statement s = con.createStatement();
                     try {
                             ResultSet Result;
-                            Result = s.executeQuery("SELECT login FROM yahimenat.compte WHERE login = '"+identifiant+";");
+                            Result = s.executeQuery("SELECT login FROM yahimenat.compte WHERE login ='"+identifiant+"';");
                             if (!Result.next())
                             {
                                 s.executeUpdate("insert into COMPTE(login,password,droit) values ('"+identifiant+"','"+mdp+"','"+droits+"');");
