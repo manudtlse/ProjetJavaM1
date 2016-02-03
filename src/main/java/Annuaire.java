@@ -62,9 +62,9 @@ public class Annuaire {
 		}
 	}
 
-	public boolean ajoutInfos(String infos) {
+	public boolean creationProfilEtudiant(String infos) {
 		try {
-			String [] tab = infos.split(":");
+			String [] tab = infos.split(" ");
 			if(tab.length != 6) 
 				return false;
                         String nom_etudiant = tab[0];
@@ -78,6 +78,7 @@ public class Annuaire {
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
 			Statement s = con.createStatement();
+
 			if (s.executeUpdate("INSERT INTO profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence) VALUES ('"+tab[0]+"','"+tab[1]+"','"+tab[2]+"','"+tab[3]+"','"+tab[4]+"','"+id_competence+"');")==1)
                             return true;
 			else
@@ -133,7 +134,7 @@ public class Annuaire {
             an1 = new Annuaire();
             resultat=an1.lireInfos(1);
             System.out.println("Résultat : "+resultat);
-            result=an1.ajoutInfos("nom2:prenom2:18/12/1993:nom2.prenom2@gmail.com:0665758387:1");
+            result=an1.creationProfilEtudiant("nom2:prenom2:18/12/1993:nom2.prenom2@gmail.com:0665758387:1");
             an1.majInfos("5:nom4:prenom4:18/12/1993:nom4.prenom4@gmail.com:0665758387:1");
             System.out.println(result);
 	}	

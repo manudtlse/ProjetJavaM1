@@ -4,7 +4,7 @@ import java.io.*;
 /** 
  * @author  Emmanuel Menat - Selim Yahi
  */
-public class serveur extends Thread {
+public class serveurIdentification extends Thread {
 
   /** Port par defaut */
   public final static int portEcho = 2001;
@@ -18,6 +18,7 @@ public class serveur extends Thread {
     PrintStream     fluxSortieSocket;
     BufferedReader  fluxEntreeSocket;
     gestionProtocole gestion = new gestionProtocole();
+    gestionProtocoleEtudiants gestion2 = new gestionProtocoleEtudiants();
     
     try {
       leServeur = new ServerSocket(portEcho);
@@ -43,23 +44,28 @@ public class serveur extends Thread {
     {
      try {
       System.err.println("En attente de connexion sur le port : "+leServeur.getLocalPort());
+      connexionCourante = leServeur.accept();
+      System.err.println("Nouvelle connexion : " + connexionCourante);
       while (true) {
-        connexionCourante = leServeur.accept();
+       
         
-        System.err.println("Nouvelle connexion : " + connexionCourante);
+       
         
         //recevoir chaine caractere
         fluxSortieSocket = new PrintStream(connexionCourante.getOutputStream());
         fluxEntreeSocket = new BufferedReader(new InputStreamReader(connexionCourante.getInputStream()));
         
-        String requete = fluxEntreeSocket.readLine();  
-        System.out.println(requete);
-        String resultat = gestion.travaille(requete);
+        System.out.println("Requete recue :");
+        String requeteRecue = fluxEntreeSocket.readLine();  
+        System.out.println(requeteRecue);
+        
+        
+        String resultat = gestion.travaille(requeteRecue);
         
         //Afficher requete de resultat
         fluxSortieSocket.println(resultat);
 
-        connexionCourante.close();
+       
       }
     }
     catch (Exception ex)
