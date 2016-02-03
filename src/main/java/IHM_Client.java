@@ -156,7 +156,7 @@ public class IHM_Client extends javax.swing.JFrame {
                 System.out.println(retour);
                 
                 
-                String [] param = retour.split(" ");
+                String []param = retour.split(" ");
                 if (param[0]=="NONOKCONNEXION")
                 {
                 jTextPane1.setText("");

@@ -80,7 +80,7 @@ public class gestionProtocole {
                             }
                             else 
                             {
-                                resultat = "OKCONNEXION " + id;
+                                resultat = "OKCONNEXION " + id.toString();
                             }
                         }
                         catch (Exception e) 

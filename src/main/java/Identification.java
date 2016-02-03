@@ -2,6 +2,8 @@
 import java.sql.*;
 import java.util.*;
 
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,6 +23,7 @@ public class Identification
 	private String identifiant;
         private String mdp;
         Connection conn;
+        public int id_compte_resultat=0;
 	
        public Identification(String identifiant,String mdp) 
         {
@@ -30,7 +33,7 @@ public class Identification
         
         public int connexion()
         {  
-            int resultat = 0;
+            
                  try 
                  {
                     Class.forName("com.mysql.jdbc.Driver");
@@ -42,11 +45,11 @@ public class Identification
                             compteID = s.executeQuery("SELECT id_compte FROM compte WHERE login = '"+identifiant+"' AND  password='"+mdp+"';");
                             if (!compteID.next())
                             {
-                                resultat=-1;
+                                id_compte_resultat=-1;
                             } 
                             else 
                             {
-                                resultat=compteID.getInt("id_compte");
+                                id_compte_resultat=compteID.getInt("id_compte");
                             }
                         } 
                     catch(Exception e) 
@@ -59,7 +62,7 @@ public class Identification
                 {
                      System.out.println("Erreur"+e.getMessage());
 		}
-            return resultat;
+            return id_compte_resultat;
         }
         //Fermer connection
 	public void fermer() throws Exception 
