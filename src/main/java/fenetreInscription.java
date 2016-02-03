@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,10 +155,12 @@ public class fenetreInscription extends javax.swing.JFrame {
             this.setVisible(false);
             try 
             {
-                new IHM().setVisible(true);
+                new IHM_Client().setVisible(true);
             } 
             catch (SQLException ex)
             {
+                Logger.getLogger(fenetreInscription.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(fenetreInscription.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -179,7 +182,9 @@ public class fenetreInscription extends javax.swing.JFrame {
     //BOUTN ANNULER
     private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
         try {
-            new IHM().setVisible(true);
+            new IHM_Client().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(fenetreInscription.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(fenetreInscription.class.getName()).log(Level.SEVERE, null, ex);
         }

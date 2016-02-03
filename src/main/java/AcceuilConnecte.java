@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.lang.Integer.parseInt;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -35,11 +37,6 @@ public class AcceuilConnecte extends javax.swing.JFrame {
      */
     public AcceuilConnecte() {
         initComponents();
-        jTable1.getColumnModel().getColumn(0).setHeaderValue("Numéro étudiant");
-        jTable1.getColumnModel().getColumn(1).setHeaderValue("Nom");
-        jTable1.getColumnModel().getColumn(2).setHeaderValue("Prénom");
-        jTable1.getColumnModel().getColumn(3).setHeaderValue("Date naissance");
- 
     }
 
     /**
@@ -56,8 +53,8 @@ public class AcceuilConnecte extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,18 +90,9 @@ public class AcceuilConnecte extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,8 +100,8 @@ public class AcceuilConnecte extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -137,6 +125,7 @@ public class AcceuilConnecte extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -146,9 +135,9 @@ public class AcceuilConnecte extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(144, 144, 144)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -156,8 +145,10 @@ public class AcceuilConnecte extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            new IHM().setVisible(true);
+            new IHM_Client().setVisible(true);
         } catch (SQLException ex) {
+            Logger.getLogger(AcceuilConnecte.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(AcceuilConnecte.class.getName()).log(Level.SEVERE, null, ex);
         }
                 this.setVisible(false); 
@@ -193,15 +184,18 @@ public class AcceuilConnecte extends javax.swing.JFrame {
                             ResultSet rs = s.executeQuery(sql);
                             while (rs.next())
                             {
-                                rs.getInt("num_etudiant");
-                                
+                                int num = rs.getInt("num_etudiant");
+                                String prenom = rs.getString("prenom_etudiant");
+                                String date_naissance = rs.getString("date_naissance");
+                                String mail = rs.getString("mail");
+                                String telephone = rs.getString("telephone");
+                                int id_competence = rs.getInt("id_competence");
                             }
                     }
                     catch(Exception e) 
                     {
                         System.out.println("Erreur"+e.getMessage());
-	               
-                    }
+	            }
                  } catch (SQLException ex) {
             Logger.getLogger(AcceuilConnecte.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -247,8 +241,8 @@ public class AcceuilConnecte extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

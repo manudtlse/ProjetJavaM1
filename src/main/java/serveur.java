@@ -2,7 +2,7 @@ import java.net.*;
 import java.io.*;
 
 /** 
- * @author  Patrice Torguet
+ * @author  Emmanuel Menat - Selim Yahi
  */
 public class serveur extends Thread {
 
@@ -51,8 +51,9 @@ public class serveur extends Thread {
         //recevoir chaine caractere
         fluxSortieSocket = new PrintStream(connexionCourante.getOutputStream());
         fluxEntreeSocket = new BufferedReader(new InputStreamReader(connexionCourante.getInputStream()));
-       
+        
         String requete = fluxEntreeSocket.readLine();  
+        System.out.println(requete);
         String resultat = gestion.travaille(requete);
         
         //Afficher requete de resultat

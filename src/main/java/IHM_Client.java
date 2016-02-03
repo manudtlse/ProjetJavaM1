@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -25,21 +30,21 @@ import javax.swing.JPanel;
  *
  * @author Selim Yahi
  */
-public class IHM extends javax.swing.JFrame {
+public class IHM_Client extends javax.swing.JFrame {
 
-    String url = "jdbc:mysql://binary-digit.net:3305/yahimenat";
-    String url2 = "jdbc:mysql://binary-digit.net:3306/yahimenat";
-    String loginBDD = "yahimenat";
-    String passwordBDD = "odaime";
-   
-    
+        String reponse;
+        Socket leSocket;
+        PrintStream fluxSortieSocket;
+        BufferedReader fluxEntreeSocket;
+        public int id;
     /**
      * Creates new form IHM
      * @throws java.sql.SQLException
      */
-    public IHM() throws SQLException {
+    public IHM_Client() throws SQLException, IOException {
         initComponents();
-
+        leSocket = new Socket("localhost", 2001); // socket sur echo
+        System.err.println("ConnectÃ© sur : "+leSocket);
     }
 
 
@@ -132,38 +137,43 @@ public class IHM extends javax.swing.JFrame {
 
     // BOUTON CONNEXION
     private void connexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connexionActionPerformed
-       
-        Connection cn =null;
-        Statement st =null;
+  
+        
+            try {
+                String identifiant = jTextPane1.getText();
+                String mdp = jTextPane2.getText();
                 
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            cn = DriverManager.getConnection(url, loginBDD, passwordBDD);
-            st = cn.createStatement();
-
-            String identifiant = jTextPane1.getText();
-            String mdp = jTextPane2.getText();
-
-            // Identification de manu! RECUPERER LES DROITS A LA PLACE DE LOLO
-            Identification id = new Identification(identifiant, mdp);
-            if (id.connexion() == -1)
-            {
+                // Envoie de la requete au serveur
+                String requete = "CONNEXION "+identifiant+" "+mdp;
+                fluxSortieSocket = new PrintStream(leSocket.getOutputStream());
+                fluxSortieSocket.println(requete);
+                
+                
+                // Retour su serveur
+                fluxEntreeSocket = new BufferedReader(new InputStreamReader(leSocket.getInputStream()));
+                String retour = fluxEntreeSocket.readLine();
+                
+                System.out.println(retour);
+                
+                
+                String [] param = retour.split(" ");
+                if (param[0]=="NONOKCONNEXION")
+                {
                 jTextPane1.setText("");
                 jTextPane2.setText("");
                 JOptionPane.showMessageDialog(this,"Compte inexistant, veuillez retapez vos identifiants ou inscrivez vous");
-            }
-            else
-            {
+                }
+                else if (param[0] == "OKCONNEXION")
+                {
                 new AcceuilConnecte().setVisible(true);
-                this.setVisible(false); 
+                this.setVisible(false);
+                id = Integer.parseInt(param[1]);
+                }
+                leSocket.close();
+            } catch (IOException ex) {
+                Logger.getLogger(IHM_Client.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        catch (ClassNotFoundException | SQLException ex)
-        {
-            Logger.getLogger(IHM.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+
     }//GEN-LAST:event_connexionActionPerformed
 
     // BOUTON S'INSCRIRE
@@ -178,7 +188,7 @@ public class IHM extends javax.swing.JFrame {
     /**
      * @author Selim YAHI
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -192,23 +202,30 @@ public class IHM extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IHM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
+
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new IHM().setVisible(true);
+                    try {
+                        new IHM_Client().setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(IHM_Client.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } catch (SQLException ex) {
-                    Logger.getLogger(IHM.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(IHM_Client.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
