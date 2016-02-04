@@ -85,8 +85,7 @@ public class gestionProtocole {
                         }
                         break;
                         
-                        
-                        
+
                     case "CREATIONPROFIL" :
                         try 
                         {
@@ -95,8 +94,9 @@ public class gestionProtocole {
                             String date_naissance = param[3];
                             String mail = param[4];
                             String telephone = param[5];
-                            int id_compte = Integer.parseInt(param[6]);
-                            String infos=nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_compte;
+                            int id_competence = Integer.parseInt(param[6]);
+                            int id_compte = Integer.parseInt(param[7]);
+                            String infos=nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
                             an1.creationProfilEtudiant(infos);
                             resultat = "OKCREATION PROFIL ETUDIANT";
                         }
@@ -104,8 +104,58 @@ public class gestionProtocole {
                         {
                             resultat = "ERREUR CREATION PROFIL ETUDIANT";
                         }
+                        break;
+                    
+                            
+                    case "MODIFICATIONMAIL" : 
+                        try 
+                        {
+                           String nouveauMail = param[1];
+                           int id_compte = Integer.parseInt(param[2]);
+                           String infos =nouveauMail+" "+id_compte;
+                           an1.majInfoMail(infos);
+                           resultat = "OKMODIFICATIONMAIL PROFIL ETUDIANT";
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR MODIFICATIONMAIL PROFIL ETUDIANT";
+                        }
                         
-                    break;
+                    case "MODIFICATIONTEL" : 
+                        try 
+                        {
+                           String nouveauTel = param[1];
+                           int id_compte = Integer.parseInt(param[2]);
+                           String infos =nouveauTel+" "+id_compte;
+                           an1.majInfoTel(infos);
+                           resultat = "OKMODIFICATIONTEL PROFIL ETUDIANT";
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR MODIFICATIONTEL PROFIL ETUDIANT";
+                        }
+                        
+                    case "MODIFICATIONCOMPETENCE" : 
+                        try 
+                        {
+                           String nouvelleCompetence = param[1];
+                           int id_compte = Integer.parseInt(param[2]);
+                           String infos =nouvelleCompetence+" "+id_compte;
+                           an1.majInfoCompetence(infos);
+                           resultat = "OKMODIFICATIONCOMPETENCE PROFIL ETUDIANT";
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR MODIFICATIONCOMPETENCE PROFIL ETUDIANT";
+                        }
+                        
+                        
+                        
+                    // A continuer si creation profil et les maj marchent
+                        
+                        // Apres le reste ca devrait aller vite (attention aux droits à gerer quand meme..)
+                        
+                        
                         
                         
                     default: resultat = "ERREUR REQUETE INCONNUE";
