@@ -92,7 +92,7 @@ public class client extends Object {
                                 String param [] = retourConnexion.split(" ");
                                 if (param[0].equals("OKCONNEXION"))
                                 {
-                                    int id = Integer.parseInt(param[1]);
+                                    id_compte = Integer.parseInt(param[1]);
                                     System.out.println("==============================================================");
                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                     System.out.println("==============================================================");
@@ -118,7 +118,7 @@ public class client extends Object {
                                             String mail = entree.readLine();
                                             System.out.println("Entrez votre telephone :");
                                             String telephone = entree.readLine();
-                                            requete = "CREATIONPROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone;
+                                            requete = "CREATIONPROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_compte;
                                             System.out.println(requete);
                                             fluxSortieSocket.println(requete);	      
                                             String retourCreationProfil = fluxEntreeSocket.readLine();	      
@@ -172,19 +172,6 @@ public class client extends Object {
                 
             }
 
-                    
-         
-	      /*System.out.println("Tapez votre requete : ");
-	      reponse = fluxEntreeStandard.readLine();
-	      fluxSortieSocket.println(reponse);	      
-	      String retour = fluxEntreeSocket.readLine();	      
-	      System.out.println("Reponse du serveur : "+retour);           
-              String param[] = retour.split(" ");
-              if (param[0].equals("OKCONNEXION"))
-              {
-
-              }     
-               */
       }
       
       //leSocket.close();

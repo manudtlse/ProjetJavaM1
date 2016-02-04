@@ -10,9 +10,6 @@
  */
 
 
-//http://blog.paumard.org/cours/jdbc/chap02-apercu-exemple.html
-
-
 
 import java.sql.*;
 import java.util.*;
@@ -57,30 +54,28 @@ public class Annuaire {
 			// il y a eu une erreur
 			ex.printStackTrace();
                         return null;
-         
-
 		}
 	}
 
 	public boolean creationProfilEtudiant(String infos) {
 		try {
 			String [] tab = infos.split(" ");
-			if(tab.length != 6) 
+			if(tab.length != 7) 
 				return false;
                         String nom_etudiant = tab[0];
 			String prenom_etudiant = tab[1];
 			String date_naissance = tab[2];
                         String mail = tab[3];
                         String telephone = tab[4];
-                        String id_comp = tab[5]; //a convertir en int pour la BD
-                        Integer id_competence=Integer.parseInt(tab[5]);
-			
+                        int id_competence=Integer.parseInt(tab[5]);
+                        int id_compte = Integer.parseInt(tab[6]);
+                        
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
-			Statement s = con.createStatement();
-
-			if (s.executeUpdate("INSERT INTO profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence) VALUES ('"+tab[0]+"','"+tab[1]+"','"+tab[2]+"','"+tab[3]+"','"+tab[4]+"','"+id_competence+"');")==1)
-                            return true;
+			Statement s = con.createStatement();                    
+                        
+			if (s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence, id_compte) VALUES ('"+nom_etudiant+"','"+prenom_etudiant+"','"+date_naissance+"','"+mail+"','"+telephone+"','"+id_competence+"','"+id_compte+"');")==1)
+                          return true;
 			else
 				return false;
 		} catch(Exception ex) {

@@ -18,7 +18,6 @@ public class serveurIdentification extends Thread {
     PrintStream     fluxSortieSocket;
     BufferedReader  fluxEntreeSocket;
     gestionProtocole gestion = new gestionProtocole();
-    gestionProtocoleEtudiants gestion2 = new gestionProtocoleEtudiants();
     
     try {
       leServeur = new ServerSocket(portEcho);
@@ -48,9 +47,6 @@ public class serveurIdentification extends Thread {
       System.err.println("Nouvelle connexion : " + connexionCourante);
       while (true) {
        
-        
-       
-        
         //recevoir chaine caractere
         fluxSortieSocket = new PrintStream(connexionCourante.getOutputStream());
         fluxEntreeSocket = new BufferedReader(new InputStreamReader(connexionCourante.getInputStream()));

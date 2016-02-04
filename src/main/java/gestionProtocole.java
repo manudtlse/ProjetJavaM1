@@ -95,7 +95,8 @@ public class gestionProtocole {
                             String date_naissance = param[3];
                             String mail = param[4];
                             String telephone = param[5];
-                            String infos=nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone;
+                            int id_compte = Integer.parseInt(param[6]);
+                            String infos=nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_compte;
                             an1.creationProfilEtudiant(infos);
                             resultat = "OKCREATION PROFIL ETUDIANT";
                         }

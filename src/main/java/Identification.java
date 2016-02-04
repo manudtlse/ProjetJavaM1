@@ -11,7 +11,7 @@ import java.util.*;
 
 /**
  *
- * @author Emmanuel Ménat
+ * @author Emmanuel Ménat - Selim Yahi
  */
 public class Identification 
 {
