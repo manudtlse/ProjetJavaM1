@@ -149,6 +149,18 @@ public class gestionProtocole {
                             resultat = "ERREUR MODIFICATIONCOMPETENCE PROFIL ETUDIANT";
                         }
                         
+                    case "AFFICHERLISTE" : 
+                        try 
+                        {
+                           String id_compte = param[1];
+                           String infos = id_compte;
+                           an1.AfficherListeProfilCompte(id_compte);
+                           resultat = "OKAFFICHARGE PROFIL ETUDIANT DU COMPTE";
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR AFFICHARGE PROFIL ETUDIANT DU COMPTE";
+                        }
                         
                         
                     // A continuer si creation profil et les maj marchent

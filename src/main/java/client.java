@@ -6,8 +6,6 @@
  
 import java.io.*;
 import java.net.*;
-import static java.time.Clock.system;
-
 public class client extends Object {
 
 
@@ -96,7 +94,7 @@ public class client extends Object {
                                 {
                                     // On récupere l'id du compte connecté
                                     id_compte = Integer.parseInt(param[1]);
-                                    
+                                    while(true){
                                     //On affiche le menu principal
                                     System.out.println("==============================================================");
                                     System.out.println("---------------------- Projet Connect ! ----------------------");
@@ -137,6 +135,17 @@ public class client extends Object {
                                             System.out.println("==============================================================");
                                             System.out.println("---------------------- Projet Connect ! ----------------------");
                                             System.out.println("==============================================================");
+                                            
+                                            requete = "AFFICHERLISTE "+id_compte;
+                                            System.out.println(requete);
+                                            fluxSortieSocket.println(requete);	      
+                                            String retourAfficherListeProfilCompte = fluxEntreeSocket.readLine();	      
+                                            System.out.println("Reponse du serveur : "+retourAfficherListeProfilCompte);
+                                            System.out.println("Entrez le numéro etudiants du compte à modifier");
+                                            String num_etudiant = entree.readLine(); 
+                                            System.out.println("==============================================================");
+                                            System.out.println("---------------------- Projet Connect ! ----------------------");
+                                            System.out.println("==============================================================");
                                             System.out.println("Que souhaitez vous modifier ? :");
                                             System.out.println("1 - Votre mail ? ");
                                             System.out.println("2 - Votre numero de telephone ? ");
@@ -151,7 +160,9 @@ public class client extends Object {
                                                     System.out.println("==============================================================");
                                                     System.out.println("Quel est votre nouveau mail ? :");
                                                     String nouveauMail = entree.readLine();
-                                                    requete = "MODIFICATIONMAIL "+nouveauMail+" "+id_compte;
+                                                    requete = "MODIFICATIONMAIL "+nouveauMail+" "+num_etudiant;
+                                                   
+
                                                     fluxSortieSocket.println(requete);	      
                                                     String retourModificationMail = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourModificationMail); 
@@ -163,7 +174,7 @@ public class client extends Object {
                                                     System.out.println("==============================================================");
                                                     System.out.println("Quel est votre nouveau numéro de téléphone ? :");
                                                     String nouveauTelephone = entree.readLine();
-                                                    requete = "MODIFICATIONTEL "+nouveauTelephone+" "+id_compte;
+                                                    requete = "MODIFICATIONTEL "+nouveauTelephone+" "+num_etudiant;
                                                     fluxSortieSocket.println(requete);	      
                                                     String retourModificationTel = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourModificationTel); 
@@ -176,7 +187,7 @@ public class client extends Object {
                                                     System.out.println("==============================================================");
                                                     System.out.println("Competence(s) ? :");
                                                     String nouveleCompetence = entree.readLine();
-                                                    requete = "MODIFICATIONCOMPETENCE "+nouveleCompetence+" "+id_compte;
+                                                    requete = "MODIFICATIONCOMPETENCE "+nouveleCompetence+" "+num_etudiant;
                                                     fluxSortieSocket.println(requete);	      
                                                     String retourModificationCompetence = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourModificationCompetence); 
@@ -199,6 +210,7 @@ public class client extends Object {
                                          default : 
                                             
                                             break;
+                                    }
                                     }
                                 }
                                 break; 

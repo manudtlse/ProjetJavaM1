@@ -74,7 +74,7 @@ public class Annuaire {
                         Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
 			Statement s = con.createStatement();                    
                         
-			if (s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence, id_compte) VALUES ('"+nom_etudiant+"','"+prenom_etudiant+"','"+date_naissance+"','"+mail+"','"+telephone+"','"+id_competence+"','"+id_compte+"');")==1)
+			if (s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence,id_compte) VALUES ('"+nom_etudiant+"','"+prenom_etudiant+"','"+date_naissance+"','"+mail+"','"+telephone+"','"+id_competence+"','"+id_compte+"');")==1)
                           return true;
 			else
 				return false;
@@ -99,7 +99,7 @@ public class Annuaire {
 			Statement s = con.createStatement();
                         
                         // on modifie le mail du profil_etudiant qui a le numéro de compte associé
-			if (s.executeUpdate("update profil_etudiant set  mail='"+mail+"' where id_compte='"+id_compte+";")==1)
+			if (s.executeUpdate("update profil_etudiant set  mail='"+mail+"' where num_etudiant='"+id_compte+"';")==1)
 				return true;
 			else
 				return false;	
@@ -123,7 +123,7 @@ public class Annuaire {
 			Statement s = con.createStatement();
                         
                         // on modifie le mail du profil_etudiant qui a le numéro de compte associé
-			if (s.executeUpdate("update profil_etudiant set  telephone='"+nouveauTelephone+"' where id_compte='"+id_compte+";")==1)
+			if (s.executeUpdate("update profil_etudiant set  telephone='"+nouveauTelephone+"' where num_etudiant='"+id_compte+"';")==1)
 				return true;
 			else
 				return false;	
@@ -147,7 +147,7 @@ public class Annuaire {
 			Statement s = con.createStatement();
                         
                         // on modifie le mail du profil_etudiant qui a le numéro de compte associé
-			if (s.executeUpdate("update profil_etudiant set  id_competence='"+id_competence+"' where id_compte='"+id_compte+";")==1)
+			if (s.executeUpdate("update profil_etudiant set  id_competence='"+id_competence+"' where num_etudiant='"+id_compte+"';")==1)
 				return true;
 			else
 				return false;	
@@ -205,14 +205,36 @@ public class Annuaire {
 	    String resultat;
             Boolean result;
             Annuaire an1;
+
             an1 = new Annuaire();
             resultat=an1.lireInfos(1);
             System.out.println("Résultat : "+resultat);
-            result=an1.creationProfilEtudiant("nom2:prenom2:18/12/1993:nom2.prenom2@gmail.com:0665758387:1");
+            resultat=an1.AfficherListeProfilCompte("22");
             //an1.majInfos("5:nom4:prenom4:18/12/1993:nom4.prenom4@gmail.com:0665758387:1");
-            System.out.println(result);
+            System.out.println(resultat);
+            
 	}	
 
-    
+    public String AfficherListeProfilCompte(String infos) {
+		try {
+                   
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+                    Statement s = con.createStatement();
+  
+                    int id_compte = Integer.parseInt(infos);
+			ResultSet rs = s.executeQuery("select * from profil_etudiant where id_compte = '"+id_compte+"';");
+	        if (rs.next()) {
+	        	return rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence");
+	        } else {
+                    return null;
+
+	        }
+		} catch(Exception ex) {
+			// il y a eu une erreur
+			ex.printStackTrace();
+                        return null;
+		}
+	}
 	
 }
