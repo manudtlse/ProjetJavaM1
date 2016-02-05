@@ -225,7 +225,7 @@ public class Annuaire {
                     int id_compte = Integer.parseInt(infos);
 			ResultSet rs = s.executeQuery("select * from profil_etudiant where id_compte = '"+id_compte+"';");
 	        if (rs.next()) {
-	        	return rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence");
+	        	return rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence")+":"+rs.getInt("id_compte");
 	        } else {
                     return null;
 

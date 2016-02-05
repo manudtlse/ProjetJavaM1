@@ -154,7 +154,7 @@ public class gestionProtocole {
                         {
                            String id_compte = param[1];
                            String infos = id_compte;
-                           an1.AfficherListeProfilCompte(id_compte);
+                           an1.AfficherListeProfilCompte(infos);
                            resultat = "OKAFFICHARGE PROFIL ETUDIANT DU COMPTE";
                         }
                         catch (Exception e) 
