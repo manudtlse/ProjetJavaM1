@@ -51,9 +51,9 @@ public class serveurIdentification extends Thread {
         fluxSortieSocket = new PrintStream(connexionCourante.getOutputStream());
         fluxEntreeSocket = new BufferedReader(new InputStreamReader(connexionCourante.getInputStream()));
         
-        System.out.println("Requete recue :");
+        
         String requeteRecue = fluxEntreeSocket.readLine();  
-        System.out.println(requeteRecue);
+        System.out.println("Requete Recu : "+requeteRecue);
         
         
         String resultat = gestion.travaille(requeteRecue);

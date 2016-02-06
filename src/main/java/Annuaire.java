@@ -38,7 +38,7 @@ public class Annuaire {
                     
         
 
-	public String lireInfos(int numetudiant) {
+	public String RechercherEtudiant(int numetudiant) {
 		try {	
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
@@ -200,22 +200,7 @@ public class Annuaire {
 			ex.printStackTrace();
 		}
 	}
- public static void main(String[] args) throws Exception 
-        {
-	    String resultat;
-            Boolean result;
-            Annuaire an1;
-
-            an1 = new Annuaire();
-            resultat=an1.lireInfos(1);
-            System.out.println("Résultat : "+resultat);
-            resultat=an1.AfficherListeProfilCompte("22");
-            //an1.majInfos("5:nom4:prenom4:18/12/1993:nom4.prenom4@gmail.com:0665758387:1");
-            System.out.println(resultat);
-            
-	}	
-
-    public String AfficherListeProfilCompte(String infos) {
+        public String AfficherListeProfilCompte(String infos) {
 		try {
                    
                     Class.forName("com.mysql.jdbc.Driver");
@@ -225,8 +210,12 @@ public class Annuaire {
                     int id_compte = Integer.parseInt(infos);
 			ResultSet rs = s.executeQuery("select * from profil_etudiant where id_compte = '"+id_compte+"';");
 	        if (rs.next()) {
-	        	return rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence")+":"+rs.getInt("id_compte");
-	        } else {
+                        String retour="";
+                        while(rs!=null){
+	        	retour=retour+rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence")+":"+rs.getInt("id_compte");
+                        }
+                    return retour;
+                } else {
                     return null;
 
 	        }
@@ -236,5 +225,21 @@ public class Annuaire {
                         return null;
 		}
 	}
+ public static void main(String[] args) throws Exception 
+        {
+	    String resultat;
+            Boolean result;
+            Annuaire an1;
+
+            an1 = new Annuaire();
+            resultat=an1.RechercherEtudiant(1);
+            System.out.println("Résultat : "+resultat);
+            resultat=an1.AfficherListeProfilCompte("19");
+            //an1.majInfos("5:nom4:prenom4:18/12/1993:nom4.prenom4@gmail.com:0665758387:1");
+            System.out.println(resultat);
+            
+	}	
+
+    
 	
 }

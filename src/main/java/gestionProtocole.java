@@ -106,6 +106,20 @@ public class gestionProtocole {
                         }
                         break;
                     
+                    case "AFFICHERPROFILCOMPTE" :
+                        try 
+                        {
+                           String id_compte = param[1];
+                           String infos = id_compte;
+                           String res=an1.AfficherListeProfilCompte(infos);
+                           resultat = "OKAFFICHAGE PROFIL ETUDIANT DU COMPTE "+res;
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR AFFICHARGE PROFIL ETUDIANT DU COMPTE";
+                        }
+                        break;    
+                    
                             
                     case "MODIFICATIONMAIL" : 
                         try 
@@ -149,19 +163,7 @@ public class gestionProtocole {
                             resultat = "ERREUR MODIFICATIONCOMPETENCE PROFIL ETUDIANT";
                         }
                         
-                    case "AFFICHERLISTE" : 
-                        try 
-                        {
-                           String id_compte = param[1];
-                           String infos = id_compte;
-                           an1.AfficherListeProfilCompte(infos);
-                           resultat = "OKAFFICHARGE PROFIL ETUDIANT DU COMPTE";
-                        }
-                        catch (Exception e) 
-                        {
-                            resultat = "ERREUR AFFICHARGE PROFIL ETUDIANT DU COMPTE";
-                        }
-                        
+                    
                         
                     // A continuer si creation profil et les maj marchent
                         

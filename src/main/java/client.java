@@ -54,8 +54,8 @@ public class client extends Object {
                 System.out.println("3/ Connexion (sans compte) ");
                 System.out.println("4/ Exit ");
                 
-                String choix = entree.readLine();
-                switch (choix)
+                String choix1 = entree.readLine();
+                switch (choix1)
                 {                   
                     // ------------------------- CREATION DE COMPTE ------------------------------
                     case "1":
@@ -136,7 +136,7 @@ public class client extends Object {
                                             System.out.println("---------------------- Projet Connect ! ----------------------");
                                             System.out.println("==============================================================");
                                             
-                                            requete = "AFFICHERLISTE "+id_compte;
+                                            requete = "AFFICHERPROFILCOMPTE "+id_compte;
                                             System.out.println(requete);
                                             fluxSortieSocket.println(requete);	      
                                             String retourAfficherListeProfilCompte = fluxEntreeSocket.readLine();	      
@@ -216,11 +216,16 @@ public class client extends Object {
                                 break; 
                         
                         
-                    case "3":
+                    case "3":// ------------------------------- CONNEXION SANS COMPTE (ANONYME)-----------------------
                                 System.out.println("==============================================================");
                                 System.out.println("---------------------- Projet Connect ! ----------------------");
                                 System.out.println("==============================================================");
-                        
+                                System.out.println("1/ Afficher liste étudiant ");
+                                System.out.println("2/ Recherche un étudiant (N°étudiant) ");
+                                System.out.println("3/ Exit ");
+                                //ON lit le choix
+                                String choix4 = entree.readLine();
+                                
                         
                         
                         
