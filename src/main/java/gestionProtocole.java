@@ -141,6 +141,7 @@ public class gestionProtocole {
                         {
                             resultat = "ERREUR MODIFICATIONMAIL PROFIL ETUDIANT";
                         }
+                        break;
                         
                     case "MODIFICATIONTEL" : 
                         try 
@@ -155,6 +156,7 @@ public class gestionProtocole {
                         {
                             resultat = "ERREUR MODIFICATIONTEL PROFIL ETUDIANT";
                         }
+                        break;
                         
                     case "MODIFICATIONCOMPETENCE" : 
                         try 
@@ -169,13 +171,21 @@ public class gestionProtocole {
                         {
                             resultat = "ERREUR MODIFICATIONCOMPETENCE PROFIL ETUDIANT";
                         }
-                        
+                        break;
                     
                         
-                    // A continuer si creation profil et les maj marchent
-                        
-                        // Apres le reste ca devrait aller vite (attention aux droits à gerer quand meme..)
-                        
+                    case "RECHERCHE_ETUDIANT" :
+                        try
+                        {
+                              String nomRecherche = param[1];
+                              String res = an1.RechercherEtudiant(nomRecherche);
+                              resultat = "OKRECHERCHE ETUDIANT "+res;
+                        }                            
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR RECHERCHE ETUDIANT";
+                        }
+                        break;
                         
                         
                         
