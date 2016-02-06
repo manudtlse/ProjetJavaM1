@@ -116,10 +116,10 @@ public class gestionProtocole {
                     case "AFFICHERPROFILCOMPTE" :
                         try 
                         {
-                           String id_compte = param[1];
-                           String infos = id_compte;
-                           String res=an1.AfficherListeProfilCompte(infos);
-                           resultat = "OKAFFICHAGE PROFIL ETUDIANT DU COMPTE "+res;
+                            String id_compte = param[1];
+                            String infos = id_compte;
+                            String res=an1.AfficherListeProfilCompte(infos);
+                            resultat = "OKAFFICHAGE PROFIL ETUDIANT DU COMPTE "+res;
                         }
                         catch (Exception e) 
                         {
@@ -130,11 +130,11 @@ public class gestionProtocole {
                      case "MODIFICATIONMAIL" :
                         try 
                         {
-                           String nouveauMail = param[1];
-                           int id_compte = Integer.parseInt(param[2]);
-                           String infos =nouveauMail+" "+id_compte;
-                           an1.majInfoMail(infos);
-                           resultat = "OKMODIFICATIONMAIL PROFIL ETUDIANT";
+                            String nouveauMail = param[1];
+                            int id_compte = Integer.parseInt(param[2]);
+                            String infos =nouveauMail+" "+id_compte;
+                            an1.majInfoMail(infos);
+                            resultat = "OKMODIFICATIONMAIL PROFIL ETUDIANT";
                         }
                         catch (Exception e) 
                         {
@@ -145,11 +145,11 @@ public class gestionProtocole {
                      case "MODIFICATIONTEL" :
                         try 
                         {
-                           String nouveauTel = param[1];
-                           int id_compte = Integer.parseInt(param[2]);
-                           String infos =nouveauTel+" "+id_compte;
-                           an1.majInfoTel(infos);
-                           resultat = "OKMODIFICATIONTEL PROFIL ETUDIANT";
+                            String nouveauTel = param[1];
+                            int id_compte = Integer.parseInt(param[2]);
+                            String infos =nouveauTel+" "+id_compte;
+                            an1.majInfoTel(infos);
+                            resultat = "OKMODIFICATIONTEL PROFIL ETUDIANT";
                         }
                         catch (Exception e) 
                         {
@@ -157,22 +157,22 @@ public class gestionProtocole {
                         }
 
                         break;
+                    case "MODIFICATIONCOMPETENCE" :
+                        try 
+                        {
+                            String nouvelleCompetence = param[1];
+                            int id_compte = Integer.parseInt(param[2]);
+                            String infos =nouvelleCompetence+" "+id_compte;
+                            an1.majInfoCompetence(infos);
+                            resultat = "OKMODIFICATIONCOMPETENCE PROFIL ETUDIANT";
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR MODIFICATION COMPETENCE PROFIL ETUDIANT";
+                        }
+
+                        break;
                     
-                     case "MODIFICATIONCOMPETENCE" :     
-                        try
-                        {
-                         String nouvelleCompetence = param[1];  
-                         int id_compte = Integer.parseInt(param[2]);
-                         String infos =nouvelleCompetence+" "+id_compte;
-                         an1.majInfoCompetence(infos);
-                         resultat ="OK MODIFICATION COMPETENCE PROFIL ETUDIANT";
-                        }
-                        catch (Exception e)
-                        {
-                            resultat= "ERREUR MODIFICATION COMPETENCE PROFIL ETUDIANT";
-                          
-                        }
-                      
                      case "RECHERCHE ETUDIANT" :
                         try
                         {
