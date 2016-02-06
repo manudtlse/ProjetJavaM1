@@ -186,7 +186,16 @@ public class client extends Object {
                                             
                                             break;
                                             
-                                         case "4" :
+                                         case "4" : //Recherche d'informations sur un étudiant (droits utilisateur)
+                                                    System.out.println("==============================================================");
+                                                    System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                    System.out.println("==============================================================");
+                                                    System.out.println("Entrez le nom de l'étudiant recherché :");
+                                                    String nomRecherche = entree.readLine();
+                                                    requete = "RECHERCHE_ETUDIANT "+nomRecherche;
+                                                    fluxSortieSocket.println(requete);	      
+                                                    String retourRecherche = fluxEntreeSocket.readLine();	      
+                                                    System.out.println("Reponse du serveur : "+retourRecherche); 
                                             
                                             break;
                                             
