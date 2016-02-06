@@ -127,8 +127,7 @@ public class gestionProtocole {
                         }
                         break;    
                     
-                            
-                    case "MODIFICATIONMAIL" : 
+                     case "MODIFICATIONMAIL" :
                         try 
                         {
                            String nouveauMail = param[1];
@@ -141,8 +140,9 @@ public class gestionProtocole {
                         {
                             resultat = "ERREUR MODIFICATIONMAIL PROFIL ETUDIANT";
                         }
-                        
-                    case "MODIFICATIONTEL" : 
+                        break; 
+                   
+                     case "MODIFICATIONTEL" :
                         try 
                         {
                            String nouveauTel = param[1];
@@ -155,8 +155,9 @@ public class gestionProtocole {
                         {
                             resultat = "ERREUR MODIFICATIONTEL PROFIL ETUDIANT";
                         }
-                        
-                    case "MODIFICATIONCOMPETENCE" : 
+                        break;      
+                    
+                    case "MODIFICATIONCOMPETENCE" :
                         try 
                         {
                            String nouvelleCompetence = param[1];
@@ -169,6 +170,8 @@ public class gestionProtocole {
                         {
                             resultat = "ERREUR MODIFICATIONCOMPETENCE PROFIL ETUDIANT";
                         }
+                        break;     
+                    
                         
                     
                         

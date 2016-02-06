@@ -109,7 +109,7 @@ public class Annuaire {
 			Statement s = con.createStatement();
                         
                         // on modifie le mail du profil_etudiant qui a le numéro de compte associé
-			if (s.executeUpdate("update profil_etudiant set  mail='"+mail+"' where num_etudiant='"+id_compte+"';")==1)
+			if (s.executeUpdate("update profil_etudiant set  mail='"+mail+"' where id_compte='"+id_compte+"';")==1)
 				return true;
 			else
 				return false;	
@@ -133,7 +133,7 @@ public class Annuaire {
 			Statement s = con.createStatement();
                         
                         // on modifie le mail du profil_etudiant qui a le numéro de compte associé
-			if (s.executeUpdate("update profil_etudiant set  telephone='"+nouveauTelephone+"' where num_etudiant='"+id_compte+"';")==1)
+			if (s.executeUpdate("update profil_etudiant set  telephone='"+nouveauTelephone+"' where id_compte='"+id_compte+"';")==1)
 				return true;
 			else
 				return false;	
@@ -157,7 +157,7 @@ public class Annuaire {
 			Statement s = con.createStatement();
                         
                         // on modifie le mail du profil_etudiant qui a le numéro de compte associé
-			if (s.executeUpdate("update profil_etudiant set  id_competence='"+id_competence+"' where num_etudiant='"+id_compte+"';")==1)
+			if (s.executeUpdate("update profil_etudiant set  id_competence='"+id_competence+"' where id_compte='"+id_compte+"';")==1)
 				return true;
 			else
 				return false;	

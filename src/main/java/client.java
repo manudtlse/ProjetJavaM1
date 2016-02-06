@@ -9,17 +9,7 @@ import java.net.*;
 public class client extends Object {
 
 
-    public static int menu () throws IOException
-    {
-        int choix = System.in.read();
-        System.out.println("Tapez votre choix (chiffre) : ");
-        System.out.println("1 - Modifier ses propres informations (faire plus tard)");
-        System.out.println("2 - Créer profil étudiant");
-        System.out.println("3 - Afficher la liste des étudiants");
-        System.out.println("4 - Recherche d'un étudiant (N°Etudiant)");
-        System.out.println("5 - FIN");
-        return choix;
-  }
+    
       
       
   /**
@@ -160,7 +150,6 @@ public class client extends Object {
                                                     String nouveauMail = entree.readLine();
                                                     requete = "MODIFICATIONMAIL "+nouveauMail+" "+id_compte;
                                                    
-
                                                     fluxSortieSocket.println(requete);	      
                                                     String retourModificationMail = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourModificationMail); 
