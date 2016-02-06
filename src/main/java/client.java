@@ -112,7 +112,7 @@ public class client extends Object {
                                             String mail = entree.readLine();
                                             System.out.println("Entrez votre telephone :");
                                             String telephone = entree.readLine();
-                                            System.out.println("Entrez votre competence, 1: Réseaux, 2: Télécoms, 3: Development :");
+                                            System.out.println("Entrez votre competence, 1: Réseaux, 2: Télécoms, 3: ");
                                             String id_competence = entree.readLine();
                                             requete = "CREATIONPROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
                                             System.out.println(requete);

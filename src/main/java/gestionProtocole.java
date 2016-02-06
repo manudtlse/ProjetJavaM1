@@ -157,30 +157,30 @@ public class gestionProtocole {
                         }
 
                         break;
-                        
-                    case "MODIFICATIONCOMPETENCE" : 
-
-                        try 
-                        {
-                           String nouvelleCompetence = param[1];
-                           int id_compte = Integer.parseInt(param[2]);
-                           String infos =nouvelleCompetence+" "+id_compte;
-                           an1.majInfoCompetence(infos);
-                           resultat = "OKMODIFICATIONCOMPETENCE PROFIL ETUDIANT";
-                        }
-                        catch (Exception e) 
-                        {
-                            resultat = "ERREUR MODIFICATIONCOMPETENCE PROFIL ETUDIANT";
-                        }
                     
-                        
-                    case "RECHERCHE_ETUDIANT" :
+                     case "MODIFICATIONCOMPETENCE" :     
                         try
                         {
-                              String nomRecherche = param[1];
-                              String res = an1.RechercherEtudiant(nomRecherche);
-                              resultat = "OKRECHERCHE ETUDIANT "+res;
-                        }                            
+                         String nouvelleCompetence = param[1];  
+                         int id_compte = Integer.parseInt(param[2]);
+                         String infos =nouvelleCompetence+" "+id_compte;
+                         an1.majInfoCompetence(infos);
+                         resultat ="OK MODIFICATION COMPETENCE PROFIL ETUDIANT";
+                        }
+                        catch (Exception e)
+                        {
+                            resultat= "ERREUR MODIFICATION COMPETENCE PROFIL ETUDIANT";
+                          
+                        }
+                      
+                     case "RECHERCHE ETUDIANT" :
+                        try
+                        {
+                         
+                            String nomRecherche = param[1];
+                            String res = an1.RechercherEtudiant(nomRecherche);
+                            resultat= "OKRECHERCHE ETUDIANT "+res;
+                        }
                         catch (Exception e) 
                         {
                             resultat = "ERREUR RECHERCHE ETUDIANT";
