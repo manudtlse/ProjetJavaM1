@@ -57,11 +57,14 @@ public class Annuaire {
 		}
 	}
 
-	public boolean creationProfilEtudiant(String infos) {
+	public int creationProfilEtudiant(String infos) {
+                int resultat = 0;
 		try {
+                        
+
 			String [] tab = infos.split(" ");
 			if(tab.length != 7) 
-				return false;
+				return resultat=-1;
                         String nom_etudiant = tab[0];
 			String prenom_etudiant = tab[1];
 			String date_naissance = tab[2];
@@ -73,16 +76,23 @@ public class Annuaire {
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
 			Statement s = con.createStatement();                    
-                        
-			if (s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence,id_compte) VALUES ('"+nom_etudiant+"','"+prenom_etudiant+"','"+date_naissance+"','"+mail+"','"+telephone+"','"+id_competence+"','"+id_compte+"');")==1)
-                          return true;
-			else
-				return false;
-		} catch(Exception ex) {
-			// il y a eu une erreur
-			ex.printStackTrace();
-			return false;
-		}
+                        ResultSet Result;
+                        Result = s.executeQuery("SELECT * FROM yahimenat.profil_etudiant WHERE id_compte ='"+id_compte+"';");
+                        if (!Result.next())
+                            {
+                                s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence,id_compte) VALUES ('"+nom_etudiant+"','"+prenom_etudiant+"','"+date_naissance+"','"+mail+"','"+telephone+"','"+id_competence+"','"+id_compte+"');");
+                                resultat=1;
+                                
+                            }
+                         else
+				resultat=-1;
+                    } 
+                catch(Exception ex) 
+                    {
+                    // il y a eu une erreur
+                    ex.printStackTrace();
+                    }
+                return resultat;
 	}
 
         
@@ -210,11 +220,10 @@ public class Annuaire {
                     int id_compte = Integer.parseInt(infos);
 			ResultSet rs = s.executeQuery("select * from profil_etudiant where id_compte = '"+id_compte+"';");
 	        if (rs.next()) {
-                        String retour="";
-                        while(rs!=null){
-	        	retour=retour+rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence")+":"+rs.getInt("id_compte");
-                        }
-                    return retour;
+
+	        	return rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence")+":"+rs.getInt("id_compte");
+                        
+                   
                 } else {
                     return null;
 

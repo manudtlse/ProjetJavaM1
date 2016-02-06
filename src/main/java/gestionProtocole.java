@@ -97,14 +97,21 @@ public class gestionProtocole {
                             int id_competence = Integer.parseInt(param[6]);
                             int id_compte = Integer.parseInt(param[7]);
                             String infos=nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
-                            an1.creationProfilEtudiant(infos);
-                            resultat = "OKCREATION PROFIL ETUDIANT";
-                        }
+                            int resu=an1.creationProfilEtudiant(infos);
+                            if (resu==-1)
+                            {
+                                resultat = "NON OK CREATION PROFIL ETUDIANT";
+                            }
+                            else 
+                            {
+                                resultat = "OK CREATION PROFIL ETUDIANT";
+                            }
+                        }    
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR CREATION PROFIL ETUDIANT";
+                            resultat = "ERREUR CREATION PROFIL";
                         }
-                        break;
+                            break;
                     
                     case "AFFICHERPROFILCOMPTE" :
                         try 

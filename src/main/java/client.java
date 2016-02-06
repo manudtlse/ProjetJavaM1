@@ -139,10 +139,8 @@ public class client extends Object {
                                             requete = "AFFICHERPROFILCOMPTE "+id_compte;
                                             System.out.println(requete);
                                             fluxSortieSocket.println(requete);	      
-                                            String retourAfficherListeProfilCompte = fluxEntreeSocket.readLine();	      
-                                            System.out.println("Reponse du serveur : "+retourAfficherListeProfilCompte);
-                                            System.out.println("Entrez le numéro etudiants du compte à modifier");
-                                            String num_etudiant = entree.readLine(); 
+                                            String retourAfficherListeProfilCompte = fluxEntreeSocket.readLine();
+                                             System.out.println(retourAfficherListeProfilCompte);
                                             System.out.println("==============================================================");
                                             System.out.println("---------------------- Projet Connect ! ----------------------");
                                             System.out.println("==============================================================");
@@ -160,7 +158,7 @@ public class client extends Object {
                                                     System.out.println("==============================================================");
                                                     System.out.println("Quel est votre nouveau mail ? :");
                                                     String nouveauMail = entree.readLine();
-                                                    requete = "MODIFICATIONMAIL "+nouveauMail+" "+num_etudiant;
+                                                    requete = "MODIFICATIONMAIL "+nouveauMail+" "+id_compte;
                                                    
 
                                                     fluxSortieSocket.println(requete);	      
@@ -174,7 +172,7 @@ public class client extends Object {
                                                     System.out.println("==============================================================");
                                                     System.out.println("Quel est votre nouveau numéro de téléphone ? :");
                                                     String nouveauTelephone = entree.readLine();
-                                                    requete = "MODIFICATIONTEL "+nouveauTelephone+" "+num_etudiant;
+                                                    requete = "MODIFICATIONTEL "+nouveauTelephone+" "+id_compte;
                                                     fluxSortieSocket.println(requete);	      
                                                     String retourModificationTel = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourModificationTel); 
@@ -187,7 +185,7 @@ public class client extends Object {
                                                     System.out.println("==============================================================");
                                                     System.out.println("Competence(s) ? :");
                                                     String nouveleCompetence = entree.readLine();
-                                                    requete = "MODIFICATIONCOMPETENCE "+nouveleCompetence+" "+num_etudiant;
+                                                    requete = "MODIFICATIONCOMPETENCE "+nouveleCompetence+" "+id_compte;
                                                     fluxSortieSocket.println(requete);	      
                                                     String retourModificationCompetence = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourModificationCompetence); 
