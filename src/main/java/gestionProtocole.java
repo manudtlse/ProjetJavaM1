@@ -173,7 +173,7 @@ public class gestionProtocole {
 
                         break;
                     
-                     case "RECHERCHE ETUDIANT" :
+                     case "RECHERCHE_ETUDIANT" :
                         try
                         {
                          

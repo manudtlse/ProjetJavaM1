@@ -92,7 +92,7 @@ public class client extends Object {
                                     System.out.println("1/ Créer profil étudiant ");
                                     System.out.println("2/ Modifier informations de mon profil étudiant");
                                     System.out.println("3/ Afficher liste étudiant ");
-                                    System.out.println("4/ Recherche un étudiant (N°étudiant) ");
+                                    System.out.println("4/ Recherche un étudiant ");
                                     System.out.println("5/ Exit ");
                                     //ON lit le choix
                                     String choix2 = entree.readLine();
