@@ -89,11 +89,12 @@ public class client extends Object {
                                     System.out.println("==============================================================");
                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                     System.out.println("==============================================================");
-                                    System.out.println("1/ Créer profil étudiant ");
+                                    System.out.println("1/ Créer profil étudiant");
                                     System.out.println("2/ Modifier informations de mon profil étudiant");
-                                    System.out.println("3/ Afficher liste étudiant ");
-                                    System.out.println("4/ Recherche un étudiant ");
-                                    System.out.println("5/ Exit ");
+                                    System.out.println("3/ Afficher liste étudiant");
+                                    System.out.println("4/ Recherche un étudiant");
+                                    System.out.println("5/ Modifier mot de passe");
+                                    System.out.println("6/ Exit");
                                     //ON lit le choix
                                     String choix2 = entree.readLine();
                                     switch (choix2) 
@@ -121,7 +122,7 @@ public class client extends Object {
                                             System.out.println("Reponse du serveur : "+retourCreationProfil); 
                                             break;
                                           
-                                         case "2" :
+                                        case "2" :
                                             System.out.println("==============================================================");
                                             System.out.println("---------------------- Projet Connect ! ----------------------");
                                             System.out.println("==============================================================");
@@ -182,11 +183,11 @@ public class client extends Object {
                                             }
                                             break;
                                             
-                                         case "3" :
+                                        case "3" :
                                             
                                             break;
                                             
-                                         case "4" : //Recherche d'informations sur un étudiant (droits utilisateur)
+                                        case "4" : //Recherche d'informations sur un étudiant (droits utilisateur)
                                                     System.out.println("==============================================================");
                                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                                     System.out.println("==============================================================");
@@ -199,9 +200,30 @@ public class client extends Object {
                                             
                                             break;
                                             
-                                         case "5" :
-                                            
+                                        case "5" : //Modifier mot de passe
+                                                    System.out.println("==============================================================");
+                                                    System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                    System.out.println("==============================================================");
+                                                   System.out.println("Entrez votre login :");
+                                                    String login = entree.readLine();
+                                                    System.out.println("Mot de passe actuel :");
+                                                    String mdpActuel = entree.readLine();
+                                                    System.out.println("Nouveau mot de passe :");
+                                                    String mdp1 = entree.readLine();
+                                                    System.out.println("Confirmez votre nouveau mot de passe :");
+                                                    String mdp2 = entree.readLine();
+                                                    if (mdp1.equals(mdp2))
+                                                            {
+                                                            requete = "CHANGE_MDP "+login+" "+mdpActuel+" "+mdp1+" "+id_compte;
+                                                            fluxSortieSocket.println(requete);	      
+                                                            String retourChangeMdp = fluxEntreeSocket.readLine();	      
+                                                            System.out.println("Reponse du serveur : "+retourChangeMdp);
+                                                            }
                                             break;
+                                        
+                                        case "6" :
+                                            
+                                            break;    
                                             
                                          default : 
                                             
@@ -230,7 +252,7 @@ public class client extends Object {
                     case "4":
                         
                         break;
-                        
+                       
                     default :
  
                 }

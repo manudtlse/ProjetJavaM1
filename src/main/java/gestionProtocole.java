@@ -173,21 +173,46 @@ public class gestionProtocole {
 
                         break;
                     
-                     case "RECHERCHE_ETUDIANT" :
+                    case "RECHERCHE_ETUDIANT" :
                         try
                         {
-                         
                             String nomRecherche = param[1];
                             String res = an1.RechercherEtudiant(nomRecherche);
                             resultat= "OKRECHERCHE ETUDIANT "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR RECHERCHE ETUDIANT";
+                            resultat = "NON OK RECHERCHE ETUDIANT";
                         }
                         break;
                         
-                        
+                    case "CHANGE_MDP" :
+                        try
+                        {
+                            String login = param[1];
+                            String mdpActuel = param[2];
+                            String nouveauMdp = param[3];
+                            int id_compte = Integer.parseInt(param[4]);
+                            String infos=(nouveauMdp+" "+id_compte);
+                            
+                            Identification id = new Identification (login ,mdpActuel);
+                            Boolean res= id.ChangeMdp(infos);
+                            if (res=true)
+                            {
+                              resultat = "OK CHANGEMENT MDP "+res;  
+                            }
+                            else
+                            {
+                            resultat = "NON OK CHANGEMENT MDP "+res;
+                            
+                            }  
+                            
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR CHANGEMENT MDP";
+                        }
+                        break;
                         
                     default: resultat = "ERREUR REQUETE INCONNUE";
                     

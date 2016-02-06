@@ -74,6 +74,30 @@ public class Identification
                 {
 		}
 	}
+        
+        public boolean ChangeMdp(String infos)
+        {
+                boolean resultat;
+                try
+                {
+                    String [] tab = infos.split(" ");
+                    if(tab.length != 2) 
+			return false;
+                    String NouveauMdp = tab[0];
+                    int id_compte = Integer.parseInt(tab[1]);
+                    System.out.println(infos);
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url1,bdlogin,bdmdp);
+                    Statement s = con.createStatement(); 
+                    ResultSet rs = s.executeQuery("update yahimenat.compte set  password='"+NouveauMdp+"' where id_compte='"+id_compte+"';");
+                    resultat=true;
+                }
+                catch(NumberFormatException | ClassNotFoundException | SQLException ex)
+                {
+                    resultat=false;   
+                }
+                return resultat;
+        }        
 	
 	public static void main(String[] args) throws Exception 
         {
@@ -83,7 +107,13 @@ public class Identification
             ident = new Identification("profil2","mdp1");
             res=ident.connexion();
             System.out.println("resultat : "+res);
+            String infos=("daux 26");
+            boolean resu=ident.ChangeMdp(infos);
+            System.out.println("resultat : "+resu);
 	}
+        
 }
     
+
+
 

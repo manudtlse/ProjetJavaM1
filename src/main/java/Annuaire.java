@@ -169,32 +169,35 @@ public class Annuaire {
 	}
         
         
-        public String AfficherListeProfilCompte(String infos) {
-		try {
-                   
+       public String AfficherListeProfilCompte(String infos) 
+        {
+		try 
+                {
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
                     Statement s = con.createStatement();
   
                     int id_compte = Integer.parseInt(infos);
-			ResultSet rs = s.executeQuery("select * from profil_etudiant where id_compte = '"+id_compte+"';");
-	        if (rs.next()) {
+                    ResultSet rs = s.executeQuery("select * from profil_etudiant where id_compte = '"+id_compte+"';");
+                    if (rs.next()) {
 
 	        	return rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence")+":"+rs.getInt("id_compte");
-                        
-                   
-                } else {
-                    return null;
+                    } 
+                    else 
+                    {
+                        return null;
 
-	        }
-		} catch(Exception ex) {
+                    }
+		} 
+                catch(Exception ex) 
+                {
 			// il y a eu une erreur
 			ex.printStackTrace();
                         return null;
 		}
 	}
         
-                       
+               
 	public void fermer() throws Exception {		
 		try {
 			con.close();
