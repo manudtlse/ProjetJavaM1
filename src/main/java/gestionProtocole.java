@@ -196,7 +196,7 @@ public class gestionProtocole {
                         {
                             String nomRecherche = param[1];
                             String res = an1.RechercherEtudiantNom(nomRecherche);
-                            resultat= "OK RECHERCHE PAR NOM ETUDIANT "+res;
+                            resultat= "OK RECHERCHE PAR NOM ETUDIANT  "+res;
                         }
                         catch (Exception e) 
                         {
@@ -210,7 +210,7 @@ public class gestionProtocole {
                         {
                             String prenomRecherche = param[1];
                             String res = an1.RechercherEtudiantPrenom(prenomRecherche);
-                            resultat= "OK RECHERCHE ETUDIANT PAR PRENOM "+res;
+                            resultat= "OK RECHERCHE ETUDIANT PAR PRENOM  "+res;
                         }
                         catch (Exception e) 
                         {
@@ -224,15 +224,28 @@ public class gestionProtocole {
                         {
                             String mailRecherche = param[1];
                             String res = an1.RechercherEtudiantMail(mailRecherche);
-                            resultat= "OK RECHERCHE ETUDIANT PAR MAIL"+res;
+                            resultat= "OK RECHERCHE ETUDIANT PAR MAIL  "+res;
                         }
                         catch (Exception e) 
                         {
                             resultat = "NON OK RECHERCHE ETUDIANT PAR MAIL";
                         }
                         break;                        
-                        
-                        
+                     
+                    // Recherche par competence    
+                    case "RECHERCHE_ETUDIANT_COMPETENCE" :
+                        try
+                        {
+                            String competenceRecherche = param[1];
+                            String res = an1.RechercherEtudiantCompetence(competenceRecherche);
+                            resultat= "OK RECHERCHE ETUDIANT PAR COMEPTENCE  "+res;
+                        }
+                        catch (Exception e)
+                        {
+                            resultat = "NON OK RECHERCHE ETUDIANT PAR COMEPTENCE";
+                        }
+                        break;                       
+                            
                     case "CHANGE_MDP" :
                         try
                         {

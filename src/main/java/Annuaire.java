@@ -205,14 +205,16 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from profil_etudiant where nom_etudiant = '"+nom+"';");
-            if (rs.next()) 
-            {
-                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");
+           String resultat="";
+                rs.last();
+                int NbLignes=rs.getRow();
+                rs.beforeFirst();
+                resultat=NbLignes+"  ";
+            while (rs.next()) 
+            {  
+                resultat=resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms, 3-Developement) :"+rs.getInt("id_competence")+"  ";
             } 
-            else 
-            {
-                return null;
-            }
+            return resultat;
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {
@@ -232,15 +234,15 @@ public class Annuaire
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from profil_etudiant where prenom_etudiant = '"+prenom+"';");
             String resultat="";
+                rs.last();
+                int NbLignes=rs.getRow();
+                rs.beforeFirst();
+                resultat=NbLignes+"  ";
             while (rs.next()) 
-            {
+            {  
                 resultat=resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms, 3-Developement) :"+rs.getInt("id_competence")+"  ";
             } 
             return resultat;
-           // else 
-           // {
-           //     return null;
-          //  }
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {
@@ -259,14 +261,44 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from profil_etudiant where mail = '"+mail+"';");
-            if (rs.next()) 
-            {
-                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");
+            String resultat="";
+                rs.last();
+                int NbLignes=rs.getRow();
+                rs.beforeFirst();
+                resultat=NbLignes+"  ";
+            while (rs.next()) 
+            {  
+                resultat=resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms, 3-Developement) :"+rs.getInt("id_competence")+"  ";
             } 
-            else 
-            {
-                return null;
-            }
+            return resultat;
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            // il y a eu une erreur
+            ex.printStackTrace();
+            return null;
+        }
+    }   
+    
+    // Recherche par competence
+    public String RechercherEtudiantCompetence(String Competence)
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant where id_competence = '"+Competence+"';");
+            String resultat="";
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
+            { 
+                resultat=resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms, 3-Developement) :"+rs.getInt("id_competence")+"  ";
+            } 
+            return resultat;
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {
@@ -389,13 +421,8 @@ public class Annuaire
         Boolean result;
         Annuaire an1;
         an1 = new Annuaire();
-        resultat=an1.RechercherEtudiantAnonymeNom("MENAT");
         
-
-        String[] affichage = an1.afficherListeProfilEtudiant();
-        System.out.println("Résultat : "+affichage);
-        System.out.println("Résultat : "+resultat);
-        resultat=an1.AfficherProfilCompte("19");
+        resultat=an1.RechercherEtudiantCompetence("1");
         //an1.majInfos("5:nom4:prenom4:18/12/1993:nom4.prenom4@gmail.com:0665758387:1");
         System.out.println(resultat);     
     }		
