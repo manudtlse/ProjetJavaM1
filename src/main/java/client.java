@@ -6,16 +6,18 @@
  
 import java.io.*;
 import java.net.*;
-public class client extends Object {
+public class client extends Object 
+{
 
 
     
       
       
-  /**
-  * @param args the command line arguments
-  */
-  public static void main (String args[]) {
+/**
+* @param args the command line arguments
+*/
+public static void main (String args[])
+{
     String          reponse = "";
     BufferedReader  fluxEntreeStandard;
     Socket          leSocket;
@@ -23,16 +25,17 @@ public class client extends Object {
     BufferedReader  fluxEntreeSocket;
     int id_compte;
     
-    try {
-      fluxEntreeStandard = new BufferedReader(new InputStreamReader(System.in));
-      leSocket = new Socket("localhost", 2001); // socket sur echo
-      System.err.println("ConnectÃ© sur : "+leSocket);
-      fluxSortieSocket = new PrintStream(leSocket.getOutputStream());
-      fluxEntreeSocket = new BufferedReader(new InputStreamReader(leSocket.getInputStream()));
-      String requete = "";
-      
-      while (true)
-      {
+    try 
+    {
+        fluxEntreeStandard = new BufferedReader(new InputStreamReader(System.in));
+        leSocket = new Socket("localhost", 2001); // socket sur echo
+        System.err.println("ConnectÃ© sur : "+leSocket);
+        fluxSortieSocket = new PrintStream(leSocket.getOutputStream());
+        fluxEntreeSocket = new BufferedReader(new InputStreamReader(leSocket.getInputStream()));
+        String requete = "";
+
+        while (true)
+        {
             BufferedReader entree = new BufferedReader(new InputStreamReader(System.in));
             while (true)
             {
@@ -63,8 +66,8 @@ public class client extends Object {
                                 System.out.println("Reponse du serveur : "+retourInscription); 
                                 break;
                                           
-                     // ------------------------------- CONNEXION AVEC COMPTE ---------------------------------
-                     case "2":
+                    // ------------------------------- CONNEXION AVEC COMPTE ---------------------------------
+                    case "2":
                                 System.out.println("==============================================================");
                                 System.out.println("---------------------- Projet Connect ! ----------------------");
                                 System.out.println("==============================================================");
@@ -84,7 +87,8 @@ public class client extends Object {
                                 {
                                     // On récupere l'id du compte connecté
                                     id_compte = Integer.parseInt(param[1]);
-                                    while(true){
+                                    while(true)
+                                    {
                                     //On affiche le menu principal
                                     System.out.println("==============================================================");
                                     System.out.println("---------------------- Projet Connect ! ----------------------");
@@ -131,7 +135,7 @@ public class client extends Object {
                                             System.out.println(requete);
                                             fluxSortieSocket.println(requete);	      
                                             String retourAfficherListeProfilCompte = fluxEntreeSocket.readLine();
-                                             System.out.println(retourAfficherListeProfilCompte);
+                                            System.out.println(retourAfficherListeProfilCompte);
                                             System.out.println("==============================================================");
                                             System.out.println("---------------------- Projet Connect ! ----------------------");
                                             System.out.println("==============================================================");
@@ -143,7 +147,7 @@ public class client extends Object {
                                             switch (choix3) 
                                             {
                                                 // Modification du mail 
-                                                 case "1" :
+                                                case "1" :
                                                     System.out.println("==============================================================");
                                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                                     System.out.println("==============================================================");
@@ -155,8 +159,9 @@ public class client extends Object {
                                                     String retourModificationMail = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourModificationMail); 
                                                     break;
-                                                 // Modification du numéro de téléphone   
-                                                 case "2" :
+                                                
+                                                // Modification du numéro de téléphone   
+                                                case "2" :
                                                     System.out.println("==============================================================");
                                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                                     System.out.println("==============================================================");
@@ -168,8 +173,8 @@ public class client extends Object {
                                                     System.out.println("Reponse du serveur : "+retourModificationTel); 
                                                     break;
                                                     
-                                                 // Modification des compétences ( A REVOIIIIIIIIIIIIIIR)  
-                                                 case "3" :
+                                                // Modification des compétences ( A REVOIIIIIIIIIIIIIIR)  
+                                                case "3" :
                                                     System.out.println("==============================================================");
                                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                                     System.out.println("==============================================================");
@@ -204,7 +209,7 @@ public class client extends Object {
                                                     System.out.println("==============================================================");
                                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                                     System.out.println("==============================================================");
-                                                   System.out.println("Entrez votre login :");
+                                                    System.out.println("Entrez votre login :");
                                                     String login = entree.readLine();
                                                     System.out.println("Mot de passe actuel :");
                                                     String mdpActuel = entree.readLine();
@@ -213,12 +218,12 @@ public class client extends Object {
                                                     System.out.println("Confirmez votre nouveau mot de passe :");
                                                     String mdp2 = entree.readLine();
                                                     if (mdp1.equals(mdp2))
-                                                            {
-                                                            requete = "CHANGE_MDP "+login+" "+mdpActuel+" "+mdp1+" "+id_compte;
-                                                            fluxSortieSocket.println(requete);	      
-                                                            String retourChangeMdp = fluxEntreeSocket.readLine();	      
-                                                            System.out.println("Reponse du serveur : "+retourChangeMdp);
-                                                            }
+                                                    {
+                                                        requete = "CHANGE_MDP "+login+" "+mdpActuel+" "+mdp1+" "+id_compte;
+                                                        fluxSortieSocket.println(requete);	      
+                                                        String retourChangeMdp = fluxEntreeSocket.readLine();	      
+                                                        System.out.println("Reponse du serveur : "+retourChangeMdp);
+                                                    }
                                             break;
                                         
                                         case "6" :
@@ -232,7 +237,6 @@ public class client extends Object {
                                     }
                                 }
                                 break; 
-                        
                         
                     case "3":// ------------------------------- CONNEXION SANS COMPTE (ANONYME)-----------------------
                                 System.out.println("==============================================================");
@@ -256,26 +260,21 @@ public class client extends Object {
                     default :
  
                 }
-                
-                
-                
-                
             }
-
-      }
+        }
       
       //leSocket.close();
     }
     catch (UnknownHostException ex)
     {
-      System.err.println("Machine inconnue : "+ex);
-      ex.printStackTrace();
+        System.err.println("Machine inconnue : "+ex);
+        ex.printStackTrace();
     }
     catch (IOException ex)
     {
-      System.err.println("Erreur : "+ex);
-      ex.printStackTrace();
+        System.err.println("Erreur : "+ex);
+        ex.printStackTrace();
     }    
-  }
+}
 
 }

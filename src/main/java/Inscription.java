@@ -33,8 +33,8 @@ public class Inscription
         public int Inscription()
         {  
             int resultat = 0;
-                 try 
-                 {
+                try 
+                {
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url1,bdlogin,bdmdp);
                     // on cree un objet Statement qui va permettre l'execution des requetes

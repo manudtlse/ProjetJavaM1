@@ -24,12 +24,11 @@ public class gestionProtocole {
         String url2 = "jdbc:mysql://binary-digit.net:3306/yahimenat";
         String loginBDD = "yahimenat";
         String passwordBDD = "odaime";
-         
         Annuaire an1 = new Annuaire();
         
 	public String travaille (String requete) throws SQLException, ClassNotFoundException {
-		
-                String [] param = requete.split(" ");
+            
+                String [] param = requete.split(" ");      
                 
                 // Retour OK/NOK
                 String resultat = "";
@@ -62,14 +61,15 @@ public class gestionProtocole {
                             resultat = "ERREUR INSCRIPTION";
                         }
                         break;
-                        // Creer compte
+                        
+                        // Connexion
                     case "CONNEXION" :
                         try 
                         {
-                          String login = param[1];
-                          String mdp = param[2];
-                          Identification id = new Identification (login ,mdp); 
-                          if (id.connexion()== -1)
+                            String login = param[1];
+                            String mdp = param[2];
+                            Identification id = new Identification (login ,mdp); 
+                            if (id.connexion()== -1)
                             {
                                 resultat = "NONOKCONNEXION";
                             }
@@ -98,6 +98,7 @@ public class gestionProtocole {
                             int id_compte = Integer.parseInt(param[7]);
                             String infos=nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
                             int resu=an1.creationProfilEtudiant(infos);
+                            
                             if (resu==-1)
                             {
                                 resultat = "NON OK CREATION PROFIL ETUDIANT";
@@ -157,6 +158,7 @@ public class gestionProtocole {
                         }
 
                         break;
+                        
                     case "MODIFICATIONCOMPETENCE" :
                         try 
                         {
@@ -194,18 +196,23 @@ public class gestionProtocole {
                             String nouveauMdp = param[3];
                             int id_compte = Integer.parseInt(param[4]);
                             String infos=(nouveauMdp+" "+id_compte);
-                            
                             Identification id = new Identification (login ,mdpActuel);
-                            Boolean res= id.ChangeMdp(infos);
-                            if (res=true)
+                            if (id.connexion()==1)
                             {
-                              resultat = "OK CHANGEMENT MDP "+res;  
+                                Boolean res= id.ChangeMdp(infos);
+                                if (res=true)
+                                {
+                                    resultat = "OK CHANGEMENT MDP "+res;  
+                                }
+                                else
+                                {
+                                    resultat = "NON OK CHANGEMENT MDP "+res;
+                                }    
                             }
                             else
                             {
-                            resultat = "NON OK CHANGEMENT MDP "+res;
-                            
-                            }  
+                                resultat="Combinaison Identifiant/Mot de passe érronée";
+                            }
                             
                         }
                         catch (Exception e) 
