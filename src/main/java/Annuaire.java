@@ -310,8 +310,10 @@ public class Annuaire
        
     
     
-    // PARTIE ANONYME -----------------------------------------
-    public String RechercherEtudiantAnonyme(String nom) 
+    // PARTIE ANONYME ------------------------------------------------------------------------------------
+    
+    // Recherche par nom avec droits anonymes
+    public String RechercherEtudiantAnonymeNom(String nom) 
     {
         try 
         {	
@@ -335,6 +337,32 @@ public class Annuaire
             return null;
         }
     }
+    // Recherche par prenom avec droits anonymes
+    public String RechercherEtudiantAnonymePrenom(String prenom) 
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select num_etudiant, nom_etudiant, prenom_etudiant from profil_etudiant where prenom_etudiant = '"+prenom+"';");
+            if (rs.next()) 
+            {
+                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant");
+            } 
+            else 
+            {
+                return null;
+            }
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            // il y a eu une erreur
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
        
     
 
@@ -359,7 +387,7 @@ public class Annuaire
         Boolean result;
         Annuaire an1;
         an1 = new Annuaire();
-        resultat=an1.RechercherEtudiantMail("emmanuel.menat@gmail.com");
+        resultat=an1.RechercherEtudiantAnonymeNom("MENAT");
         
 
         String[] affichage = an1.afficherListeProfilEtudiant();

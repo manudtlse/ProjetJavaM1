@@ -275,16 +275,31 @@ public class gestionProtocole {
                         
                         
                         // ------------------------------ PARTIE ANONYMEEEEEEEEEEEEEEE-----------------------------
-                        case "RECHERCHE_ETUDIANT_ANONYME" :
+                        case "RECHERCHE_ETUDIANT_NOM_ANONYME" :
                         try
                         {
                             String nomRecherche = param[1];
-                            String res = an1.RechercherEtudiantAnonyme(nomRecherche);
-                            resultat= "OK RECHERCHE ETUDIANT "+res;
+                            String res = an1.RechercherEtudiantAnonymeNom (nomRecherche);
+                            resultat= "OK RECHERCHE ANONYME ETUDIANT "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON OK RECHERCHE ETUDIANT";
+                            resultat = "NON OK RECHERCHE ANONYME ETUDIANT";
+                        }
+                        break;
+                        
+                        
+                         // Recherche par prenom (anonyme)
+                        case "RECHERCHE_ETUDIANT_PRENOM_ANONYME" :
+                        try
+                        {
+                            String prenomRecherche = param[1];
+                            String res = an1.RechercherEtudiantAnonymePrenom (prenomRecherche);
+                            resultat= "OK RECHERCHE ANONYME ETUDIANT "+res;
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "NON OK ANONYME RECHERCHE ETUDIANT";
                         }
                         break;
                         

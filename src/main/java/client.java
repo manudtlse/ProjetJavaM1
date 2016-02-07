@@ -41,10 +41,9 @@ public static void main (String args[])
                 System.out.println("==============================================================");
                 System.out.println("---------------------- Projet Connect ! ----------------------");
                 System.out.println("==============================================================");
-                System.out.println(" ////////// Veuillez tapez votre choix  \\\\\\\\\\\\\\");
                 System.out.println("1/ Création de compte (Inscription)");
-                System.out.println("2/ Connexion (avec compte))");
-                System.out.println("3/ Connexion (Utilisateur Anonyme)");
+                System.out.println("2/ Connexion (avec Compte))");
+                System.out.println("3/ Connexion (Anonyme)");
                 System.out.println("4/ Exit ");
                 
                 // On lit le choix de l'utilisateur
@@ -250,7 +249,7 @@ public static void main (String args[])
                                                                 System.out.println("Reponse du serveur : "+retourRechercheMail); 
                                                                 break;
                                                                 
-                                                                // -------------------------------- RAJOUTER PAR COMPETENCE QUAND ON AURA GERER LES PLUSIEURS LIGNES ----------------
+                                                                // ---------- RAJOUTER PAR COMPETENCE QUAND ON AURA GERER LES PLUSIEURS LIGNES ----------------
                                                         }
                                                         break;
 
@@ -302,18 +301,39 @@ public static void main (String args[])
                                         
                                         break;
                                     
-                                    case "2" : //Recherche d'informations sur un étudiant (droits anonyme)
-                                            System.out.println("==============================================================");
-                                            System.out.println("---------------------- Projet Connect ! ----------------------");
-                                            System.out.println("==============================================================");
-                                            System.out.println("Entrez le nom du profil étudiant recherché :");
-                                            String nomRecherche = entree.readLine();
-                                            requete = "RECHERCHE_ETUDIANT_ANONYME "+nomRecherche;
-                                            fluxSortieSocket.println(requete);	      
-                                            String retourRechercheAnonyme = fluxEntreeSocket.readLine();	      
-                                            System.out.println("Reponse du serveur : "+retourRechercheAnonyme); 
-                                        break;
-                                        
+                                    case "2" :  //Recherche d'informations sur un étudiant (droits anonyme)
+                                                System.out.println("==============================================================");
+                                                System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                System.out.println("==============================================================");
+                                                System.out.println("Rechercher par nom (1), prenom (2) : ");
+                                                String choix6 = entree.readLine();
+                                                switch (choix6) 
+                                                {
+                                                    // Recherche par nom
+                                                    case "1" : 
+                                                        System.out.println("Entrez le nom du profil étudiant recherché :");
+                                                        String nomRecherche = entree.readLine();
+                                                        requete = "RECHERCHE_ETUDIANT_NOM_ANONYME "+nomRecherche;
+                                                        fluxSortieSocket.println(requete);	      
+                                                        String retourRecherche = fluxEntreeSocket.readLine();	      
+                                                        System.out.println("Reponse du serveur : "+retourRecherche); 
+                                                        break;
+                                                    // Recherche par prenom
+                                                    case "2" : 
+                                                        System.out.println("Entrez le prenom du profil étudiant recherché :");
+                                                        String prenomRecherche = entree.readLine();
+                                                        requete = "RECHERCHE_ETUDIANT_PRENOM_ANONYME "+prenomRecherche;
+                                                        fluxSortieSocket.println(requete);	      
+                                                        String retourRechercheAnonymePrenom = fluxEntreeSocket.readLine();	      
+                                                        System.out.println("Reponse du serveur : "+retourRechercheAnonymePrenom); 
+                                                        break;
+                                                        
+                                                        
+                                                        // ------ RAJOUTER CASE PAR COMPETENCE QUAND ON AURA GERER LES PLUSIEURS LIGNES ----------------
+                                                }
+                                                break;
+                                                
+                                     // Pour quitter le mode Anonyme   
                                     case "3" : break;
                                     
                                     default : exit(0); 
