@@ -272,8 +272,8 @@ public static void main (String args[])
                                                                 }
                                                                 break;
                                                                 
-                                                                // ---------- RAJOUTER PAR COMPETENCE QUAND ON AURA GERER LES PLUSIEURS LIGNES ----------------
-                                                                // Recherche par comptence    
+                                                                
+                                                            // Recherche par comptence    
                                                             case "4" : 
                                                                 System.out.println("Entrez le numéro de la compétence recherchée (1-Réseau,2-Télécoms,3-Dévelopement) :");
                                                                 String competenceRecherche = entree.readLine();
@@ -334,10 +334,24 @@ public static void main (String args[])
                                 String choix5 = entree.readLine();
                                 switch (choix5)
                                 {
-                                    // A FAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIRE COPIE DE L'AFFICHAGE UTILISATEUR CONNECTE
+                                    
                                     case "1" : // Afficher la liste des profils étudiants avec des droits d'un utilisateur anonyme
-                                        
-                                        break;
+                                               System.out.println("==============================================================");
+                                               System.out.println("---------------------- Projet Connect ! ----------------------");
+                                               System.out.println("==============================================================");
+                                               requete = "AFFICHER_LISTE_PROFIL_ETUDIANT_ANONYLE";
+                                               fluxSortieSocket.println(requete);	
+                                               String retourAffichageListeProfilEtudiantAnonyme = fluxEntreeSocket.readLine();
+                                               System.out.println("Reponse du serveur : "+retourAffichageListeProfilEtudiantAnonyme); 
+
+                                               String[] param1= retourAffichageListeProfilEtudiantAnonyme.split("  ");
+                                               int nbLigne=Integer.parseInt(param1[1]);
+                                               for (int i=2;i<=nbLigne+1;i++)
+                                               {
+                                                    System.out.println(param1[i]);
+                                               }
+                                               break;
+                          
                                     
                                     case "2" :  //Recherche d'informations sur un étudiant (droits anonyme)
                                                 System.out.println("==============================================================");
@@ -349,22 +363,36 @@ public static void main (String args[])
                                                 {
                                                     // Recherche par nom
                                                     case "1" : 
-                                                        System.out.println("Entrez le nom du profil étudiant recherché :");
-                                                        String nomRecherche = entree.readLine();
-                                                        requete = "RECHERCHE_ETUDIANT_NOM_ANONYME "+nomRecherche;
-                                                        fluxSortieSocket.println(requete);	      
-                                                        String retourRecherche = fluxEntreeSocket.readLine();	      
-                                                        System.out.println("Reponse du serveur : "+retourRecherche); 
-                                                        break;
+                                                            System.out.println("Entrez le nom du profil étudiant recherché :");
+                                                            String nomRecherche = entree.readLine();
+                                                            requete = "RECHERCHE_ETUDIANT_NOM_ANONYME "+nomRecherche;
+                                                            fluxSortieSocket.println(requete);	      
+                                                            String retourRechercheNom = fluxEntreeSocket.readLine();	      
+                                                            System.out.println("Reponse du serveur : "+retourRechercheNom); 
+                                                            String [] param6 = retourRechercheNom.split("  ");
+                                                            int NbLigne1=Integer.parseInt(param6[1]);
+                                                            for (int i=2;i<=NbLigne1+1;i++)
+                                                            {
+                                                                 System.out.println(param6[i]);
+                                                            }
+                                                            break;
+                                                        
+                                                                                            
                                                     // Recherche par prenom
                                                     case "2" : 
-                                                        System.out.println("Entrez le prenom du profil étudiant recherché :");
-                                                        String prenomRecherche = entree.readLine();
-                                                        requete = "RECHERCHE_ETUDIANT_PRENOM_ANONYME "+prenomRecherche;
-                                                        fluxSortieSocket.println(requete);	      
-                                                        String retourRechercheAnonymePrenom = fluxEntreeSocket.readLine();	      
-                                                        System.out.println("Reponse du serveur : "+retourRechercheAnonymePrenom); 
-                                                        break;
+                                                            System.out.println("Entrez le prenom du profil étudiant recherché :");
+                                                            String prenomRecherche = entree.readLine();
+                                                            requete = "RECHERCHE_ETUDIANT_PRENOM_ANONYME "+prenomRecherche;
+                                                            fluxSortieSocket.println(requete);	      
+                                                            String retourRecherchePrenom = fluxEntreeSocket.readLine();	      
+                                                            System.out.println("Reponse du serveur : "+retourRecherchePrenom); 
+                                                            String [] param7 = retourRecherchePrenom.split("  ");
+                                                            int NbLigne2=Integer.parseInt(param7[1]);
+                                                            for (int i=2;i<=NbLigne2+1;i++)
+                                                            {
+                                                                 System.out.println(param7[i]);
+                                                            }
+                                                            break;
                                                         
                                                         
                                                         // ------ RAJOUTER CASE PAR COMPETENCE QUAND ON AURA GERER LES PLUSIEURS LIGNES ----------------

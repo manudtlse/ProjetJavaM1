@@ -238,7 +238,7 @@ public class gestionProtocole {
                         {
                             String competenceRecherche = param[1];
                             String res = an1.RechercherEtudiantCompetence(competenceRecherche);
-                            resultat= "OK RECHERCHE ETUDIANT PAR COMEPTENCE  "+res;
+                            resultat= "OK RECHERCHE ETUDIANT PAR COMPETENCE  "+res;
                         }
                         catch (Exception e)
                         {
@@ -288,16 +288,31 @@ public class gestionProtocole {
                         
                         
                         // ------------------------------ PARTIE ANONYMEEEEEEEEEEEEEEE-----------------------------
-                        case "RECHERCHE_ETUDIANT_NOM_ANONYME" :
+                        
+                        case "AFFICHER_LISTE_PROFIL_ETUDIANT_ANONYLE" :
+                        try
+                        {
+                            String res = an1.afficherListeProfilEtudiantAnonyme();
+                            resultat= "OK AFFICHAGE LISTE PROFILS  "+res;
+                           
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT";
+                        }
+                        break;    
+                         
+                         
+                         case "RECHERCHE_ETUDIANT_NOM_ANONYME" :
                         try
                         {
                             String nomRecherche = param[1];
                             String res = an1.RechercherEtudiantAnonymeNom (nomRecherche);
-                            resultat= "OK RECHERCHE ANONYME ETUDIANT "+res;
+                            resultat= "OK RECHERCHE ANONYME NOM ETUDIANT  "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON OK RECHERCHE ANONYME ETUDIANT";
+                            resultat = "NON OK RECHERCHE NOM ANONYME ETUDIANT";
                         }
                         break;
                         
@@ -308,11 +323,11 @@ public class gestionProtocole {
                         {
                             String prenomRecherche = param[1];
                             String res = an1.RechercherEtudiantAnonymePrenom (prenomRecherche);
-                            resultat= "OK RECHERCHE ANONYME ETUDIANT "+res;
+                            resultat= "OK RECHERCHE ANONYME PRENOM ETUDIANT  "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON OK ANONYME RECHERCHE ETUDIANT";
+                            resultat = "NON OK ANONYME RECHERCHE PRENOM ETUDIANT";
                         }
                         break;
                         

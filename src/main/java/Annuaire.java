@@ -342,6 +342,35 @@ public class Annuaire
     
     // PARTIE ANONYME ------------------------------------------------------------------------------------
     
+    
+    public String afficherListeProfilEtudiantAnonyme ()
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant");
+            
+            String resultat="";
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
+            {
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+"  ";       
+            }
+            return resultat;
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            return null;
+        }
+    }
+    
+    
+    
     // Recherche par nom avec droits anonymes
     public String RechercherEtudiantAnonymeNom(String nom) 
     {
@@ -351,14 +380,17 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select num_etudiant, nom_etudiant, prenom_etudiant from profil_etudiant where nom_etudiant = '"+nom+"';");
-            if (rs.next()) 
+                        
+            String resultat="";
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
             {
-                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant");
-            } 
-            else 
-            {
-                return null;
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Competence (1-Réseaux, 2-Telecoms, 3-Developement)"+rs.getInt("id_competence")+"  ";       
             }
+            return resultat;
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {
@@ -376,14 +408,16 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select num_etudiant, nom_etudiant, prenom_etudiant from profil_etudiant where prenom_etudiant = '"+prenom+"';");
-            if (rs.next()) 
+            String resultat="";
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
             {
-                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant");
-            } 
-            else 
-            {
-                return null;
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Competence (1-Réseaux, 2-Telecoms, 3-Developement)"+rs.getInt("id_competence")+"  ";       
             }
+            return resultat;
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {
