@@ -225,8 +225,8 @@ public static void main (String args[])
                                                                 String nomRecherche = entree.readLine();
                                                                 requete = "RECHERCHE_ETUDIANT_NOM "+nomRecherche;
                                                                 fluxSortieSocket.println(requete);	      
-                                                                String retourRecherche = fluxEntreeSocket.readLine();	      
-                                                                System.out.println("Reponse du serveur : "+retourRecherche); 
+                                                                String retourRechercheNom = fluxEntreeSocket.readLine();	      
+                                                                System.out.println("Reponse du serveur : "+retourRechercheNom); 
                                                                 break;
                                                             
                                                             // Recherche par prenom
