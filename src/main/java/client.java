@@ -7,13 +7,16 @@
 import java.io.*;
 import static java.lang.System.exit;
 import java.net.*;
+import java.awt.Color;
 public class client extends Object 
+        
 {
 
      
 /**
 * @param args the command line arguments
 */
+
 public static void main (String args[])
 {
     BufferedReader  fluxEntreeStandard;
@@ -47,7 +50,7 @@ public static void main (String args[])
                 System.out.println("4/ Exit ");
                 
                 // On lit le choix de l'utilisateur
-                System.out.print("> ");
+                System.out.print("\u001B[31m> ");
                 String choix1 = entree.readLine();
                 // En fonction de ce choix
                 switch (choix1)
@@ -58,10 +61,10 @@ public static void main (String args[])
                                 System.out.println("---------------------- Projet Connect ! ----------------------");
                                 System.out.println("==============================================================");
                                 System.out.println("Choisissez votre login pour l'inscription :");
-                                System.out.print("> ");
+                                System.out.print("\u001B[31m> ");
                                 String loginInscription = entree.readLine();
                                 System.out.println("Entrez votre mot de passe :");
-                                System.out.print("> ");
+                                System.out.print("\u001B[31m> ");
                                 String pwdInscription = entree.readLine();
                                 requete = "INSCRIPTION "+loginInscription+" "+pwdInscription + " Utilisateur";
                                 System.out.println(requete);
@@ -79,10 +82,10 @@ public static void main (String args[])
                                 System.out.println("---------------------- Projet Connect ! ----------------------");
                                 System.out.println("==============================================================");
                                 System.out.println("Pour vous connecter, entrez votre login :");
-                                System.out.print("> ");
+                                System.out.print("\u001B[31m> ");
                                 String loginConnexion = entree.readLine();
                                 System.out.println("Entrez votre mot de passe :");
-                                System.out.print("> ");
+                                System.out.print("\u001B[31m> ");
                                 String pwdConnexion = entree.readLine();
                                 requete = "CONNEXION "+loginConnexion+" "+pwdConnexion;
                                 System.out.println(requete);
@@ -110,7 +113,7 @@ public static void main (String args[])
                                         System.out.println("4/ Rechercher un étudiant");
                                         System.out.println("5/ Modifier mot de passe");
                                         //ON lit le choix
-                                        System.out.print("> ");
+                                        System.out.print("\u001B[31m> ");
                                         String choix2 = entree.readLine();
                                         switch (choix2) 
                                         {
@@ -120,22 +123,22 @@ public static void main (String args[])
                                                 System.out.println("---------------------- Projet Connect ! ----------------------");
                                                 System.out.println("==============================================================");
                                                 System.out.println("Entrez votre nom :");
-                                                System.out.print("> ");
+                                                System.out.print("\u001B[31m> ");
                                                 String nom = entree.readLine();
                                                 System.out.println("Entrez votre prenom :");
-                                                System.out.print("> ");
+                                                System.out.print("\u001B[31m> ");
                                                 String prenom = entree.readLine();
                                                 System.out.println("Entrez votre date de naissance (JJ/MM/YYYY) :");
-                                                System.out.print("> ");
+                                                System.out.print("\u001B[31m> ");
                                                 String date_naissance = entree.readLine();
                                                 System.out.println("Entrez votre mail :");
-                                                System.out.print("> ");
+                                                System.out.print("\u001B[31m> ");
                                                 String mail = entree.readLine();
                                                 System.out.println("Entrez votre telephone :");
-                                                System.out.print("> ");
+                                                System.out.print("\u001B[31m> ");
                                                 String telephone = entree.readLine();
                                                 System.out.println("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms, 3 Dévélopement : ");
-                                                System.out.print("> ");
+                                                System.out.print("\u001B[31m> ");
                                                 String id_competence = entree.readLine();
                                                 requete = "CREATION_PROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
                                                 System.out.println(requete);
@@ -165,7 +168,7 @@ public static void main (String args[])
                                                 System.out.println("Voici vos informations actuelles : ");
                                                 System.out.println(retourAfficherProfilCompte);
                                                 System.out.println(" ////////// Veuillez entrer votre choix  \\\\\\\\\\\\\\");
-                                                System.out.print("> ");
+                                                System.out.print("\u001B[31m> ");
                                                 String choix3 = entree.readLine();
                                                 switch (choix3) 
                                                 {
@@ -175,7 +178,7 @@ public static void main (String args[])
                                                         System.out.println("---------------------- Projet Connect ! ----------------------");
                                                         System.out.println("==============================================================");
                                                         System.out.println("Quel est votre nouveau mail ? :");
-                                                        System.out.print("> ");
+                                                        System.out.print("\u001B[31m> ");
                                                         String nouveauMail = entree.readLine();
                                                         requete = "MODIFICATION_MAIL "+nouveauMail+" "+id_compte;
 
@@ -190,7 +193,7 @@ public static void main (String args[])
                                                         System.out.println("---------------------- Projet Connect ! ----------------------");
                                                         System.out.println("==============================================================");
                                                         System.out.println("Quel est votre nouveau numéro de téléphone ? :");
-                                                        System.out.print("> ");
+                                                        System.out.print("\u001B[31m> ");
                                                         String nouveauTelephone = entree.readLine();
                                                         requete = "MODIFICATION_TEL "+nouveauTelephone+" "+id_compte;
                                                         fluxSortieSocket.println(requete);	      
@@ -204,7 +207,7 @@ public static void main (String args[])
                                                         System.out.println("---------------------- Projet Connect ! ----------------------");
                                                         System.out.println("==============================================================");
                                                         System.out.println("Nouvelle competence ? (1-Réseaux, 2-Telecoms) :");
-                                                        System.out.print("> ");
+                                                        System.out.print("\u001B[31m> ");
                                                         String nouveleCompetence = entree.readLine();
                                                         requete = "MODIFICATION_COMPETENCE "+nouveleCompetence+" "+id_compte;
                                                         fluxSortieSocket.println(requete);	      
@@ -238,14 +241,14 @@ public static void main (String args[])
                                                         System.out.println("---------------------- Projet Connect ! ----------------------");
                                                         System.out.println("==============================================================");
                                                         System.out.println("Rechercher par nom (1), prenom (2), mail (3), compténce (4) ? : ");
-                                                        System.out.print("> ");
+                                                        System.out.print("\u001B[31m> ");
                                                         String choix4 = entree.readLine();
                                                         switch (choix4) 
                                                         {
                                                             // Recherche par nom
                                                             case "1" : 
                                                                 System.out.println("Entrez le nom du profil étudiant recherché :");
-                                                                System.out.print("> ");
+                                                                System.out.print("\u001B[31m> ");
                                                                 String nomRecherche = entree.readLine();
                                                                 requete = "RECHERCHE_ETUDIANT_NOM "+nomRecherche;
                                                                 fluxSortieSocket.println(requete);	      
@@ -262,7 +265,7 @@ public static void main (String args[])
                                                             // Recherche par prenom
                                                             case "2" : 
                                                                 System.out.println("Entrez le prenom du profil étudiant recherché :");
-                                                                System.out.print("> ");
+                                                                System.out.print("\u001B[31m> ");
                                                                 String prenomRecherche = entree.readLine();
                                                                 requete = "RECHERCHE_ETUDIANT_PRENOM "+prenomRecherche;
                                                                 fluxSortieSocket.println(requete);	      
@@ -279,7 +282,7 @@ public static void main (String args[])
                                                             // Recherche par mail    
                                                             case "3" : 
                                                                 System.out.println("Entrez le mail du profil étudiant recherché :");
-                                                                System.out.print("> ");
+                                                                System.out.print("\u001B[31m> ");
                                                                 String mailRecherche = entree.readLine();
                                                                 requete = "RECHERCHE_ETUDIANT_MAIL "+mailRecherche;
                                                                 fluxSortieSocket.println(requete);	      
@@ -297,7 +300,7 @@ public static void main (String args[])
                                                             // Recherche par comptence    
                                                             case "4" : 
                                                                 System.out.println("Entrez le numéro de la compétence recherchée (1-Réseau,2-Télécoms,3-Dévelopement) :");
-                                                                System.out.print("> ");
+                                                                System.out.print("\u001B[31m> ");
                                                                 String competenceRecherche = entree.readLine();
                                                                 requete = "RECHERCHE_ETUDIANT_COMPETENCE "+competenceRecherche;
                                                                 fluxSortieSocket.println(requete);	      
@@ -318,16 +321,16 @@ public static void main (String args[])
                                                         System.out.println("---------------------- Projet Connect ! ----------------------");
                                                         System.out.println("==============================================================");
                                                         System.out.println("Entrez votre login :");
-                                                        System.out.print("> ");
+                                                        System.out.print("\u001B[31m> ");
                                                         String login = entree.readLine();
                                                         System.out.println("Mot de passe actuel :");
-                                                        System.out.print("> ");
+                                                        System.out.print("\u001B[31m> ");
                                                         String mdpActuel = entree.readLine();
                                                         System.out.println("Nouveau mot de passe :");
-                                                        System.out.print("> ");
+                                                        System.out.print("\u001B[31m> ");
                                                         String mdp1 = entree.readLine();
                                                         System.out.println("Confirmez votre nouveau mot de passe :");
-                                                        System.out.print("> ");
+                                                        System.out.print("\u001B[31m> ");
                                                         String mdp2 = entree.readLine();
                                                         if (mdp1.equals(mdp2))
                                                         {
@@ -357,7 +360,7 @@ public static void main (String args[])
                                 System.out.println("2/ Rechercher un étudiant (N°étudiant) ");
                                 System.out.println("3/ Exit ");
                                 // on lit le choix
-                                System.out.print("> ");
+                                System.out.print("\u001B[31m> ");
                                 String choix5 = entree.readLine();
                                 switch (choix5)
                                 {
@@ -385,14 +388,14 @@ public static void main (String args[])
                                                 System.out.println("---------------------- Projet Connect ! ----------------------");
                                                 System.out.println("==============================================================");
                                                 System.out.println("Rechercher par nom (1), prenom (2) : ");
-                                                System.out.print("> ");
+                                                System.out.print("\u001B[31m> ");
                                                 String choix6 = entree.readLine();
                                                 switch (choix6) 
                                                 {
                                                     // Recherche par nom
                                                     case "1" : 
                                                             System.out.println("Entrez le nom du profil étudiant recherché :");
-                                                            System.out.print("> ");
+                                                            System.out.print("\u001B[31m> ");
                                                             String nomRecherche = entree.readLine();
                                                             requete = "RECHERCHE_ETUDIANT_NOM_ANONYME "+nomRecherche;
                                                             fluxSortieSocket.println(requete);	      
@@ -410,7 +413,7 @@ public static void main (String args[])
                                                     // Recherche par prenom
                                                     case "2" : 
                                                             System.out.println("Entrez le prenom du profil étudiant recherché :");
-                                                            System.out.print("> ");
+                                                            System.out.print("\u001B[31m> ");
                                                             String prenomRecherche = entree.readLine();
                                                             requete = "RECHERCHE_ETUDIANT_PRENOM_ANONYME "+prenomRecherche;
                                                             fluxSortieSocket.println(requete);	      
