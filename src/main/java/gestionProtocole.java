@@ -49,11 +49,11 @@ public class gestionProtocole {
                             Inscription id = new Inscription (login ,mdp, droits);
                             if (id.Inscription()== -1)
                             {
-                                resultat = "NONOKINSCRIPTION";
+                                resultat = "NON OKINSCRIPTION";
                             }
                             else 
                             {
-                                resultat = "OKINSCRIPTION";
+                                resultat = "OK INSCRIPTION";
                             }
                         }
                         catch (Exception e) 
@@ -71,7 +71,7 @@ public class gestionProtocole {
                             Identification id = new Identification (login ,mdp); 
                             if (id.connexion()== -1)
                             {
-                                resultat = "NONOKCONNEXION";
+                                resultat = "NON OKCONNEXION";
                             }
                             else 
                             {
@@ -86,7 +86,7 @@ public class gestionProtocole {
                         break;
                         
 
-                    case "CREATIONPROFIL" :
+                    case "CREATION_PROFIL" :
                         try 
                         {
                             String nom = param[1];
@@ -114,13 +114,13 @@ public class gestionProtocole {
                         }
                             break;
                     
-                    case "AFFICHERPROFILCOMPTE" :
+                    case "AFFICHER_PROFIL_COMPTE" :
                         try 
                         {
                             String id_compte = param[1];
                             String infos = id_compte;
-                            String res=an1.AfficherListeProfilCompte(infos);
-                            resultat = "OKAFFICHAGE PROFIL ETUDIANT DU COMPTE "+res;
+                            String res=an1.AfficherProfilCompte(infos);
+                            resultat = "OK AFFICHAGE PROFIL ETUDIANT DU COMPTE "+res;
                         }
                         catch (Exception e) 
                         {
@@ -128,14 +128,14 @@ public class gestionProtocole {
                         }
                         break;    
                     
-                     case "MODIFICATIONMAIL" :
+                     case "MODIFICATION_MAIL" :
                         try 
                         {
                             String nouveauMail = param[1];
                             int id_compte = Integer.parseInt(param[2]);
                             String infos =nouveauMail+" "+id_compte;
                             an1.majInfoMail(infos);
-                            resultat = "OKMODIFICATIONMAIL PROFIL ETUDIANT";
+                            resultat = "OK MODIFICATIONMAIL PROFIL ETUDIANT";
                         }
                         catch (Exception e) 
                         {
@@ -143,14 +143,14 @@ public class gestionProtocole {
                         }
                         break; 
                    
-                     case "MODIFICATIONTEL" :
+                     case "MODIFICATION_TEL" :
                         try 
                         {
                             String nouveauTel = param[1];
                             int id_compte = Integer.parseInt(param[2]);
                             String infos =nouveauTel+" "+id_compte;
                             an1.majInfoTel(infos);
-                            resultat = "OKMODIFICATIONTEL PROFIL ETUDIANT";
+                            resultat = "OK MODIFICATIONTEL PROFIL ETUDIANT";
                         }
                         catch (Exception e) 
                         {
@@ -159,14 +159,14 @@ public class gestionProtocole {
 
                         break;
                         
-                    case "MODIFICATIONCOMPETENCE" :
+                    case "MODIFICATION_COMPETENCE" :
                         try 
                         {
                             String nouvelleCompetence = param[1];
                             int id_compte = Integer.parseInt(param[2]);
                             String infos =nouvelleCompetence+" "+id_compte;
                             an1.majInfoCompetence(infos);
-                            resultat = "OKMODIFICATIONCOMPETENCE PROFIL ETUDIANT";
+                            resultat = "OK MODIFICATION COMPETENCE DU PROFIL ETUDIANT";
                         }
                         catch (Exception e) 
                         {
@@ -175,12 +175,32 @@ public class gestionProtocole {
 
                         break;
                     
+                     
+                        
+                        
+                     // REGGGGGGGGGGGARDE CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA   
+                     case "AFFICHER_LISTE_PROFIL_ETUDIANT" :
+                        try
+                        {
+                            resultat = an1.afficherListeProfilEtudiant();
+                           
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "NON OK RECHERCHE ETUDIANT";
+                        }
+                        break;    
+                        
+                        
+                        
+                        
+                        
                     case "RECHERCHE_ETUDIANT" :
                         try
                         {
                             String nomRecherche = param[1];
                             String res = an1.RechercherEtudiant(nomRecherche);
-                            resultat= "OKRECHERCHE ETUDIANT "+res;
+                            resultat= "OK RECHERCHE ETUDIANT "+res;
                         }
                         catch (Exception e) 
                         {
@@ -197,7 +217,7 @@ public class gestionProtocole {
                             int id_compte = Integer.parseInt(param[4]);
                             String infos=(nouveauMdp+" "+id_compte);
                             Identification id = new Identification (login ,mdpActuel);
-                            if (id.connexion()==1)
+                            if (id.connexion()!=1)
                             {
                                 Boolean res= id.ChangeMdp(infos);
                                 if (res=true)

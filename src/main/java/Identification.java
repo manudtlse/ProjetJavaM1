@@ -62,17 +62,6 @@ public class Identification
         }
         return id_compte_resultat;
     }
-    //Fermer connection
-    public void fermer() throws Exception 
-    {		
-            try 
-            {
-                conn.close();
-            } 
-            catch(Exception ex) 
-            {
-            }
-    }
 
     public boolean ChangeMdp(String infos)
     {
@@ -98,6 +87,18 @@ public class Identification
                 }
             return resultat;
     }        
+
+    //Fermer connection
+    public void fermer() throws Exception 
+    {		
+            try 
+            {
+                conn.close();
+            } 
+            catch(Exception ex) 
+            {
+            }
+    }
 
     public static void main(String[] args) throws Exception 
     {

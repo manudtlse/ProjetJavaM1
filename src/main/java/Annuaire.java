@@ -39,31 +39,8 @@ public class Annuaire
             }
     }
     
-    public String RechercherEtudiant(String nom) 
-    {
-        try 
-        {	
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
-            Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("select * from profil_etudiant where nom_etudiant = '"+nom+"';");
-            if (rs.next()) 
-            {
-                return rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence");
-            } 
-            else 
-            {
-                return null;
-            }
-        } 
-        catch(Exception ex) 
-        {
-            // il y a eu une erreur
-            ex.printStackTrace();
-            return null;
-        }
-    }
 
+    // Fonction pour créer un profil étudiant (renvoie 1 si insertion OK, -1 si NONOK)  
     public int creationProfilEtudiant(String infos) 
     {
         int resultat = 0;
@@ -102,7 +79,7 @@ public class Annuaire
         return resultat;
     }
 
-        
+    // Fonction pour modifier le mail      
     public boolean majInfoMail(String infos) 
     {
         try 
@@ -131,6 +108,7 @@ public class Annuaire
         }
     }
         
+    // Fonction pour modifier le tel
     public boolean majInfoTel(String infos) 
     {
         try 
@@ -158,7 +136,8 @@ public class Annuaire
             return false;
         }
     }
-             
+    
+    // Fonction pour modifier la competence             
     public boolean majInfoCompetence(String infos) 
     {
         try 
@@ -188,7 +167,7 @@ public class Annuaire
     }
         
         
-    public String AfficherListeProfilCompte(String infos) 
+    public String AfficherProfilCompte(String infos) 
     {
         try 
         {
@@ -200,7 +179,7 @@ public class Annuaire
             ResultSet rs = s.executeQuery("select * from profil_etudiant where id_compte = '"+id_compte+"';");
             if (rs.next()) {
 
-                return rs.getInt("num_etudiant")+":"+rs.getString("nom_etudiant")+":"+rs.getString("prenom_etudiant")+":"+rs.getString("date_naissance")+":"+rs.getString("mail")+":"+rs.getString("telephone")+":"+rs.getInt("id_competence")+":"+rs.getInt("id_compte");
+                return rs.getInt("num_etudiant")+" "+rs.getString("nom_etudiant")+" "+rs.getString("prenom_etudiant")+" "+rs.getString("date_naissance")+" "+rs.getString("mail")+" "+rs.getString("telephone")+" "+rs.getInt("id_competence")+" "+rs.getInt("id_compte");
             } 
             else 
             {
@@ -215,6 +194,57 @@ public class Annuaire
                 return null;
         }
     }
+    
+    
+    // Fonction qui renvoie les informations d'un profil étudiant recherché 
+    public String RechercherEtudiant(String nom) 
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant where nom_etudiant = '"+nom+"';");
+            if (rs.next()) 
+            {
+                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");
+            } 
+            else 
+            {
+                return null;
+            }
+        } 
+        catch(Exception ex) 
+        {
+            // il y a eu une erreur
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    
+    // A FAIRE QUAND RECHERCHE MARCHERA
+    public String afficherListeProfilEtudiant ()
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant");
+            String res ="";
+            while (rs.next())
+            {
+                res = "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");       
+            }
+            return res;
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            return null;
+        }
+    }
+
         
                
     public void fermer() throws Exception 
@@ -237,8 +267,10 @@ public class Annuaire
         Annuaire an1;
         an1 = new Annuaire();
         resultat=an1.RechercherEtudiant("a");
+        String affichage = an1.afficherListeProfilEtudiant();
+        System.out.println("Résultat : "+affichage);
         System.out.println("Résultat : "+resultat);
-        resultat=an1.AfficherListeProfilCompte("19");
+        resultat=an1.AfficherProfilCompte("19");
         //an1.majInfos("5:nom4:prenom4:18/12/1993:nom4.prenom4@gmail.com:0665758387:1");
         System.out.println(resultat);     
     }		
