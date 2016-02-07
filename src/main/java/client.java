@@ -5,14 +5,12 @@
  */
  
 import java.io.*;
+import static java.lang.System.exit;
 import java.net.*;
 public class client extends Object 
 {
 
-
-    
-      
-      
+     
 /**
 * @param args the command line arguments
 */
@@ -93,167 +91,192 @@ public static void main (String args[])
                                 {
                                     // On récupere l'id du compte connecté
                                     id_compte = Integer.parseInt(param[1]);
+                                    // Tant qu'il y a des actions en mode connecté
                                     while(true)
                                     {
-                                    //On affiche le menu principal
-                                    System.out.println("==============================================================");
-                                    System.out.println("---------------------- Projet Connect ! ----------------------");
-                                    System.out.println("==============================================================");
-                                    System.out.println(" ////////// Veuillez tapez votre choix  \\\\\\\\\\\\\\");
-                                    System.out.println("1/ Créer profil étudiant");
-                                    System.out.println("2/ Modifier informations de mon profil étudiant");
-                                    System.out.println("3/ Afficher la liste des étudiants");
-                                    System.out.println("4/ Rechercher un étudiant");
-                                    System.out.println("5/ Modifier mot de passe");
-                                    System.out.println("6/ Exit");
-                                    //ON lit le choix
-                                    String choix2 = entree.readLine();
-                                    switch (choix2) 
-                                    {
-                                        // Création d'un profil étudiant
-                                        case "1" :
-                                            System.out.println("==============================================================");
-                                            System.out.println("---------------------- Projet Connect ! ----------------------");
-                                            System.out.println("==============================================================");
-                                            System.out.println("Entrez votre nom :");
-                                            String nom = entree.readLine();
-                                            System.out.println("Entrez votre prenom :");
-                                            String prenom = entree.readLine();
-                                            System.out.println("Entrez votre date de naissance (JJ/MM/YYYY) :");
-                                            String date_naissance = entree.readLine();
-                                            System.out.println("Entrez votre mail :");
-                                            String mail = entree.readLine();
-                                            System.out.println("Entrez votre telephone :");
-                                            String telephone = entree.readLine();
-                                            System.out.println("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms : ");
-                                            String id_competence = entree.readLine();
-                                            requete = "CREATION_PROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
-                                            System.out.println(requete);
-                                            fluxSortieSocket.println(requete);	      
-                                            String retourCreationProfil = fluxEntreeSocket.readLine();	      
-                                            System.out.println("Reponse du serveur : "+retourCreationProfil); 
-                                            break;
-                                            
-                                            
-                                        //Modification informations profil étudiant  
-                                        case "2" :
-                                            System.out.println("==============================================================");
-                                            System.out.println("---------------------- Projet Connect ! ----------------------");
-                                            System.out.println("==============================================================");
-                                            
-                                            requete = "AFFICHER_PROFIL_COMPTE "+id_compte;
-                                            System.out.println(requete);
-                                            fluxSortieSocket.println(requete);	      
-                                            String retourAfficherProfilCompte = fluxEntreeSocket.readLine();
-                                            System.out.println("==============================================================");
-                                            System.out.println("---------------------- Projet Connect ! ----------------------");
-                                            System.out.println("==============================================================");
-                                            System.out.println("Que souhaitez vous modifier ? :");
-                                            System.out.println("1 - Votre mail ? ");
-                                            System.out.println("2 - Votre numero de telephone ? ");
-                                            System.out.println("3 - Vos compétences ? ");
-                                            System.out.println("Voici vos informations actuelles : ");
-                                            System.out.println(retourAfficherProfilCompte);
-                                            System.out.println(" ////////// Veuillez entrer votre choix  \\\\\\\\\\\\\\");
-                                            String choix3 = entree.readLine();
-                                            switch (choix3) 
-                                            {
-                                                // Modification du mail 
-                                                case "1" :
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("---------------------- Projet Connect ! ----------------------");
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("Quel est votre nouveau mail ? :");
-                                                    String nouveauMail = entree.readLine();
-                                                    requete = "MODIFICATION_MAIL "+nouveauMail+" "+id_compte;
-                                                   
-                                                    fluxSortieSocket.println(requete);	      
-                                                    String retourModificationMail = fluxEntreeSocket.readLine();	      
-                                                    System.out.println("Reponse du serveur : "+retourModificationMail); 
-                                                    break;
-                                                
-                                                // Modification du numéro de téléphone   
-                                                case "2" :
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("---------------------- Projet Connect ! ----------------------");
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("Quel est votre nouveau numéro de téléphone ? :");
-                                                    String nouveauTelephone = entree.readLine();
-                                                    requete = "MODIFICATION_TEL "+nouveauTelephone+" "+id_compte;
-                                                    fluxSortieSocket.println(requete);	      
-                                                    String retourModificationTel = fluxEntreeSocket.readLine();	      
-                                                    System.out.println("Reponse du serveur : "+retourModificationTel); 
-                                                    break;
-                                                    
-                                                // Modification des compétences ( A REVOIIIIIIIIIIIIIIR)  
-                                                case "3" :
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("---------------------- Projet Connect ! ----------------------");
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("Nouvelle competence ? (1-Réseaux, 2-Telecoms) :");
-                                                    String nouveleCompetence = entree.readLine();
-                                                    requete = "MODIFICATION_COMPETENCE "+nouveleCompetence+" "+id_compte;
-                                                    fluxSortieSocket.println(requete);	      
-                                                    String retourModificationCompetence = fluxEntreeSocket.readLine();	      
-                                                    System.out.println("Reponse du serveur : "+retourModificationCompetence); 
-                                                    break;
-                                            }
-                                            break;
-                                        
-                                              
-                                        case "3" :
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("---------------------- Projet Connect ! ----------------------");
-                                                    System.out.println("==============================================================");
-                                                    requete = "AFFICHER_LISTE_PROFIL_ETUDIANT";
-                                                    fluxSortieSocket.println(requete);	      
-                                                    String RetourAffichageListeProfilEtudiant = fluxEntreeSocket.readLine();	      
-                                                    System.out.println("Reponse du serveur : "+RetourAffichageListeProfilEtudiant); 
-                                            break;
-                                            
-                                            
-                                        case "4" : //Recherche d'informations sur un étudiant (droits utilisateur)
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("---------------------- Projet Connect ! ----------------------");
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("Entrez le nom du profil étudiant recherché :");
-                                                    String nomRecherche = entree.readLine();
-                                                    requete = "RECHERCHE_ETUDIANT "+nomRecherche;
-                                                    fluxSortieSocket.println(requete);	      
-                                                    String retourRecherche = fluxEntreeSocket.readLine();	      
-                                                    System.out.println("Reponse du serveur : "+retourRecherche); 
-                                            
-                                            break;
-                                            
-                                        case "5" : //Modifier mot de passe
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("---------------------- Projet Connect ! ----------------------");
-                                                    System.out.println("==============================================================");
-                                                    System.out.println("Entrez votre login :");
-                                                    String login = entree.readLine();
-                                                    System.out.println("Mot de passe actuel :");
-                                                    String mdpActuel = entree.readLine();
-                                                    System.out.println("Nouveau mot de passe :");
-                                                    String mdp1 = entree.readLine();
-                                                    System.out.println("Confirmez votre nouveau mot de passe :");
-                                                    String mdp2 = entree.readLine();
-                                                    if (mdp1.equals(mdp2))
-                                                    {
-                                                        requete = "CHANGE_MDP "+login+" "+mdpActuel+" "+mdp1+" "+id_compte;
+                                        //On affiche le menu principal
+                                        System.out.println("==============================================================");
+                                        System.out.println("---------------------- Projet Connect ! ----------------------");
+                                        System.out.println("==============================================================");
+                                        System.out.println(" ////////// Veuillez tapez votre choix  \\\\\\\\\\\\\\");
+                                        System.out.println("1/ Créer profil étudiant");
+                                        System.out.println("2/ Modifier informations de mon profil étudiant");
+                                        System.out.println("3/ Afficher la liste des étudiants");
+                                        System.out.println("4/ Rechercher un étudiant");
+                                        System.out.println("5/ Modifier mot de passe");
+                                        //ON lit le choix
+                                        String choix2 = entree.readLine();
+                                        switch (choix2) 
+                                        {
+                                            // Création d'un profil étudiant
+                                            case "1" :
+                                                System.out.println("==============================================================");
+                                                System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                System.out.println("==============================================================");
+                                                System.out.println("Entrez votre nom :");
+                                                String nom = entree.readLine();
+                                                System.out.println("Entrez votre prenom :");
+                                                String prenom = entree.readLine();
+                                                System.out.println("Entrez votre date de naissance (JJ/MM/YYYY) :");
+                                                String date_naissance = entree.readLine();
+                                                System.out.println("Entrez votre mail :");
+                                                String mail = entree.readLine();
+                                                System.out.println("Entrez votre telephone :");
+                                                String telephone = entree.readLine();
+                                                System.out.println("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms : ");
+                                                String id_competence = entree.readLine();
+                                                requete = "CREATION_PROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
+                                                System.out.println(requete);
+                                                fluxSortieSocket.println(requete);	      
+                                                String retourCreationProfil = fluxEntreeSocket.readLine();	      
+                                                System.out.println("Reponse du serveur : "+retourCreationProfil); 
+                                                break;
+
+
+                                            //Modification informations profil étudiant  
+                                            case "2" :
+                                                System.out.println("==============================================================");
+                                                System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                System.out.println("==============================================================");
+
+                                                requete = "AFFICHER_PROFIL_COMPTE "+id_compte;
+                                                System.out.println(requete);
+                                                fluxSortieSocket.println(requete);	      
+                                                String retourAfficherProfilCompte = fluxEntreeSocket.readLine();
+                                                System.out.println("==============================================================");
+                                                System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                System.out.println("==============================================================");
+                                                System.out.println("Que souhaitez vous modifier ? :");
+                                                System.out.println("1 - Votre mail ? ");
+                                                System.out.println("2 - Votre numero de telephone ? ");
+                                                System.out.println("3 - Vos compétences ? ");
+                                                System.out.println("Voici vos informations actuelles : ");
+                                                System.out.println(retourAfficherProfilCompte);
+                                                System.out.println(" ////////// Veuillez entrer votre choix  \\\\\\\\\\\\\\");
+                                                String choix3 = entree.readLine();
+                                                switch (choix3) 
+                                                {
+                                                    // Modification du mail 
+                                                    case "1" :
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("Quel est votre nouveau mail ? :");
+                                                        String nouveauMail = entree.readLine();
+                                                        requete = "MODIFICATION_MAIL "+nouveauMail+" "+id_compte;
+
                                                         fluxSortieSocket.println(requete);	      
-                                                        String retourChangeMdp = fluxEntreeSocket.readLine();	      
-                                                        System.out.println("Reponse du serveur : "+retourChangeMdp);
-                                                    }
-                                            break;
-                                        
-                                        case "6" :
-                                            
-                                            break;    
-                                            
-                                         default : 
-                                            
-                                            break;
-                                    }
+                                                        String retourModificationMail = fluxEntreeSocket.readLine();	      
+                                                        System.out.println("Reponse du serveur : "+retourModificationMail); 
+                                                        break;
+
+                                                    // Modification du numéro de téléphone   
+                                                    case "2" :
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("Quel est votre nouveau numéro de téléphone ? :");
+                                                        String nouveauTelephone = entree.readLine();
+                                                        requete = "MODIFICATION_TEL "+nouveauTelephone+" "+id_compte;
+                                                        fluxSortieSocket.println(requete);	      
+                                                        String retourModificationTel = fluxEntreeSocket.readLine();	      
+                                                        System.out.println("Reponse du serveur : "+retourModificationTel); 
+                                                        break;
+
+                                                    // Modification des compétences ( A REVOIIIIIIIIIIIIIIR)  
+                                                    case "3" :
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("Nouvelle competence ? (1-Réseaux, 2-Telecoms) :");
+                                                        String nouveleCompetence = entree.readLine();
+                                                        requete = "MODIFICATION_COMPETENCE "+nouveleCompetence+" "+id_compte;
+                                                        fluxSortieSocket.println(requete);	      
+                                                        String retourModificationCompetence = fluxEntreeSocket.readLine();	      
+                                                        System.out.println("Reponse du serveur : "+retourModificationCompetence); 
+                                                        break;
+                                                }
+                                                break;
+
+
+                                            // A FAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIRE   
+
+                                            case "3" : //Afficher la liste des profils étudiants (droits utilisateur)
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                        System.out.println("==============================================================");
+                                                        requete = "AFFICHER_LISTE_PROFIL_ETUDIANT";
+                                                        fluxSortieSocket.println(requete);	      
+                                                        String RetourAffichageListeProfilEtudiant = fluxEntreeSocket.readLine();	      
+                                                        System.out.println("La liste des profils étudiant est la suivante : "+RetourAffichageListeProfilEtudiant); 
+                                                        break;
+
+
+                                            case "4" : //Recherche d'informations sur un étudiant (droits utilisateur)
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("Rechercher par nom (1), prenom (2), mail (3) ? : ");
+                                                        String choix4 = entree.readLine();
+                                                        switch (choix4) 
+                                                        {
+                                                            // Recherche par nom
+                                                            case "1" : 
+                                                                System.out.println("Entrez le nom du profil étudiant recherché :");
+                                                                String nomRecherche = entree.readLine();
+                                                                requete = "RECHERCHE_ETUDIANT_NOM "+nomRecherche;
+                                                                fluxSortieSocket.println(requete);	      
+                                                                String retourRecherche = fluxEntreeSocket.readLine();	      
+                                                                System.out.println("Reponse du serveur : "+retourRecherche); 
+                                                                break;
+                                                            
+                                                            // Par prenom
+                                                            case "2" : 
+                                                                System.out.println("Entrez le prenom du profil étudiant recherché :");
+                                                                String prenomRecherche = entree.readLine();
+                                                                requete = "RECHERCHE_ETUDIANT_PRENOM "+prenomRecherche;
+                                                                fluxSortieSocket.println(requete);	      
+                                                                String retourRecherchePrenom = fluxEntreeSocket.readLine();	      
+                                                                System.out.println("Reponse du serveur : "+retourRecherchePrenom); 
+                                                                break;
+                                                                
+                                                            //Par mail    
+                                                            case "3" : 
+                                                                System.out.println("Entrez le mail du profil étudiant recherché :");
+                                                                String mailRecherche = entree.readLine();
+                                                                requete = "RECHERCHE_ETUDIANT_MAIL "+mailRecherche;
+                                                                fluxSortieSocket.println(requete);	      
+                                                                String retourRechercheMail = fluxEntreeSocket.readLine();	      
+                                                                System.out.println("Reponse du serveur : "+retourRechercheMail); 
+                                                                break;
+                                                        }
+                                                        break;
+
+                                            case "5" : //Modifier mot de passe
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                        System.out.println("==============================================================");
+                                                        System.out.println("Entrez votre login :");
+                                                        String login = entree.readLine();
+                                                        System.out.println("Mot de passe actuel :");
+                                                        String mdpActuel = entree.readLine();
+                                                        System.out.println("Nouveau mot de passe :");
+                                                        String mdp1 = entree.readLine();
+                                                        System.out.println("Confirmez votre nouveau mot de passe :");
+                                                        String mdp2 = entree.readLine();
+                                                        if (mdp1.equals(mdp2))
+                                                        {
+                                                            requete = "CHANGE_MDP "+login+" "+mdpActuel+" "+mdp1+" "+id_compte;
+                                                            fluxSortieSocket.println(requete);	      
+                                                            String retourChangeMdp = fluxEntreeSocket.readLine();	      
+                                                            System.out.println("Reponse du serveur : "+retourChangeMdp);
+                                                        }
+                                                break;
+
+
+                                             // Si aucun case n'est détecté
+                                             default : exit(0);
+                                        }
                                     }
                                 }
                                 break; 
@@ -269,24 +292,37 @@ public static void main (String args[])
                                 System.out.println("2/ Rechercher un étudiant (N°étudiant) ");
                                 System.out.println("3/ Exit ");
                                 // on lit le choix
-                                String choix4 = entree.readLine();
-                                
-                        
-                        
-                        
-                        break; 
-                        
-                    case "4":
-                        
-                        break;
-                       
-                    default :
+                                String choix5 = entree.readLine();
+                                switch (choix5)
+                                {
+                                    // A FAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIRE COPIE DE L'AFFICHAGE UTILISATEUR CONNECTE
+                                    case "1" : // Afficher la liste des profils étudiants avec des droits d'un utilisateur anonyme
+                                        
+                                        break;
+                                    
+                                    case "2" : //Recherche d'informations sur un étudiant (droits anonyme)
+                                            System.out.println("==============================================================");
+                                            System.out.println("---------------------- Projet Connect ! ----------------------");
+                                            System.out.println("==============================================================");
+                                            System.out.println("Entrez le nom du profil étudiant recherché :");
+                                            String nomRecherche = entree.readLine();
+                                            requete = "RECHERCHE_ETUDIANT_ANONYME "+nomRecherche;
+                                            fluxSortieSocket.println(requete);	      
+                                            String retourRechercheAnonyme = fluxEntreeSocket.readLine();	      
+                                            System.out.println("Reponse du serveur : "+retourRechercheAnonyme); 
+                                        break;
+                                        
+                                    case "3" : break;
+                                    
+                                    default : exit(0); 
+                                }
+                    break;     
+                    case "4": exit(0);
+                    default : break;
  
                 }
             }
         }
-      
-      //leSocket.close();
     }
     catch (UnknownHostException ex)
     {

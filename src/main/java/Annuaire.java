@@ -196,8 +196,8 @@ public class Annuaire
     }
     
     
-    // Fonction qui renvoie les informations d'un profil étudiant recherché 
-    public String RechercherEtudiant(String nom) 
+    // Recherche par Nom 
+    public String RechercherEtudiantNom(String nom) 
     {
         try 
         {	
@@ -214,7 +214,7 @@ public class Annuaire
                 return null;
             }
         } 
-        catch(Exception ex) 
+        catch(ClassNotFoundException | SQLException ex) 
         {
             // il y a eu une erreur
             ex.printStackTrace();
@@ -222,9 +222,62 @@ public class Annuaire
         }
     }
     
+    // Recherche par prenom
+    public String RechercherEtudiantPrenom(String prenom) 
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant where prenom_etudiant = '"+prenom+"';");
+            if (rs.next()) 
+            {
+                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");
+            } 
+            else 
+            {
+                return null;
+            }
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            // il y a eu une erreur
+            ex.printStackTrace();
+            return null;
+        }
+    }
     
-    // A FAIRE QUAND RECHERCHE MARCHERA
-    public String afficherListeProfilEtudiant ()
+    // Recherche par mail
+    public String RechercherEtudiantMail(String mail) 
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant where mail = '"+mail+"';");
+            if (rs.next()) 
+            {
+                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");
+            } 
+            else 
+            {
+                return null;
+            }
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            // il y a eu une erreur
+            ex.printStackTrace();
+            return null;
+        }
+    }   
+    
+     
+     
+    // A MODIFIIIIIIIIIIIIIIIIIIIIIIIIIIIIIER
+    public String[] afficherListeProfilEtudiant ()
     {
         try 
         {	
@@ -232,12 +285,21 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from profil_etudiant");
-            String res ="";
-            while (rs.next())
+            int nbLigneRequete = rs.getRow();
+            System.out.println("Le nombre de ligne de la requete est de : "+nbLigneRequete);
+            String[] tab = null;
+            for (int i=0; i<nbLigneRequete; i++)
             {
-                res = "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");       
+                if (rs.next())
+                {
+                   tab[i] = "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");       
+                }
+                else 
+                {
+                    return null;
+                }  
             }
-            return res;
+            return tab;
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {
@@ -245,8 +307,39 @@ public class Annuaire
         }
     }
 
-        
-               
+       
+    
+    
+    // PARTIE ANONYME -----------------------------------------
+    public String RechercherEtudiantAnonyme(String nom) 
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select num_etudiant, nom_etudiant, prenom_etudiant from profil_etudiant where nom_etudiant = '"+nom+"';");
+            if (rs.next()) 
+            {
+                return "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant");
+            } 
+            else 
+            {
+                return null;
+            }
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            // il y a eu une erreur
+            ex.printStackTrace();
+            return null;
+        }
+    }
+       
+    
+
+    
+    
     public void fermer() throws Exception 
     {		
             try 
@@ -266,8 +359,10 @@ public class Annuaire
         Boolean result;
         Annuaire an1;
         an1 = new Annuaire();
-        resultat=an1.RechercherEtudiant("a");
-        String affichage = an1.afficherListeProfilEtudiant();
+        resultat=an1.RechercherEtudiantMail("emmanuel.menat@gmail.com");
+        
+
+        String[] affichage = an1.afficherListeProfilEtudiant();
         System.out.println("Résultat : "+affichage);
         System.out.println("Résultat : "+resultat);
         resultat=an1.AfficherProfilCompte("19");

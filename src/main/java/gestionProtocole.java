@@ -176,37 +176,62 @@ public class gestionProtocole {
                         break;
                     
                      
-                        
-                        
-                     // REGGGGGGGGGGGARDE CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA   
+                     // A FAIREEEEEEEEEEEEEEEEEEEE
                      case "AFFICHER_LISTE_PROFIL_ETUDIANT" :
+                         String[] liste = null;
                         try
                         {
-                            resultat = an1.afficherListeProfilEtudiant();
+                            liste = an1.afficherListeProfilEtudiant();
                            
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON OK RECHERCHE ETUDIANT";
+                            resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT";
                         }
                         break;    
                         
-                        
-                        
-                        
-                        
-                    case "RECHERCHE_ETUDIANT" :
+                    // Recherche par nom
+                    case "RECHERCHE_ETUDIANT_NOM" :
                         try
                         {
                             String nomRecherche = param[1];
-                            String res = an1.RechercherEtudiant(nomRecherche);
-                            resultat= "OK RECHERCHE ETUDIANT "+res;
+                            String res = an1.RechercherEtudiantNom(nomRecherche);
+                            resultat= "OK RECHERCHE PAR NOM ETUDIANT "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON OK RECHERCHE ETUDIANT";
+                            resultat = "NON OK RECHERCHE PAR NOM ETUDIANT";
                         }
                         break;
+                    
+                    // Recherche par prenom    
+                    case "RECHERCHE_ETUDIANT_PRENOM" :
+                        try
+                        {
+                            String prenomRecherche = param[1];
+                            String res = an1.RechercherEtudiantPrenom(prenomRecherche);
+                            resultat= "OK RECHERCHE ETUDIANT PAR PRENOM "+res;
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "NON OK RECHERCHE ETUDIANT PAR PRENOM";
+                        }
+                        break;                        
+                    
+                    // Recherche par mail    
+                    case "RECHERCHE_ETUDIANT_MAIL" :
+                        try
+                        {
+                            String mailRecherche = param[1];
+                            String res = an1.RechercherEtudiantMail(mailRecherche);
+                            resultat= "OK RECHERCHE ETUDIANT PAR MAIL"+res;
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "NON OK RECHERCHE ETUDIANT PAR MAIL";
+                        }
+                        break;                        
+                        
                         
                     case "CHANGE_MDP" :
                         try
@@ -238,6 +263,28 @@ public class gestionProtocole {
                         catch (Exception e) 
                         {
                             resultat = "ERREUR CHANGEMENT MDP";
+                        }
+                        break;
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        // ------------------------------ PARTIE ANONYMEEEEEEEEEEEEEEE-----------------------------
+                        case "RECHERCHE_ETUDIANT_ANONYME" :
+                        try
+                        {
+                            String nomRecherche = param[1];
+                            String res = an1.RechercherEtudiantAnonyme(nomRecherche);
+                            resultat= "OK RECHERCHE ETUDIANT "+res;
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "NON OK RECHERCHE ETUDIANT";
                         }
                         break;
                         
