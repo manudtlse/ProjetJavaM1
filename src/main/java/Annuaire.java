@@ -379,7 +379,7 @@ public class Annuaire
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("select num_etudiant, nom_etudiant, prenom_etudiant from profil_etudiant where nom_etudiant = '"+nom+"';");
+            ResultSet rs = s.executeQuery("select num_etudiant, nom_etudiant, prenom_etudiant, id_competence from profil_etudiant where nom_etudiant = '"+nom+"';");
                         
             String resultat="";
             rs.last();
@@ -388,7 +388,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Competence (1-Réseaux, 2-Telecoms, 3-Developement)"+rs.getInt("id_competence")+"  ";       
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Competence (1-Réseaux, 2-Telecoms, 3-Developement) : "+rs.getInt("id_competence")+"  ";       
             }
             return resultat;
         } 
@@ -407,7 +407,7 @@ public class Annuaire
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("select num_etudiant, nom_etudiant, prenom_etudiant from profil_etudiant where prenom_etudiant = '"+prenom+"';");
+            ResultSet rs = s.executeQuery("select num_etudiant, nom_etudiant, prenom_etudiant, id_competence from profil_etudiant where prenom_etudiant = '"+prenom+"';");
             String resultat="";
             rs.last();
             int NbLignes=rs.getRow();
@@ -415,7 +415,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Competence (1-Réseaux, 2-Telecoms, 3-Developement)"+rs.getInt("id_competence")+"  ";       
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Competence (1-Réseaux, 2-Telecoms, 3-Developement) : "+rs.getInt("id_competence")+"  ";       
             }
             return resultat;
         } 
