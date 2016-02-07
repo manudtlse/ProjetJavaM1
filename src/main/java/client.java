@@ -230,7 +230,7 @@ public static void main (String args[])
                                                                 System.out.println("Reponse du serveur : "+retourRecherche); 
                                                                 break;
                                                             
-                                                            // Par prenom
+                                                            // Recherche par prenom
                                                             case "2" : 
                                                                 System.out.println("Entrez le prenom du profil étudiant recherché :");
                                                                 String prenomRecherche = entree.readLine();
@@ -240,7 +240,7 @@ public static void main (String args[])
                                                                 System.out.println("Reponse du serveur : "+retourRecherchePrenom); 
                                                                 break;
                                                                 
-                                                            //Par mail    
+                                                            // Recherche par mail    
                                                             case "3" : 
                                                                 System.out.println("Entrez le mail du profil étudiant recherché :");
                                                                 String mailRecherche = entree.readLine();
@@ -249,6 +249,8 @@ public static void main (String args[])
                                                                 String retourRechercheMail = fluxEntreeSocket.readLine();	      
                                                                 System.out.println("Reponse du serveur : "+retourRechercheMail); 
                                                                 break;
+                                                                
+                                                                // -------------------------------- RAJOUTER PAR COMPETENCE QUAND ON AURA GERER LES PLUSIEURS LIGNES ----------------
                                                         }
                                                         break;
 
