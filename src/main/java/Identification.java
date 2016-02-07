@@ -80,7 +80,7 @@ public class Identification
                 int rs = s.executeUpdate("update yahimenat.compte set  password='"+NouveauMdp+"' where id_compte='"+id_compte+"';");
                 resultat=true;
             }
-           catch(Exception e) 
+           catch(NumberFormatException | ClassNotFoundException | SQLException e) 
                 {
                     System.out.println("Erreur"+e.getMessage());
                    resultat=false;

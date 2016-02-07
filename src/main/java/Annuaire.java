@@ -310,8 +310,8 @@ public class Annuaire
     
      
      
-    // A MODIFIIIIIIIIIIIIIIIIIIIIIIIIIIIIIER
-    public String[] afficherListeProfilEtudiant ()
+
+    public String afficherListeProfilEtudiant ()
     {
         try 
         {	
@@ -319,21 +319,17 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from profil_etudiant");
-            int nbLigneRequete = rs.getRow();
-            System.out.println("Le nombre de ligne de la requete est de : "+nbLigneRequete);
-            String[] tab = null;
-            for (int i=0; i<nbLigneRequete; i++)
+            
+            String resultat="";
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
             {
-                if (rs.next())
-                {
-                   tab[i] = "Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence");       
-                }
-                else 
-                {
-                    return null;
-                }  
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
             }
-            return tab;
+            return resultat;
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {

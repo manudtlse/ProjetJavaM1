@@ -176,12 +176,12 @@ public class gestionProtocole {
                         break;
                     
                      
-                     // A FAIREEEEEEEEEEEEEEEEEEEE
+                     
                      case "AFFICHER_LISTE_PROFIL_ETUDIANT" :
-                         String[] liste = null;
                         try
                         {
-                            liste = an1.afficherListeProfilEtudiant();
+                            String res = an1.afficherListeProfilEtudiant();
+                            resultat= "OK AFFICHAGE LISTE PROFILS  "+res;
                            
                         }
                         catch (Exception e) 

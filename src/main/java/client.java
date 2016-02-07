@@ -198,16 +198,21 @@ public static void main (String args[])
                                                 break;
 
 
-                                            // A FAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIRE   
-
                                             case "3" : //Afficher la liste des profils étudiants (droits utilisateur)
                                                         System.out.println("==============================================================");
                                                         System.out.println("---------------------- Projet Connect ! ----------------------");
                                                         System.out.println("==============================================================");
                                                         requete = "AFFICHER_LISTE_PROFIL_ETUDIANT";
-                                                        fluxSortieSocket.println(requete);	      
-                                                        String RetourAffichageListeProfilEtudiant = fluxEntreeSocket.readLine();	      
-                                                        System.out.println("La liste des profils étudiant est la suivante : "+RetourAffichageListeProfilEtudiant); 
+                                                        fluxSortieSocket.println(requete);	
+                                                        String retourAffichageListeProfilEtudiant = fluxEntreeSocket.readLine();
+                                                        System.out.println("Reponse du serveur : "+retourAffichageListeProfilEtudiant); 
+ 
+                                                        String[] param1= retourAffichageListeProfilEtudiant.split("  ");
+                                                        int nbLigne=Integer.parseInt(param1[1]);
+                                                        for (int i=2;i<=nbLigne+1;i++)
+                                                        {
+                                                             System.out.println(param1[i]);
+                                                        }
                                                         break;
 
 
@@ -227,11 +232,11 @@ public static void main (String args[])
                                                                 fluxSortieSocket.println(requete);	      
                                                                 String retourRechercheNom = fluxEntreeSocket.readLine();	      
                                                                 System.out.println("Reponse du serveur : "+retourRechercheNom); 
-                                                                String [] param1 = retourRechercheNom.split("  ");
-                                                                int NbLigne1=Integer.parseInt(param1[1]);
+                                                                String [] param2 = retourRechercheNom.split("  ");
+                                                                int NbLigne1=Integer.parseInt(param2[1]);
                                                                 for (int i=2;i<=NbLigne1+1;i++)
                                                                 {
-                                                                     System.out.println(param1[i]);
+                                                                     System.out.println(param2[i]);
                                                                 }
                                                                 break;
                                                             
@@ -243,11 +248,11 @@ public static void main (String args[])
                                                                 fluxSortieSocket.println(requete);	      
                                                                 String retourRecherchePrenom = fluxEntreeSocket.readLine();	      
                                                                 System.out.println("Reponse du serveur : "+retourRecherchePrenom); 
-                                                                String [] param2 = retourRecherchePrenom.split("  ");
-                                                                int NbLigne2=Integer.parseInt(param2[1]);
+                                                                String [] param3 = retourRecherchePrenom.split("  ");
+                                                                int NbLigne2=Integer.parseInt(param3[1]);
                                                                 for (int i=2;i<=NbLigne2+1;i++)
                                                                 {
-                                                                     System.out.println(param2[i]);
+                                                                     System.out.println(param3[i]);
                                                                 }
                                                                 break;
                                                                 
@@ -259,11 +264,11 @@ public static void main (String args[])
                                                                 fluxSortieSocket.println(requete);	      
                                                                 String retourRechercheMail = fluxEntreeSocket.readLine();	      
                                                                 System.out.println("Reponse du serveur : "+retourRechercheMail); 
-                                                                String [] param3 = retourRechercheMail.split("  ");
-                                                                int NbLigne3=Integer.parseInt(param3[1]);
+                                                                String [] param4 = retourRechercheMail.split("  ");
+                                                                int NbLigne3=Integer.parseInt(param4[1]);
                                                                 for (int i=2;i<=NbLigne3+1;i++)
                                                                 {
-                                                                     System.out.println(param3[i]);
+                                                                     System.out.println(param4[i]);
                                                                 }
                                                                 break;
                                                                 
@@ -276,11 +281,11 @@ public static void main (String args[])
                                                                 fluxSortieSocket.println(requete);	      
                                                                 String retourCompetenceRecherche = fluxEntreeSocket.readLine();	      
                                                                 System.out.println("Reponse du serveur : "+retourCompetenceRecherche); 
-                                                                String [] param4 = retourCompetenceRecherche.split("  ");
-                                                                int NbLigne4=Integer.parseInt(param4[1]);
+                                                                String [] param5 = retourCompetenceRecherche.split("  ");
+                                                                int NbLigne4=Integer.parseInt(param5[1]);
                                                                 for (int i=2;i<=NbLigne4+1;i++)
                                                                 {
-                                                                     System.out.println(param4[i]);
+                                                                     System.out.println(param5[i]);
                                                                 }
                                                                 break;
                                                         }
