@@ -308,17 +308,15 @@ public class Annuaire
         }
     }   
     
-     
-     
-
-    public String afficherListeProfilEtudiant ()
+    // Affichage de la liste des profils étudiants triée par nom
+    public String afficherListeProfilEtudiantTriNom ()
     {
         try 
         {	
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("select * from profil_etudiant");
+            ResultSet rs = s.executeQuery("select * from profil_etudiant ORDER BY nom_etudiant");
             
             String resultat="";
             rs.last();
@@ -336,13 +334,63 @@ public class Annuaire
             return null;
         }
     }
-
-       
+    
+    // Affichage de la liste des profils étudiants triée par prenom
+    public String afficherListeProfilEtudiantTriPrenom ()
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant ORDER BY prenom_etudiant");
+            
+            String resultat="";
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
+            {
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
+            }
+            return resultat;
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            return null;
+        }
+    }
+      
+    // Affichage de la liste des profils étudiants triée par compétence
+    public String afficherListeProfilEtudiantTriCompetence ()
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant ORDER BY id_competence");
+            
+            String resultat="";
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
+            {
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
+            }
+            return resultat;
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            return null;
+        }
+    }
     
     
     // PARTIE ANONYME ------------------------------------------------------------------------------------
-    
-    
     public String afficherListeProfilEtudiantAnonyme ()
     {
         try 

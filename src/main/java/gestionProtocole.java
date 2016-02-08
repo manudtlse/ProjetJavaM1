@@ -176,12 +176,12 @@ public class gestionProtocole {
                         break;
                     
                      
-                     
-                     case "AFFICHER_LISTE_PROFIL_ETUDIANT" :
+                      // Affichage liste triée par nom
+                     case "AFFICHER_LISTE_PROFIL_ETUDIANT_TRI_NOM" :
                         try
                         {
-                            String res = an1.afficherListeProfilEtudiant();
-                            resultat= "OK AFFICHAGE LISTE PROFILS  "+res;
+                            String res = an1.afficherListeProfilEtudiantTriNom();
+                            resultat= "OK AFFICHAGE LISTE PROFILS TRI NOM  "+res;
                            
                         }
                         catch (Exception e) 
@@ -189,6 +189,37 @@ public class gestionProtocole {
                             resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT";
                         }
                         break;    
+                        
+                     // Affichage liste triée par prenom
+                     case "AFFICHER_LISTE_PROFIL_ETUDIANT_TRI_PRENOM" :
+                        try
+                        {
+                            String res = an1.afficherListeProfilEtudiantTriPrenom();
+                            resultat= "OK AFFICHAGE LISTE PROFILS TRI PRENOM  "+res;
+                           
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT TRI PRENOM";
+                        }
+                        break;    
+                        
+                      // Affichage liste triée par prenom
+                     case "AFFICHER_LISTE_PROFIL_ETUDIANT_TRI_COMPETENCE" :
+                        try
+                        {
+                            String res = an1.afficherListeProfilEtudiantTriCompetence();
+                            resultat= "OK AFFICHAGE LISTE PROFILS TRI COMPETENCE  "+res;
+                           
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT TRI COMPETENCE";
+                        }
+                        break;       
+                        
+                        
+                        
                         
                     // Recherche par nom
                     case "RECHERCHE_ETUDIANT_NOM" :
@@ -280,14 +311,9 @@ public class gestionProtocole {
                         break;
                         
                         
+
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        // ------------------------------ PARTIE ANONYMEEEEEEEEEEEEEEE-----------------------------
+                        // ------------------------------ PARTIE ANONYME-----------------------------
                         
                         case "AFFICHER_LISTE_PROFIL_ETUDIANT_ANONYLE" :
                         try
