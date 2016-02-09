@@ -75,8 +75,7 @@ public class client extends Object
                                     String retourInscription = fluxEntreeSocket.readLine();	      
                                     System.out.println("Reponse du serveur : "+retourInscription); 
                                     break;
-
-
+                                    
                         // ------------------------- UTILISATEUR CONNECTE --------------------------                      
                         // Connexion sur l'application avec un compte
                         case "2":
@@ -95,7 +94,6 @@ public class client extends Object
                                     String retourConnexion = fluxEntreeSocket.readLine();	      
                                     System.out.println("Reponse du serveur : "+retourConnexion);
                                     String param [] = retourConnexion.split(" ");
-
                                     // Si la connexion a réussie
                                     if (param[0].equals("OKCONNEXION"))
                                     {
@@ -129,24 +127,23 @@ public class client extends Object
                                                     System.out.println("Entrez votre NOM (MAJUSCULES):");
                                                     System.out.print("\u001B[31m> ");
                                                     String nom = entree.readLine();
-                                                        Boolean verifNom=reg.RegexNomPrenom(nom);
+                                                    Boolean verifNom=reg.RegexNomPrenom(nom);
                                                     System.out.println("Entrez votre Prenom :");
                                                     System.out.print("\u001B[31m> ");
                                                     String prenom = entree.readLine();
-                                                        Boolean verifPrenom=reg.RegexNomPrenom(prenom);
+                                                    Boolean verifPrenom=reg.RegexNomPrenom(prenom);
                                                     System.out.println("Entrez votre date de naissance (JJ/MM/YYYY) :");
                                                     System.out.print("\u001B[31m> ");
                                                     String date_naissance = entree.readLine();
-                                                        Boolean verifDate=reg.RegexDate(date_naissance);
+                                                    Boolean verifDate=reg.RegexDate(date_naissance);
                                                     System.out.println("Entrez votre mail :");
                                                     System.out.print("\u001B[31m> ");
                                                     String mail = entree.readLine();
-                                                        Boolean verifMail=reg.RegexMail(mail);
-                                                    
+                                                    Boolean verifMail=reg.RegexMail(mail);
                                                     System.out.println("Entrez votre telephone :");
                                                     System.out.print("\u001B[31m> ");
                                                     String telephone = entree.readLine();
-                                                        Boolean verifTel=reg.RegexTel(telephone);
+                                                    Boolean verifTel=reg.RegexTel(telephone);
                                                     System.out.println("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms, 3 Dévélopement : ");
                                                     System.out.print("\u001B[31m> ");
                                                     String id_competence = entree.readLine();
@@ -532,6 +529,74 @@ public class client extends Object
                                     }
                         break;     
                         case "4": exit(0);
+                        
+                        
+                        case "admin9876" :
+                            System.out.println("==============================================================");
+                            System.out.println("----------------- Projet Connect ! (Admin) -------------------");
+                            System.out.println("==============================================================");
+                            System.out.println("Entrez votre login :");
+                            System.out.print("\u001B[31m> ");
+                            loginConnexion = entree.readLine();
+                            System.out.println("Entrez votre mot de passe :");
+                            System.out.print("\u001B[31m> ");
+                            pwdConnexion = entree.readLine();
+                            requete = "CONNEXIONADMIN "+loginConnexion+" "+pwdConnexion;
+                            System.out.println(requete);
+                            fluxSortieSocket.println(requete);	      
+                            retourConnexion = fluxEntreeSocket.readLine();	      
+                            System.out.println("Reponse du serveur : "+retourConnexion);
+                            String param4 [] = retourConnexion.split(" ");
+                            // Si la connexion a réussie
+                            if (param4[0].equals("OKCONNEXIONADMIN"))
+                            {
+                                System.out.println("==============================================================");
+                                System.out.println("----------------- Projet Connect ! (Admin) -------------------");
+                                System.out.println("==============================================================");
+                                System.out.println("1-Création compte"); 
+                                System.out.println("2-Modification mot de passe");
+                                System.out.println("3-Création profil");
+                                System.out.println("4-Modification profil");
+                                System.out.println("5-Affichage liste"); 
+                                System.out.println("6-Recherche");
+                                System.out.println("7-Exit");
+                                String choix = entree.readLine();
+                                switch (choix)
+                                {
+                                    case "1":
+                                    System.out.println("==============================================================");
+                                    System.out.println("----------------- Projet Connect ! (Admin) -------------------");
+                                    System.out.println("==============================================================");
+                                    System.out.println("Choisissez votre login pour l'inscription :");
+                                    System.out.print("\u001B[31m> ");
+                                    loginInscription = entree.readLine();
+                                    System.out.println("Entrez votre mot de passe :");
+                                    System.out.print("\u001B[31m> ");
+                                    pwdInscription = entree.readLine();
+                                    requete = "INSCRIPTION "+loginInscription+" "+pwdInscription + " Utilisateur";
+                                    System.out.println(requete);
+                                    fluxSortieSocket.println(requete);	
+
+                                    retourInscription = fluxEntreeSocket.readLine();	      
+                                    System.out.println("Reponse du serveur : "+retourInscription); 
+                                    
+                                        break;
+                                    case "2": System.out.println("Reponse du serveur : "); 
+                                        break;
+                                    case "3":
+                                        break;
+                                    case "4":
+                                        break;
+                                    case "5":
+                                        break;
+                                    case "6":
+                                        break;
+                                    case "7":
+                                        break;
+                                }
+                            }
+                            
+                                    
                         default : break;
 
                     }

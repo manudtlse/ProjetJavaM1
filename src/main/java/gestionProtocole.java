@@ -313,6 +313,18 @@ public class gestionProtocole {
                         
 
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         // ------------------------------ PARTIE ANONYME-----------------------------
                         
                         case "AFFICHER_LISTE_PROFIL_ETUDIANT_ANONYLE" :
@@ -356,6 +368,50 @@ public class gestionProtocole {
                             resultat = "NON OK ANONYME RECHERCHE PRENOM ETUDIANT";
                         }
                         break;
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        // ------------------------------ PARTIE ADMIN-----------------------------
+                        case "CONNEXIONADMIN" :
+                        try 
+                        {
+                            String login = param[1];
+                            String mdp = param[2];
+                            Admin ad = new Admin(login ,mdp); 
+                            if (ad.connexionAdmin()== -1)
+                            {
+                                resultat = "NON OKCONNEXIONADMIN";
+                            }
+                            else 
+                            {
+                                int res = ad.connexionAdmin();
+                                resultat = "OKCONNEXIONADMIN " + res;
+                            }
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR CONNEXIONADMIN";
+                        }
+                        break;
+                        
+                    
+                        
+                        
+                        
+                        
+                        
+                        
                         
                     default: resultat = "ERREUR REQUETE INCONNUE";
                     
