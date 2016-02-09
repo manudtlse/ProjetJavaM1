@@ -19,7 +19,7 @@ public class Regex
 
     public boolean RegexMail(String a)
     {
-        pattern = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
+        pattern = Pattern.compile("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z]+\\.[a-zA-Z]{2,6}$");
         matcher = pattern.matcher(a);
         boolean result=false;
         while(matcher.find()) 
@@ -59,7 +59,7 @@ public class Regex
     public static void main(String[] args) throws Exception 
     {
         Regex reg=new Regex();
-        String Tel="abc123.aaa777@cde456.aa";
+        String Tel="abc123.aaa777@cde";
         Boolean verif=reg.RegexMail(Tel);
         
         System.out.println(verif);     
