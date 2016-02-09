@@ -550,7 +550,10 @@ public class client extends Object
                             String param4 [] = retourConnexion.split(" ");
                             // Si la connexion a réussie
                             if (param4[0].equals("OKCONNEXIONADMIN"))
-                            {
+                            {   
+                               
+                                while(true)
+                                {
                                 System.out.println("==============================================================");
                                 System.out.println("----------------- Projet Connect ! (Admin) -------------------");
                                 System.out.println("==============================================================");
@@ -923,7 +926,10 @@ public class client extends Object
                                                             
                                         break;
                                     case "7": // 7-Exit
+                                        exit(0);
                                         break;
+                                        
+                                        }
                                         }
                                         }         
                         default : break;
