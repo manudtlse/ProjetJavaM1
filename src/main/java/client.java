@@ -783,10 +783,6 @@ public class client extends Object
                                         }
                                             default : break; 
                                 
-                                            
-                                        
-                                           
-                                        
                                     
                                     case "5": // 5-Affichage liste
                                         
@@ -825,8 +821,7 @@ public class client extends Object
                                                 {
                                                      System.out.println(param2[i]);
                                                 }
-
-
+                                                
                                                 break;
                                             case "3" : 
                                                 requete = "AFFICHER_LISTE_PROFIL_ETUDIANT_TRI_COMPETENCE";
@@ -922,34 +917,29 @@ public class client extends Object
                                                      System.out.println(param8[i]);
                                                 }
                                                 break;
-                                        }
-                                                            
+                                        }                   
                                         break;
                                     case "7": // 7-Exit
                                         exit(0);
-                                        break;
-                                        
-                                        }
-                                        }
-                                        }         
-                        default : break;
+                                        break;     
                                 }
-                            }
+                                }
+                            }         
+                        default : break;
                     }
                 }
-                catch (UnknownHostException ex)
-                {
-                    System.err.println("Machine inconnue : "+ex);
-                    ex.printStackTrace();
-                }
-                catch (IOException ex)
-                {
-                    System.err.println("Erreur : "+ex);
-                    ex.printStackTrace();
-                }    
             }
-
         }
-    
+        catch (UnknownHostException ex)
+        {
+            System.err.println("Machine inconnue : "+ex);
+            ex.printStackTrace();
+        }
+        catch (IOException ex)
+        {
+            System.err.println("Erreur : "+ex);
+            ex.printStackTrace();
+        }    
+    }
 
-
+}
