@@ -126,12 +126,14 @@ public class client extends Object
                                                     System.out.println("==============================================================");
                                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                                     System.out.println("==============================================================");
-                                                    System.out.println("Entrez votre nom :");
+                                                    System.out.println("Entrez votre NOM (MAJUSCULES):");
                                                     System.out.print("\u001B[31m> ");
                                                     String nom = entree.readLine();
-                                                    System.out.println("Entrez votre prenom :");
+                                                        Boolean verifNom=reg.RegexNomPrenom(nom);
+                                                    System.out.println("Entrez votre Prenom :");
                                                     System.out.print("\u001B[31m> ");
                                                     String prenom = entree.readLine();
+                                                        Boolean verifPrenom=reg.RegexNomPrenom(prenom);
                                                     System.out.println("Entrez votre date de naissance (JJ/MM/YYYY) :");
                                                     System.out.print("\u001B[31m> ");
                                                     String date_naissance = entree.readLine();
@@ -150,7 +152,10 @@ public class client extends Object
                                                     String id_competence = entree.readLine();
                                                     System.out.println("verifmail :"+verifMail);
                                                     System.out.println("verifdate: "+verifDate);
-                                                    if ((verifMail!=false) && (verifDate!=false) && (verifTel!=false))
+                                                    System.out.println("verifTel: "+verifTel);
+                                                    System.out.println("verifPrenom: "+verifPrenom+"prenom : "+prenom);
+                                                    System.out.println("verifNom: "+verifNom+"nom : "+nom);
+                                                    if ((verifMail!=false) && (verifDate!=false) && (verifTel!=false) && (verifPrenom!=false) && (verifNom!=false))
                                                     {
                                                     requete = "CREATION_PROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
                                                     System.out.println(requete);
@@ -171,6 +176,14 @@ public class client extends Object
                                                         if(verifTel!=true)
                                                         {
                                                         System.out.println("Erreur saisie Numéro de téléphone");
+                                                        }
+                                                        if(verifPrenom!=true)
+                                                        {
+                                                        System.out.println("Erreur saisie Prénom");
+                                                        }
+                                                         if(verifNom!=true)
+                                                        {
+                                                        System.out.println("Erreur saisie Nom: Entrez le NOM en MAJUSCULES");
                                                         }
                                                     }
                                                     break;
@@ -208,11 +221,19 @@ public class client extends Object
                                                             System.out.println("Quel est votre nouveau mail ? :");
                                                             System.out.print("\u001B[31m> ");
                                                             String nouveauMail = entree.readLine();
+                                                            verifMail=reg.RegexMail(nouveauMail);
+                                                            if ((verifMail!=false))
+                                                            {
                                                             requete = "MODIFICATION_MAIL "+nouveauMail+" "+id_compte;
-
                                                             fluxSortieSocket.println(requete);	      
                                                             String retourModificationMail = fluxEntreeSocket.readLine();	      
                                                             System.out.println("Reponse du serveur : "+retourModificationMail); 
+                                                            }
+                                                            else
+                                                            {
+                                                            System.out.println("Erreur saisie Mail. Format=xxxxx@xxxx.xx");
+                                                            }
+                                                             
                                                             break;
 
                                                         // Modification du numéro de téléphone   
@@ -223,10 +244,19 @@ public class client extends Object
                                                             System.out.println("Quel est votre nouveau numéro de téléphone ? :");
                                                             System.out.print("\u001B[31m> ");
                                                             String nouveauTelephone = entree.readLine();
+                                                             
+                                                            verifTel=reg.RegexMail(nouveauTelephone);
+                                                            if ((verifTel!=false))
+                                                            {
                                                             requete = "MODIFICATION_TEL "+nouveauTelephone+" "+id_compte;
                                                             fluxSortieSocket.println(requete);	      
                                                             String retourModificationTel = fluxEntreeSocket.readLine();	      
-                                                            System.out.println("Reponse du serveur : "+retourModificationTel); 
+                                                            System.out.println("Reponse du serveur : "+retourModificationTel);
+                                                            }
+                                                            else
+                                                            {
+                                                            System.out.println("Erreur saisie n° Téléphone");
+                                                            }
                                                             break;
 
                                                         // Modification des compétences ( A REVOIIIIIIIIIIIIIIR)  

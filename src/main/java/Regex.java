@@ -56,12 +56,25 @@ public class Regex
     return result;
     }
     
+    public boolean RegexNomPrenom(String a)
+    {                               
+        pattern = Pattern.compile("^[a-zA-ZÀ-ÿ\\s\\’-]{1,29}$");
+        matcher = pattern.matcher(a);
+        boolean result=false;
+        while(matcher.find()) 
+        {
+            result= true ;
+        
+        }
+    return result;
+    }
+    
     public static void main(String[] args) throws Exception 
     {
         Regex reg=new Regex();
-        String Tel="abc123.aaa777@cde";
-        Boolean verif=reg.RegexMail(Tel);
+        String Tel="Emmanuel";
+        Boolean verif=reg.RegexNomPrenom(Tel);
         
-        System.out.println(verif);     
+        System.out.println(verif);      
     }	
 }
