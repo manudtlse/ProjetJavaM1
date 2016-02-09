@@ -24,6 +24,8 @@ public class client extends Object
         PrintStream     fluxSortieSocket;
         BufferedReader  fluxEntreeSocket;
         int id_compte;
+        Regex reg=new Regex();
+        Boolean verif = null;
 
         try 
         {
@@ -120,6 +122,7 @@ public class client extends Object
                                             {
                                                 // Création d'un profil étudiant
                                                 case "1" :
+                                                    
                                                     System.out.println("==============================================================");
                                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                                     System.out.println("==============================================================");
@@ -132,22 +135,46 @@ public class client extends Object
                                                     System.out.println("Entrez votre date de naissance (JJ/MM/YYYY) :");
                                                     System.out.print("\u001B[31m> ");
                                                     String date_naissance = entree.readLine();
+                                                        Boolean verifDate=reg.RegexDate(date_naissance);
                                                     System.out.println("Entrez votre mail :");
                                                     System.out.print("\u001B[31m> ");
                                                     String mail = entree.readLine();
+                                                        Boolean verifMail=reg.RegexMail(mail);
+                                                    
                                                     System.out.println("Entrez votre telephone :");
                                                     System.out.print("\u001B[31m> ");
                                                     String telephone = entree.readLine();
+                                                        Boolean verifTel=reg.RegexTel(telephone);
                                                     System.out.println("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms, 3 Dévélopement : ");
                                                     System.out.print("\u001B[31m> ");
                                                     String id_competence = entree.readLine();
+                                                    System.out.println("verifmail :"+verifMail);
+                                                    System.out.println("verifdate: "+verifDate);
+                                                    if ((verifMail!=false) && (verifDate!=false) && (verifTel!=false))
+                                                    {
                                                     requete = "CREATION_PROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
                                                     System.out.println(requete);
                                                     fluxSortieSocket.println(requete);	      
                                                     String retourCreationProfil = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourCreationProfil); 
+                                                    }
+                                                    else
+                                                    {
+                                                        if(verifMail!=true)
+                                                        {
+                                                        System.out.println("Erreur saisie Mail. Format=xxxxx@xxxx.xx");
+                                                        }
+                                                        if(verifDate!=true)
+                                                        {
+                                                        System.out.println("Erreur saisie Date. Format= xx/xx/xxxx");
+                                                        }
+                                                        if(verifTel!=true)
+                                                        {
+                                                        System.out.println("Erreur saisie Numéro de téléphone");
+                                                        }
+                                                    }
                                                     break;
-
+                                                    
 
                                                 //Modification informations profil étudiant  
                                                 case "2" :
