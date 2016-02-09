@@ -406,10 +406,52 @@ public class gestionProtocole {
                         break;
                         
                     
+                        case "CHANGE_MDP_ADMIN" :
+                        try
+                        {
+                            String login = param[1];
+                            String nouveauMdp = param[2];
+                            String infos=(nouveauMdp+" "+login);
+                            Admin ad = new Admin ("a","b");
+                            
+                                Boolean res= ad.ChangeMdpAdmin(infos);
+                                if (res=true)
+                                {
+                                    resultat = "OK_CHANGEMENT MDP ADMIN "+res;  
+                                }
+                                else
+                                {
+                                    resultat = "NON OK CHANGEMENT MDP ADMIN "+res;
+                                }    
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR CHANGEMENT MDP ADMIN";
+                        }
+                        break;
                         
                         
-                        
-                        
+                        case "RECUP_ID_COMPTE_ADMIN" :
+                        try
+                        {
+                            String login = param[1];
+                            Admin ad = new Admin ("a","b");
+                            
+                                int res= ad.recupIdCompte(login);
+                                if (res!=-1)
+                                {
+                                    resultat = "OK_RECUP_ID_COMPTE_ADMIN "+res;  
+                                }
+                                else
+                                {
+                                    resultat = "NON OK RECUP_ID_COMPTE_ADMIN "+res;
+                                }    
+                        }
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR RECUP_ID_COMPTE_ADMIN";
+                        }
+                        break;
                         
                         
                         

@@ -30,6 +30,41 @@ public class Admin {
         this.identifiant=identifiant;
         this.mdp=mdp;
     }
+     
+    public int recupIdCompte(String loginAdminCompte)
+    {
+        int id_Compte_administre=-1;
+        
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url1,bdlogin,bdmdp);
+            // on cree un objet Statement qui va permettre l'execution des requetes
+            Statement s = con.createStatement();
+            try 
+            {
+                ResultSet compteID;
+                compteID = s.executeQuery("SELECT id_compte FROM compte WHERE login = '"+loginAdminCompte+"';");
+                if (!compteID.next())
+                    {
+                        id_Compte_administre=-1;
+                    } 
+                else 
+                    {
+                        id_Compte_administre=compteID.getInt("id_compte");
+                    }
+            } 
+            catch(Exception e) 
+            {
+                System.out.println("Erreur"+e.getMessage());
+            }
+        } 
+        catch(ClassNotFoundException | SQLException e) 
+        {
+            System.out.println("Erreur"+e.getMessage());
+        }
+       return id_Compte_administre; 
+    }
     public int connexionAdmin()
     {  
         try 
@@ -72,12 +107,12 @@ public class Admin {
                 if(tab.length != 2) 
                     return false;
                 String NouveauMdp = tab[0];
-                int id_compte = Integer.parseInt(tab[1]);
+                String login = tab[1];
                 System.out.println(infos);
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url1,bdlogin,bdmdp);
                 Statement s = con.createStatement(); 
-                int rs = s.executeUpdate("update yahimenat.compte set  password='"+NouveauMdp+"' where id_compte='"+id_compte+"';");
+                int rs = s.executeUpdate("update yahimenat.compte set  password='"+NouveauMdp+"' where login='"+login+"';");
                 resultat=true;
             }
            catch(NumberFormatException | ClassNotFoundException | SQLException e) 
