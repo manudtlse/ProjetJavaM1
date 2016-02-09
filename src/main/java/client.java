@@ -611,7 +611,7 @@ public class client extends Object
                                     System.out.println("----------------- Projet Connect ! (Admin) -------------------");
                                     System.out.println("==============================================================");
                                     System.out.println("==============================================================");
-                                     System.out.println("Entrez le login du compte pour lequel vous voulez créer un profil:");
+                                    System.out.println("Entrez le login du compte pour lequel vous voulez créer un profil:");
                                     System.out.print("\u001B[31m> ");
                                     String logAdminCompte = entree.readLine();
                                     requete = "RECUP_ID_COMPTE_ADMIN "+logAdminCompte;
@@ -619,9 +619,10 @@ public class client extends Object
                                     fluxSortieSocket.println(requete);        
                                     String retourlogAdminCompte = fluxEntreeSocket.readLine();        
                                     System.out.println("Reponse du serveur : "+retourlogAdminCompte);
-                                    String param5 [] = retourConnexion.split(" ");
+                                    String param5 [] = retourlogAdminCompte.split(" ");
                                     int id_compteProfilAdministre;
                                     id_compteProfilAdministre=Integer.parseInt(param5[1]);
+                                    System.out.println("param5[0]:"+param5[0]);
                                     if (param5[0].equals("OK_RECUP_ID_COMPTE_ADMIN"))
                                     {
                                         System.out.println("Entrez votre NOM (MAJUSCULES):");
