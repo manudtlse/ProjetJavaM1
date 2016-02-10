@@ -1,26 +1,29 @@
 import java.net.*;
 import java.io.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** 
  * @author  Emmanuel Menat - Selim Yahi
  */
 public class serveurIdentification extends Thread 
-{
-
-    /** Port par defaut */
+{ /** Port par defaut */
     public final static int portEcho = 2001;
+    Socket          connexionCourante;
     
-    /**
-    * @param args the command line arguments
-    */
-    public static void main (String args[]) 
+    
+    serveurIdentification(Socket connexionCourante) 
     {
-        ServerSocket    leServeur = null;
+        this.connexionCourante = connexionCourante; 
+    }
+    public static void main (String args[]) throws Exception
+    {
+        ServerSocket leServeur =null;
         Socket          connexionCourante;
-        PrintStream     fluxSortieSocket;
-        BufferedReader  fluxEntreeSocket;
-        gestionProtocole gestion = new gestionProtocole();
-    
+    PrintStream     fluxSortieSocket;
+    BufferedReader  fluxEntreeSocket;
+    gestionProtocole gestion = new gestionProtocole();
         try 
         {
             leServeur = new ServerSocket(portEcho);
@@ -47,20 +50,15 @@ public class serveurIdentification extends Thread
             try 
             {
                 System.err.println("En attente de connexion sur le port : "+leServeur.getLocalPort());
-                connexionCourante = leServeur.accept();
-                System.err.println("Nouvelle connexion : " + connexionCourante);
                 while (true) 
                 {
-       
-                    //recevoir chaine caractere
-                    fluxSortieSocket = new PrintStream(connexionCourante.getOutputStream());
-                    fluxEntreeSocket = new BufferedReader(new InputStreamReader(connexionCourante.getInputStream()));
-                    String requeteRecue = fluxEntreeSocket.readLine();  
-                    System.out.println("Requete Recu : "+requeteRecue);
-                    String resultat = gestion.travaille(requeteRecue);
-                    //Afficher requete de resultat
-                    fluxSortieSocket.println(resultat);
+                connexionCourante = leServeur.accept();
+                System.err.println("Nouvelle connexion : " + connexionCourante);
+                new Thread(new serveurIdentification(connexionCourante)).start();
                 }
+            
+               
+                
             }
             catch (Exception ex)
             {
@@ -68,7 +66,37 @@ public class serveurIdentification extends Thread
                 System.err.println("Une erreur est survenue : "+ex);
                 ex.printStackTrace();
             }
-        } 
+        }
     }
+    
+    public void run()
+    {
+        try {
+            PrintStream     fluxSortieSocket;
+            BufferedReader  fluxEntreeSocket;
+            gestionProtocole gestion = new gestionProtocole();
+            
+            //recevoir chaine caractere
+            fluxSortieSocket = new PrintStream(connexionCourante.getOutputStream());
+            fluxEntreeSocket = new BufferedReader(new InputStreamReader(connexionCourante.getInputStream()));
+            while(true)
+            {
+            String requeteRecue = fluxEntreeSocket.readLine();
+            System.out.println("Requete Recu : "+requeteRecue);
+            String resultat = gestion.travaille(requeteRecue);
+            //Afficher requete de resultat
+            fluxSortieSocket.println(resultat);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(serveurIdentification.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(serveurIdentification.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(serveurIdentification.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
 
 }
