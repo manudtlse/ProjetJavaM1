@@ -19,8 +19,8 @@ public class serveurIdentification extends Thread
     }
     public static void main (String args[]) throws Exception
     {
-        ServerSocket leServeur =null;
-        Socket          connexionCourante;
+    ServerSocket leServeur =null;
+    Socket          connexionCourante;
     PrintStream     fluxSortieSocket;
     BufferedReader  fluxEntreeSocket;
     gestionProtocole gestion = new gestionProtocole();

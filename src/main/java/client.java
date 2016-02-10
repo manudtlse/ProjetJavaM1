@@ -113,6 +113,7 @@ public class client extends Object
                                             System.out.println("3/ Afficher la liste des étudiants");
                                             System.out.println("4/ Rechercher un étudiant");
                                             System.out.println("5/ Modifier mot de passe");
+                                            System.out.println("6/ Exit");
 
                                             //ON lit le choix
                                             System.out.print("\u001B[31m> ");
@@ -148,11 +149,13 @@ public class client extends Object
                                                     System.out.println("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms, 3 Dévélopement : ");
                                                     System.out.print("\u001B[31m> ");
                                                     String id_competence = entree.readLine();
-                                                    System.out.println("verifmail :"+verifMail);
-                                                    System.out.println("verifdate: "+verifDate);
-                                                    System.out.println("verifTel: "+verifTel);
+                                                    System.out.println("verifmail :"+verifMail+" mail: "+mail);
+                                                    System.out.println("verifdate: "+verifDate+" date: "+date_naissance);
+                                                    System.out.println("verifTel: "+verifTel+" tel: "+telephone);
                                                     System.out.println("verifPrenom: "+verifPrenom+"prenom : "+prenom);
                                                     System.out.println("verifNom: "+verifNom+"nom : "+nom);
+                                                    System.out.println("");
+                                                    System.out.println("");
                                                     if ((verifMail!=false) && (verifDate!=false) && (verifTel!=false) && (verifPrenom!=false) && (verifNom!=false))
                                                     {
                                                     requete = "CREATION_PROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
@@ -243,7 +246,7 @@ public class client extends Object
                                                             System.out.print("\u001B[31m> ");
                                                             String nouveauTelephone = entree.readLine();
                                                              
-                                                            verifTel=reg.RegexMail(nouveauTelephone);
+                                                            verifTel=reg.RegexTel(nouveauTelephone);
                                                             if ((verifTel!=false))
                                                             {
                                                             requete = "MODIFICATION_TEL "+nouveauTelephone+" "+id_compte;
@@ -257,12 +260,12 @@ public class client extends Object
                                                             }
                                                             break;
 
-                                                        // Modification des compétences ( A REVOIIIIIIIIIIIIIIR)  
+                                                        // Modification des compétences  
                                                         case "3" :
                                                             System.out.println("==============================================================");
                                                             System.out.println("---------------------- Projet Connect ! ----------------------");
                                                             System.out.println("==============================================================");
-                                                            System.out.println("Nouvelle competence ? (1-Réseaux, 2-Telecoms) :");
+                                                            System.out.println("Nouvelle competence ? (1-Réseaux, 2-Telecoms, 3-Developement) :");
                                                             System.out.print("\u001B[31m> ");
                                                             String nouveleCompetence = entree.readLine();
                                                             requete = "MODIFICATION_COMPETENCE "+nouveleCompetence+" "+id_compte;
@@ -330,7 +333,7 @@ public class client extends Object
                                                             break;
 
 
-                                                case "4" : //Recherche d'informations sur un étudiant (droits utilisateur)
+                                                case "4" :  //Recherche d'informations sur un étudiant (droits utilisateur)
                                                             System.out.println("==============================================================");
                                                             System.out.println("---------------------- Projet Connect ! ----------------------");
                                                             System.out.println("==============================================================");
@@ -434,10 +437,11 @@ public class client extends Object
                                                                 System.out.println("Reponse du serveur : "+retourChangeMdp);
                                                             }
                                                     break;
-
-
+                                                /*case "6" : //Suppresion Profil*/
+                                                case "6" :  exit(0);
+                                                    
                                                  // Si aucun case n'est détecté
-                                                 default : exit(0);
+                                                default : exit(0);
                                             }
                                         }
                                     }
@@ -447,11 +451,13 @@ public class client extends Object
 
                         // ------------------------------- UTILISATEUR ANONYME -----------------------    
                         case "3" :
+                                while(true)
+                                {
                                     System.out.println("==============================================================");
                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                     System.out.println("==============================================================");
                                     System.out.println("1/ Afficher liste étudiant ");
-                                    System.out.println("2/ Rechercher un étudiant (N°étudiant) ");
+                                    System.out.println("2/ Rechercher un étudiant ");
                                     System.out.println("3/ Exit ");
                                     // on lit le choix
                                     System.out.print("\u001B[31m> ");
@@ -481,7 +487,7 @@ public class client extends Object
                                                     System.out.println("==============================================================");
                                                     System.out.println("---------------------- Projet Connect ! ----------------------");
                                                     System.out.println("==============================================================");
-                                                    System.out.println("Rechercher par nom (1), prenom (2) : ");
+                                                    System.out.println("Rechercher par Nom (1), Prenom (2) : ");
                                                     System.out.print("\u001B[31m> ");
                                                     String choix6 = entree.readLine();
                                                     switch (choix6) 
@@ -524,11 +530,13 @@ public class client extends Object
                                                     break;
 
                                          // Pour quitter le mode Anonyme   
-                                        case "3" : break;
-
+                                        case "3" : exit(0);
+                                    
                                         default : exit(0); 
+                                    
                                     }
-                        break;     
+                                }
+                           
                         case "4": exit(0);
                         
                         
@@ -564,6 +572,7 @@ public class client extends Object
                                 System.out.println("5-Affichage liste"); 
                                 System.out.println("6-Recherche");
                                 System.out.println("7-Exit");
+                                System.out.print("\u001B[31m> ");
                                 String choix = entree.readLine();
                                 switch (choix)
                                 {
