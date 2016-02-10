@@ -13,6 +13,8 @@
 
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Annuaire 
@@ -165,7 +167,7 @@ public class Annuaire
         }
     }
         
-        
+    
     public String AfficherProfilCompte(String infos) 
     {
         try 
@@ -324,7 +326,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
             }
             return resultat;
         } 
@@ -351,7 +353,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
             }
             return resultat;
         } 
@@ -378,7 +380,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
             }
             return resultat;
         } 
@@ -387,6 +389,65 @@ public class Annuaire
             return null;
         }
     }
+    
+    public boolean confidentialite(String infos) throws ClassNotFoundException    //Met les parametre de confidentialité dans la BD
+    {
+        boolean resultat = false;
+        try 
+        {
+            String [] tab = infos.split(" ");
+            /*if(tab.length != 2)
+            return false;*/
+            int id_compte = Integer.parseInt(tab[0]);
+            Boolean v_date_naissance =Boolean.parseBoolean(tab[1]);
+            Boolean v_mail = Boolean.parseBoolean(tab[2]);
+            Boolean v_telephone = Boolean.parseBoolean(tab[3]);
+            /*System.out.println("idcompte"+id_compte);
+            System.out.println("v_date_naissance"+v_date_naissance);
+            System.out.println("v_mail"+v_mail);
+            System.out.println("v_telephone"+v_telephone);*/
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            resultat = s.executeUpdate("INSERT INTO confidentialite(v_date_naissance,v_mail,v_téléphone,id_compte) VALUES ("+v_date_naissance+","+v_mail+","+v_telephone+",'"+id_compte+"');")==1;
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Annuaire.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultat;
+    }
+    
+    public boolean maj_confidentialite(String infos) throws ClassNotFoundException    //Met les parametre de confidentialité dans la BD
+    {
+        boolean resultat = false;
+        try 
+        {
+            String [] tab = infos.split(" ");
+            /*if(tab.length != 2)
+            return false;*/
+            int id_compte = Integer.parseInt(tab[0]);
+            Boolean v_date_naissance =Boolean.parseBoolean(tab[1]);
+            Boolean v_mail = Boolean.parseBoolean(tab[2]);
+            Boolean v_telephone = Boolean.parseBoolean(tab[3]);
+            /*System.out.println("idcompte"+id_compte);
+            System.out.println("v_date_naissance"+v_date_naissance);
+            System.out.println("v_mail"+v_mail);
+            System.out.println("v_telephone"+v_telephone);*/
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            resultat = s.executeUpdate("UPDATE confidentialite set v_date_naissance="+v_date_naissance+",v_mail="+v_mail+",v_téléphone="+v_telephone+" where id_compte='"+id_compte+"';")==1;
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Annuaire.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultat;
+    }
+    
     
     
     // PARTIE ANONYME ------------------------------------------------------------------------------------
@@ -491,6 +552,8 @@ public class Annuaire
                 ex.printStackTrace();
             }
     }
+    
+   
         
     public static void main(String[] args) throws Exception 
     {
@@ -499,8 +562,8 @@ public class Annuaire
         Annuaire an1;
         an1 = new Annuaire();
         
-        resultat=an1.RechercherEtudiantCompetence("1");
+        result=an1.maj_confidentialite("70 true true true");
         //an1.majInfos("5:nom4:prenom4:18/12/1993:nom4.prenom4@gmail.com:0665758387:1");
-        System.out.println(resultat);     
+        System.out.println(result);     
     }		
 }

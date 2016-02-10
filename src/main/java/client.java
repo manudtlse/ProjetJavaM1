@@ -138,14 +138,44 @@ public class client extends Object
                                                     System.out.print("\u001B[31m> ");
                                                     String date_naissance = entree.readLine();
                                                     Boolean verifDate=reg.RegexDate(date_naissance);
+                                                    System.out.println("Voulez-vous afficher votre date de naissance? 1-Oui, 0-Non :");
+                                                    Boolean v_date_naissance=null;
+                                                    if ("1".equals(entree.readLine()))
+                                                    {
+                                                        v_date_naissance=true;   
+                                                    }
+                                                    else
+                                                    {
+                                                        v_date_naissance=false;
+                                                    }
                                                     System.out.println("Entrez votre mail :");
                                                     System.out.print("\u001B[31m> ");
                                                     String mail = entree.readLine();
                                                     Boolean verifMail=reg.RegexMail(mail);
+                                                    System.out.println("Voulez-vous afficher votre adresse mail? 1-Oui, 0-Non :");
+                                                    Boolean v_mail=null;
+                                                    if ("1".equals(entree.readLine()))
+                                                    {
+                                                        v_mail=true;   
+                                                    }
+                                                    else
+                                                    {
+                                                        v_mail=false;
+                                                    }
                                                     System.out.println("Entrez votre telephone :");
                                                     System.out.print("\u001B[31m> ");
                                                     String telephone = entree.readLine();
                                                     Boolean verifTel=reg.RegexTel(telephone);
+                                                    System.out.println("Voulez-vous afficher votre numéro de Téléphone? 1-Oui, 0-Non :");
+                                                    Boolean v_tel=null;
+                                                    if ("1".equals(entree.readLine()))
+                                                    {
+                                                        v_tel=true;   
+                                                    }
+                                                    else
+                                                    {
+                                                        v_tel=false;
+                                                    }
                                                     System.out.println("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms, 3 Dévélopement : ");
                                                     System.out.print("\u001B[31m> ");
                                                     String id_competence = entree.readLine();
@@ -163,6 +193,11 @@ public class client extends Object
                                                     fluxSortieSocket.println(requete);	      
                                                     String retourCreationProfil = fluxEntreeSocket.readLine();	      
                                                     System.out.println("Reponse du serveur : "+retourCreationProfil); 
+                                                    requete = "CONFIDENTIALITE "+id_compte+" "+v_date_naissance+" "+v_mail+" "+v_tel;
+                                                    System.out.println(requete);
+                                                    fluxSortieSocket.println(requete);	      
+                                                    String retourConfidentialite = fluxEntreeSocket.readLine();	      
+                                                    System.out.println("Reponse du serveur : "+retourConfidentialite); 
                                                     }
                                                     else
                                                     {
@@ -207,6 +242,7 @@ public class client extends Object
                                                     System.out.println("1 - Votre mail ? ");
                                                     System.out.println("2 - Votre numero de telephone ? ");
                                                     System.out.println("3 - Vos compétences ? ");
+                                                    System.out.println("4 - Vos paramètre de confidentialité ? ");
                                                     System.out.println("Voici vos informations actuelles : ");
                                                     System.out.println(retourAfficherProfilCompte);
                                                     System.out.println(" ////////// Veuillez entrer votre choix  \\\\\\\\\\\\\\");
@@ -273,8 +309,52 @@ public class client extends Object
                                                             String retourModificationCompetence = fluxEntreeSocket.readLine();	      
                                                             System.out.println("Reponse du serveur : "+retourModificationCompetence); 
                                                             break;
-                                                    }
-                                                    break;
+                                                            
+                                                        case "4" : //Maj Paramètres de confidentialité
+                                                            System.out.println("==============================================================");
+                                                            System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                            System.out.println("==============================================================");
+                                                            System.out.println("Voulez-vous afficher votre date de naissance? 1-Oui, 0-Non :");
+                                                            v_date_naissance=null;
+                                                            System.out.print("\u001B[31m> ");
+                                                            if ("1".equals(entree.readLine()))
+                                                            {
+                                                                v_date_naissance=true;   
+                                                            }
+                                                            else
+                                                            {
+                                                                v_date_naissance=false;
+                                                            }
+                                                            System.out.println("Voulez-vous afficher votre adresse mail? 1-Oui, 0-Non :");
+                                                            v_mail=null;
+                                                            System.out.print("\u001B[31m> ");
+                                                            if ("1".equals(entree.readLine()))
+                                                            {
+                                                                v_mail=true;   
+                                                            }
+                                                            else
+                                                            {
+                                                                v_mail=false;
+                                                            }
+                                                            System.out.println("Voulez-vous afficher votre numéro de Téléphone? 1-Oui, 0-Non :");
+                                                            v_tel=null;
+                                                            System.out.print("\u001B[31m> ");
+                                                            if ("1".equals(entree.readLine()))
+                                                            {
+                                                                v_tel=true;   
+                                                            }
+                                                            else
+                                                            {
+                                                                v_tel=false;
+                                                            }
+                                                                    requete = "MAJ_CONFIDENTIALITE "+id_compte+" "+v_date_naissance+" "+v_mail+" "+v_tel;
+                                                                    System.out.println(requete);
+                                                                    fluxSortieSocket.println(requete);	      
+                                                                    String retourMajConfidentialite = fluxEntreeSocket.readLine();	      
+                                                                    System.out.println("Reponse du serveur : "+retourMajConfidentialite); 
+                                                                    break;    
+                                                            }
+                                                            break;
 
 
                                                 case "3" : //Afficher la liste des profils étudiants (droits utilisateur)

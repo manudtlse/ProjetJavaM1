@@ -289,7 +289,7 @@ public class gestionProtocole {
                             if (id.connexion()!=1)
                             {
                                 Boolean res= id.ChangeMdp(infos);
-                                if (res=true)
+                                if (res==true)
                                 {
                                     resultat = "OK CHANGEMENT MDP "+res;  
                                 }
@@ -310,9 +310,56 @@ public class gestionProtocole {
                         }
                         break;
                         
-                        
+                    case "CONFIDENTIALITE":
+                        try
+                        {
+                            int id_compte = Integer.parseInt(param[1]);
+                            String v_date_naissance = param[2];
+                            String v_mail = param[3];
+                            String v_tel = param[4];
+                            String infos=(id_compte+" "+v_date_naissance+" "+v_mail+" "+v_tel);
+                            Annuaire an = new Annuaire();
+                            Boolean res= an.confidentialite(infos);
+                            if (res==true)
+                            {
+                                resultat = "OK CONFIDENTIALITE ";  
+                            }
+                            else
+                            {
+                                resultat = "NON OK CONFIDENTIALITE ";
+                            }    
+                        } 
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR CONFIDENTIALITE";
+                        }
+                        break;
 
                         
+                        case "MAJ_CONFIDENTIALITE":
+                        try
+                        {
+                            int id_compte = Integer.parseInt(param[1]);
+                            String v_date_naissance = param[2];
+                            String v_mail = param[3];
+                            String v_tel = param[4];
+                            String infos=(id_compte+" "+v_date_naissance+" "+v_mail+" "+v_tel);
+                            Annuaire an = new Annuaire();
+                            Boolean res= an.maj_confidentialite(infos);
+                            if (res==true)
+                            {
+                                resultat = "OK MAJ_CONFIDENTIALITE ";  
+                            }
+                            else
+                            {
+                                resultat = "NON OK MAJ_CONFIDENTIALITE ";
+                            }    
+                        } 
+                        catch (Exception e) 
+                        {
+                            resultat = "ERREUR MAJ_CONFIDENTIALITE";
+                        }
+                        break;
                         
                         
                         
