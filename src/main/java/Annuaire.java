@@ -66,12 +66,12 @@ public class Annuaire
             Result = s.executeQuery("SELECT * FROM yahimenat.profil_etudiant WHERE id_compte ='"+id_compte+"';");
             if (!Result.next())
             {
-                s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence,id_compte) VALUES ('"+nom_etudiant+"','"+prenom_etudiant+"','"+date_naissance+"','"+mail+"','"+telephone+"','"+id_competence+"','"+id_compte+"');");
+                s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence,id_compte,connecte) VALUES ('"+nom_etudiant+"','"+prenom_etudiant+"','"+date_naissance+"','"+mail+"','"+telephone+"','"+id_competence+"','"+id_compte+"','1');");
                 resultat=1;
             }
             else
                 resultat=-1;
-        } 
+            } 
         catch(Exception ex) 
         {
         // il y a eu une erreur
@@ -326,7 +326,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms,3-Dev) :"+rs.getInt("id_competence")+", Connecté (1-Oui,2-Non) :"+rs.getInt("Connecte")+"  ";       
             }
             return resultat;
         } 
@@ -353,7 +353,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms, 3-Dev) :"+rs.getInt("id_competence")+", Connecté (1-Oui,2-Non) :"+rs.getInt("Connecte")+"  ";       
             }
             return resultat;
         } 
@@ -380,7 +380,34 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms) :"+rs.getInt("id_competence")+"  ";       
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms, 3-Dev) :"+rs.getInt("id_competence")+", Connecté (1-Oui,2-Non) :"+rs.getInt("Connecte")+"  ";       
+            }
+            return resultat;
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            return null;
+        }
+    }
+    
+    // Affichage de la liste des profils étudiants triée par compétence
+    public String afficherEtudiantConnecte()
+    {
+        try 
+        {   
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from profil_etudiant where connecte='1'");
+            
+            String resultat="";
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
+            {
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms, 3-Dev) :"+rs.getInt("id_competence")+"  ";       
             }
             return resultat;
         } 

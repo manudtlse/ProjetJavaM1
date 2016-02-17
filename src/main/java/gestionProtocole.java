@@ -85,7 +85,7 @@ public class gestionProtocole {
                         }
                         break;
                         
-
+                        
                     case "CREATION_PROFIL" :
                         try 
                         {
@@ -361,6 +361,21 @@ public class gestionProtocole {
                         }
                         break;
                         
+                        
+                         // Afficher liste etudiant connecte
+                        
+                        case "CONNECTE" :
+                            try
+                            {
+                                String res= an1.afficherEtudiantConnecte();
+                                resultat="OK AFFICHAGE LISTE CONNECTE"+res;
+                               
+                            }
+                            catch (Exception e) 
+                        {
+                            resultat = "NON OK AFFICHAGE LISTE CONNECTE";
+                        }
+                        break;
                         
                         
                         

@@ -49,6 +49,14 @@ public class Identification
                 else 
                     {
                         id_compte_resultat=compteID.getInt("id_compte");
+                        ResultSet Result;
+                        Result = s.executeQuery("SELECT * FROM yahimenat.profil_etudiant WHERE id_compte ='"+id_compte_resultat+"';");
+                        if (!Result.next())
+                        {
+                            s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(connecte) VALUES ('1') where id_compte='"+id_compte_resultat+"';");
+
+                        }
+           
                     }
             } 
             catch(Exception e) 
@@ -99,6 +107,8 @@ public class Identification
             {
             }
     }
+    
+    
 
     public static void main(String[] args) throws Exception 
     {

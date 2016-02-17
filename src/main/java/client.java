@@ -18,7 +18,7 @@ public class client extends Object
      * @throws java.io.IOException
 */
 
-    public static void main (String args[]) throws IOException
+    public static void main (String args[]) throws IOException, Exception
     {
         BufferedReader  fluxEntreeStandard;
         Socket          leSocket;
@@ -27,6 +27,7 @@ public class client extends Object
         int id_compte;
         Regex reg=new Regex();
         Boolean verif = null;
+        Deconnexion de1 =new Deconnexion();
 
         try 
         {
@@ -113,7 +114,8 @@ public class client extends Object
                                             System.out.println("3/ Afficher la liste des étudiants");
                                             System.out.println("4/ Rechercher un étudiant");
                                             System.out.println("5/ Modifier mot de passe");
-                                            System.out.println("6/ Exit");
+                                            System.out.println("6/ Afficher la liste des étudiants connectés");
+                                            System.out.println("7/ Exit");
 
                                             //ON lit le choix
                                             System.out.print("\u001B[31m> ");
@@ -140,6 +142,7 @@ public class client extends Object
                                                     Boolean verifDate=reg.RegexDate(date_naissance);
                                                     System.out.println("Voulez-vous afficher votre date de naissance? 1-Oui, 0-Non :");
                                                     Boolean v_date_naissance=null;
+                                                    System.out.print("\u001B[31m> ");
                                                     if ("1".equals(entree.readLine()))
                                                     {
                                                         v_date_naissance=true;   
@@ -154,6 +157,7 @@ public class client extends Object
                                                     Boolean verifMail=reg.RegexMail(mail);
                                                     System.out.println("Voulez-vous afficher votre adresse mail? 1-Oui, 0-Non :");
                                                     Boolean v_mail=null;
+                                                    System.out.print("\u001B[31m> ");
                                                     if ("1".equals(entree.readLine()))
                                                     {
                                                         v_mail=true;   
@@ -167,6 +171,7 @@ public class client extends Object
                                                     String telephone = entree.readLine();
                                                     Boolean verifTel=reg.RegexTel(telephone);
                                                     System.out.println("Voulez-vous afficher votre numéro de Téléphone? 1-Oui, 0-Non :");
+                                                    System.out.print("\u001B[31m> ");
                                                     Boolean v_tel=null;
                                                     if ("1".equals(entree.readLine()))
                                                     {
@@ -517,16 +522,39 @@ public class client extends Object
                                                                 System.out.println("Reponse du serveur : "+retourChangeMdp);
                                                             }
                                                     break;
-                                                /*case "6" : //Suppresion Profil*/
-                                                case "6" :  exit(0);
+                                                    
+                                                case "6" :  
+                                                    System.out.println("==============================================================");
+                                                   System.out.println("---------------------- Projet Connect ! ----------------------");
+                                                   System.out.println("==============================================================");
+                                                   requete = "CONNECTE";
+                                                   fluxSortieSocket.println(requete);	
+                                                   String retourAfficherListeConnecte= fluxEntreeSocket.readLine();
+                                                   System.out.println("Reponse du serveur : "+retourAfficherListeConnecte); 
+
+                                                   String[] param1= retourAfficherListeConnecte.split("  ");
+                                                   int nbLigne=Integer.parseInt(param1[1]);
+                                                   for (int i=2;i<=nbLigne+1;i++)
+                                                   {
+                                                        System.out.println(param1[i]);
+                                                   }
+                                                   break;
+                                                   
+                                                    
+                                                    
+                                                /*case "7" : //Suppresion Profil*/
+                                                case "7" :  
+                                                    de1.deconnexion(id_compte);
+                                                    exit(0);
                                                     
                                                  // Si aucun case n'est détecté
-                                                default : exit(0);
+                                                default :
+                                                    de1.deconnexion(id_compte); 
+                                                    exit(0);
                                             }
                                         }
                                     }
                                     break; 
-
 
 
                         // ------------------------------- UTILISATEUR ANONYME -----------------------    
