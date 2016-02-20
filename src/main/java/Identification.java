@@ -50,13 +50,13 @@ public class Identification
                     {
                         id_compte_resultat=compteID.getInt("id_compte");
                         ResultSet Result;
-                        Result = s.executeQuery("SELECT * FROM yahimenat.profil_etudiant WHERE id_compte ='"+id_compte_resultat+"';");
-                        if (!Result.next())
+                        Connection con2 = DriverManager.getConnection(url2,bdlogin,bdmdp);
+                        Statement s2 = con2.createStatement();
+                        Result = s2.executeQuery("SELECT * FROM profil_etudiant WHERE id_compte ='"+id_compte_resultat+"';");
+                        if (Result.next())
                         {
-                            s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(connecte) VALUES ('1') where id_compte='"+id_compte_resultat+"';");
-
+                            s2.executeUpdate("update yahimenat.profil_etudiant set connecte=1 where id_compte='"+id_compte_resultat+"';");
                         }
-           
                     }
             } 
             catch(Exception e) 

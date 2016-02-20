@@ -368,12 +368,12 @@ public class gestionProtocole {
                             try
                             {
                                 String res= an1.afficherEtudiantConnecte();
-                                resultat="OK AFFICHAGE LISTE CONNECTE"+res;
+                                resultat="OK_AFFICHAGE_LISTE_CONNECTE  "+res;
                                
                             }
                             catch (Exception e) 
                         {
-                            resultat = "NON OK AFFICHAGE LISTE CONNECTE";
+                            resultat = "NON_OK_AFFICHAGE_LISTE_CONNECTE";
                         }
                         break;
                         
