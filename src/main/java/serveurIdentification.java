@@ -32,7 +32,6 @@ public class serveurIdentification extends Thread
         {
         // fin de connexion
         System.err.println("Impossible de creer un socket serveur sur ce port : "+ex);
-      
             try 
             {
                 // on demande un port anonyme 
@@ -53,12 +52,10 @@ public class serveurIdentification extends Thread
                 while (true) 
                 {
                 connexionCourante = leServeur.accept();
+                    
                 System.err.println("Nouvelle connexion : " + connexionCourante);
                 new Thread(new serveurIdentification(connexionCourante)).start();
-                }
-            
-               
-                
+                }   
             }
             catch (Exception ex)
             {
@@ -67,6 +64,19 @@ public class serveurIdentification extends Thread
                 ex.printStackTrace();
             }
         }
+    }
+    
+    public void fermer() throws Exception 
+    {		
+            try 
+            {
+                connexionCourante.close();
+            } 
+            catch(Exception ex) 
+            {
+                // il y a eu une erreur
+                ex.printStackTrace();
+            }
     }
     
     public void run()
@@ -86,17 +96,13 @@ public class serveurIdentification extends Thread
             String resultat = gestion.travaille(requeteRecue);
             //Afficher requete de resultat
             fluxSortieSocket.println(resultat);
-            }
-            
+            } 
         } catch (SQLException ex) {
             Logger.getLogger(serveurIdentification.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(serveurIdentification.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(serveurIdentification.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }   
     }
-
-
 }

@@ -475,7 +475,53 @@ public class Annuaire
         return resultat;
     }
     
+    public int numIdCompte(int numEtudiant)
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select id_compte from profil_etudiant where num_etudiant='"+numEtudiant+"';");
+            
+            int resultat=-1;
+           
+            while (rs.next())
+            {
+                   resultat = rs.getInt("id_compte");
+            }
+            return resultat;
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            return -1;
+        }
+        
+    }
     
+    public int numEtudiant(int id_compte)
+    {
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select num_etudiant from profil_etudiant where id_compte='"+id_compte+"';");
+            
+            int resultat=-1;
+           
+            while (rs.next())
+            {
+                   resultat = rs.getInt("num_etudiant");
+            }
+            return resultat;
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            return -1;
+        }
+        
+    }
     
     // PARTIE ANONYME ------------------------------------------------------------------------------------
     public String afficherListeProfilEtudiantAnonyme ()
@@ -562,10 +608,7 @@ public class Annuaire
         }
     }
 
-       
-    
-
-    
+   
     
     public void fermer() throws Exception 
     {		
@@ -588,6 +631,8 @@ public class Annuaire
         Boolean result;
         Annuaire an1;
         an1 = new Annuaire();
+        int num=an1.numEtudiant(75);
+        System.out.println("an1.numEtudiant(75)= "+num);
         
         result=an1.maj_confidentialite("70 true true true");
         //an1.majInfos("5:nom4:prenom4:18/12/1993:nom4.prenom4@gmail.com:0665758387:1");

@@ -31,7 +31,7 @@ public class Deconnexion {
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
                 Statement s = con.createStatement(); 
-                int rs = s.executeUpdate("update yahimenat.profil_etudiant set connecte='0' where id_compte='"+id_compte+"';");
+                int rs = s.executeUpdate("update yahimenat.profil_etudiant set connecte='0', portClient=null,addressClient=null where id_compte='"+id_compte+"';");
             } 
             catch(Exception ex) 
             {
@@ -43,7 +43,7 @@ public class Deconnexion {
         int chiffre;
         Deconnexion d1;
         d1 = new Deconnexion();
-        int id_compte=75;
+        int id_compte=76;
         d1.deconnexion(id_compte);
             
     }		

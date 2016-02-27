@@ -49,14 +49,7 @@ public class Identification
                 else 
                     {
                         id_compte_resultat=compteID.getInt("id_compte");
-                        ResultSet Result;
-                        Connection con2 = DriverManager.getConnection(url2,bdlogin,bdmdp);
-                        Statement s2 = con2.createStatement();
-                        Result = s2.executeQuery("SELECT * FROM profil_etudiant WHERE id_compte ='"+id_compte_resultat+"';");
-                        if (Result.next())
-                        {
-                            s2.executeUpdate("update yahimenat.profil_etudiant set connecte=1 where id_compte='"+id_compte_resultat+"';");
-                        }
+                        
                     }
             } 
             catch(Exception e) 
