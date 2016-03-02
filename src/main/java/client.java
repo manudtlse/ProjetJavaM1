@@ -59,16 +59,8 @@ public class client extends Object
                     {                   
                         // Création d'un compte pour utiliser l'application en mode "connecté"
                         case "1":
-                                    c.banniere();
-                                    c.afficher("Choisissez votre login pour l'inscription :");
-                                    c.chevron();
-                                    String loginInscription = entree.readLine();
-                                    c.afficher("Entrez votre mot de passe :");
-                                    c.chevron();
-                                    String pwdInscription = entree.readLine();
-                                    // Envoi de la requete
-                                    requete = "INSCRIPTION "+loginInscription+" "+pwdInscription + " Utilisateur";
-                                    c.afficher(requete);
+                                    
+                                    requete=c.creationCompte();
                                     // Envoie de la requete via la socket
                                     fluxSortieSocket.println(requete);	
 
@@ -80,16 +72,8 @@ public class client extends Object
                         // ------------------------- UTILISATEUR CONNECTE --------------------------                      
                         // Connexion sur l'application avec un compte
                         case "2":
-                                    c.banniere();
-                                    c.afficher("Pour vous connecter, entrez votre login :");
-                                    c.chevron();
-                                    String loginConnexion = entree.readLine();
-                                    c.afficher("Entrez votre mot de passe :");
-                                    c.chevron();
-                                    String pwdConnexion = entree.readLine();
-                                    // Mise en forme de la requete
-                                    requete = "CONNEXION "+loginConnexion+" "+pwdConnexion;
-                                    c.afficher(requete);
+                                    
+                                    requete=c.connexionCompte();
                                     // Envoie de la requete via la socket
                                     fluxSortieSocket.println(requete);	      
                                     String retourConnexion = fluxEntreeSocket.readLine();	      
@@ -127,109 +111,20 @@ public class client extends Object
                                             {
                                                 // Création d'un profil étudiant
                                                 case "1" :
-                                                    
-                                                    c.banniere();
-                                                    c.afficher("Entrez votre NOM (MAJUSCULES):");
-                                                    c.chevron();
-                                                    String nom = entree.readLine();
-                                                    // Regex pour le nom
-                                                    Boolean verifNom=reg.RegexNomPrenom(nom);
-                                                    c.afficher("Entrez votre Prenom :");
-                                                    c.chevron();
-                                                    String prenom = entree.readLine();
-                                                    // Regex pour le prenom
-                                                    Boolean verifPrenom=reg.RegexNomPrenom(prenom);
-                                                    c.afficher("Entrez votre date de naissance (JJ/MM/YYYY) :");
-                                                    c.chevron();
-                                                    String date_naissance = entree.readLine();
-                                                    // Regex date naissance
-                                                    Boolean verifDate=reg.RegexDate(date_naissance);
-                                                    c.afficher("Voulez-vous afficher votre date de naissance? 1-Oui, 0-Non :");
-                                                    Boolean v_date_naissance=null;
-                                                    c.chevron();
-                                                    if ("1".equals(entree.readLine()))
+                                                    requete=c.creationCompteEtudiant(id_compte);
+                                                    if (!requete.equals("erreur"))
                                                     {
-                                                        v_date_naissance=true;   
-                                                    }
-                                                    else
-                                                    {
-                                                        v_date_naissance=false;
-                                                    }
-                                                    c.afficher("Entrez votre mail :");
-                                                    c.chevron();
-                                                    String mail = entree.readLine();
-                                                    Boolean verifMail=reg.RegexMail(mail);
-                                                    c.afficher("Voulez-vous afficher votre adresse mail? 1-Oui, 0-Non :");
-                                                    Boolean v_mail=null;
-                                                    c.chevron();
-                                                    if ("1".equals(entree.readLine()))
-                                                    {
-                                                        v_mail=true;   
-                                                    }
-                                                    else
-                                                    {
-                                                        v_mail=false;
-                                                    }
-                                                    c.afficher("Entrez votre telephone :");
-                                                    c.chevron();
-                                                    String telephone = entree.readLine();
-                                                    Boolean verifTel=reg.RegexTel(telephone);
-                                                    c.afficher("Voulez-vous afficher votre numéro de Téléphone? 1-Oui, 0-Non :");
-                                                    c.chevron();
-                                                    Boolean v_tel=null;
-                                                    if ("1".equals(entree.readLine()))
-                                                    {
-                                                        v_tel=true;   
-                                                    }
-                                                    else
-                                                    {
-                                                        v_tel=false;
-                                                    }
-                                                    c.afficher("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms, 3 Dévélopement : ");
-                                                    c.chevron();
-                                                    String id_competence = entree.readLine();
-                                                    c.afficher("verifmail :"+verifMail+" mail: "+mail);
-                                                    c.afficher("verifdate: "+verifDate+" date: "+date_naissance);
-                                                    c.afficher("verifTel: "+verifTel+" tel: "+telephone);
-                                                    c.afficher("verifPrenom: "+verifPrenom+"prenom : "+prenom);
-                                                    c.afficher("verifNom: "+verifNom+"nom : "+nom);
-                                                    c.afficher("");
-                                                    c.afficher("");
-                                                    if ((verifMail!=false) && (verifDate!=false) && (verifTel!=false) && (verifPrenom!=false) && (verifNom!=false))
-                                                    {
-                                                    requete = "CREATION_PROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
-                                                    c.afficher(requete);
-                                                    fluxSortieSocket.println(requete);	      
-                                                    String retourCreationProfil = fluxEntreeSocket.readLine();	      
-                                                    c.afficher("Reponse du serveur : "+retourCreationProfil); 
-                                                    requete = "CONFIDENTIALITE "+id_compte+" "+v_date_naissance+" "+v_mail+" "+v_tel;
-                                                    c.afficher(requete);
-                                                    fluxSortieSocket.println(requete);	      
-                                                    String retourConfidentialite = fluxEntreeSocket.readLine();	      
-                                                    c.afficher("Reponse du serveur : "+retourConfidentialite); 
-                                                    }
-                                                    else
-                                                    {
-                                                        if(verifMail!=true)
-                                                        {
-                                                            c.afficher("Erreur saisie Mail. Format=xxxxx@xxxx.xx");
-                                                        }
-                                                        if(verifDate!=true)
-                                                        {
-                                                            c.afficher("Erreur saisie Date. Format= xx/xx/xxxx");
-                                                        }
-                                                        if(verifTel!=true)
-                                                        {
-                                                            c.afficher("Erreur saisie Numéro de téléphone");
-                                                        }
-                                                        if(verifPrenom!=true)
-                                                        {
-                                                            c.afficher("Erreur saisie Prénom");
-                                                        }
-                                                         if(verifNom!=true)
-                                                        {
-                                                            c.afficher("Erreur saisie Nom: Entrez le NOM en MAJUSCULES");
-                                                        }
+                                                        String [] param1 = requete.split("#");
+                                                        System.out.println("requete avant split="+requete);
+                                                        String requeteCreation=param1[0];
+                                                        String requeteConfidentialite=param1[1];
+                                                        System.err.println("requeteConfidentialite: "+requeteConfidentialite);
+                                                        fluxSortieSocket.println(requeteCreation);	      
+                                                        String retourCreationProfil = fluxEntreeSocket.readLine();	      
+                                                        c.afficher("Reponse du serveur : "+retourCreationProfil);
+                                                        fluxSortieSocket.println(requeteConfidentialite);	      
+                                                        String retourConfidentialite = fluxEntreeSocket.readLine();	      
+                                                        c.afficher("Reponse du serveur : "+retourConfidentialite); 
                                                     }
                                                     break;
                                                     
@@ -261,7 +156,7 @@ public class client extends Object
                                                             c.afficher("Quel est votre nouveau mail ? :");
                                                             c.chevron();
                                                             String nouveauMail = entree.readLine();
-                                                            verifMail=reg.RegexMail(nouveauMail);
+                                                            Boolean verifMail=reg.RegexMail(nouveauMail);
                                                             if ((verifMail!=false))
                                                             {
                                                             requete = "MODIFICATION_MAIL "+nouveauMail+" "+id_compte;
@@ -283,7 +178,7 @@ public class client extends Object
                                                             c.chevron();
                                                             String nouveauTelephone = entree.readLine();
                                                              
-                                                            verifTel=reg.RegexTel(nouveauTelephone);
+                                                            Boolean verifTel=reg.RegexTel(nouveauTelephone);
                                                             if ((verifTel!=false))
                                                             {
                                                             requete = "MODIFICATION_TEL "+nouveauTelephone+" "+id_compte;
@@ -312,7 +207,7 @@ public class client extends Object
                                                         case "4" : //Maj Paramètres de confidentialité
                                                             c.banniere();
                                                             c.afficher("Voulez-vous afficher votre date de naissance? 1-Oui, 0-Non :");
-                                                            v_date_naissance=null;
+                                                            Boolean v_date_naissance=null;
                                                             c.chevron();
                                                             if ("1".equals(entree.readLine()))
                                                             {
@@ -323,7 +218,7 @@ public class client extends Object
                                                                 v_date_naissance=false;
                                                             }
                                                             c.afficher("Voulez-vous afficher votre adresse mail? 1-Oui, 0-Non :");
-                                                            v_mail=null;
+                                                            Boolean v_mail=null;
                                                             c.chevron();
                                                             if ("1".equals(entree.readLine()))
                                                             {
@@ -334,7 +229,7 @@ public class client extends Object
                                                                 v_mail=false;
                                                             }
                                                             c.afficher("Voulez-vous afficher votre numéro de Téléphone? 1-Oui, 0-Non :");
-                                                            v_tel=null;
+                                                            Boolean v_tel=null;
                                                             c.chevron();
                                                             if ("1".equals(entree.readLine()))
                                                             {
@@ -880,10 +775,10 @@ public class client extends Object
                             c.banniere();
                             c.afficher("Entrez votre login :");
                             c.chevron();
-                            loginConnexion = entree.readLine();
+                            String loginConnexion = entree.readLine();
                             c.afficher("Entrez votre mot de passe :");
                             c.chevron();
-                            pwdConnexion = entree.readLine();
+                            String pwdConnexion = entree.readLine();
                             requete = "CONNEXIONADMIN "+loginConnexion+" "+pwdConnexion;
                             c.afficher(requete);
                             fluxSortieSocket.println(requete);	      
@@ -912,10 +807,10 @@ public class client extends Object
                                     c.banniere(); 
                                     c.afficher("Choisissez votre login pour l'inscription :");
                                     c.chevron();
-                                    loginInscription = entree.readLine();
+                                    String loginInscription = entree.readLine();
                                     c.afficher("Entrez votre mot de passe :");
                                     c.chevron();
-                                    pwdInscription = entree.readLine();
+                                    String pwdInscription = entree.readLine();
                                     requete = "INSCRIPTION "+loginInscription+" "+pwdInscription + " Utilisateur";
                                     c.afficher(requete);
                                     fluxSortieSocket.println(requete);
@@ -1284,5 +1179,148 @@ public class client extends Object
         System.out.print("\u001B[31m> ");
     }
     
+    public String creationCompte() throws IOException
+    {
+        BufferedReader entree = new BufferedReader(new InputStreamReader(System.in));
+        client c = new client();
+        String requete="";
+        c.banniere();
+        c.afficher("Choisissez votre login pour l'inscription :");
+        c.chevron();
+        String loginInscription = entree.readLine();
+        c.afficher("Entrez votre mot de passe :");
+        c.chevron();
+        String pwdInscription = entree.readLine();
+        // Envoi de la requete
+        requete = "INSCRIPTION "+loginInscription+" "+pwdInscription + " Utilisateur";
+        c.afficher(requete);
+        return requete;
+    } 
     
+    public String connexionCompte() throws IOException
+    {
+        BufferedReader entree = new BufferedReader(new InputStreamReader(System.in));
+        client c = new client();
+        String requete="";
+        c.banniere();
+        c.afficher("Pour vous connecter, entrez votre login :");
+        c.chevron();
+        String loginConnexion = entree.readLine();
+        c.afficher("Entrez votre mot de passe :");
+        c.chevron();
+        String pwdConnexion = entree.readLine();
+        // Mise en forme de la requete
+        requete = "CONNEXION "+loginConnexion+" "+pwdConnexion;
+        c.afficher(requete);
+        return requete;
+    } 
+    
+    public String creationCompteEtudiant(int id_compte) throws IOException
+    {
+        BufferedReader entree   = new BufferedReader(new InputStreamReader(System.in));
+        client c                = new client();
+        Regex reg               = new Regex();
+        String requete="";
+        c.banniere();
+        c.afficher("Entrez votre NOM (MAJUSCULES):");
+        c.chevron();
+        String nom = entree.readLine();
+        // Regex pour le nom
+        Boolean verifNom=reg.RegexNomPrenom(nom);
+        c.afficher("Entrez votre Prenom :");
+        c.chevron();
+        String prenom = entree.readLine();
+        // Regex pour le prenom
+        Boolean verifPrenom=reg.RegexNomPrenom(prenom);
+        c.afficher("Entrez votre date de naissance (JJ/MM/YYYY) :");
+        c.chevron();
+        String date_naissance = entree.readLine();
+        // Regex date naissance
+        Boolean verifDate=reg.RegexDate(date_naissance);
+        c.afficher("Voulez-vous afficher votre date de naissance? 1-Oui, 0-Non :");
+        Boolean v_date_naissance=null;
+        c.chevron();
+        if ("1".equals(entree.readLine()))
+        {
+            v_date_naissance=true;   
+        }
+        else
+        {
+            v_date_naissance=false;
+        }
+        c.afficher("Entrez votre mail :");
+        c.chevron();
+        String mail = entree.readLine();
+        Boolean verifMail=reg.RegexMail(mail);
+        c.afficher("Voulez-vous afficher votre adresse mail? 1-Oui, 0-Non :");
+        Boolean v_mail=null;
+        c.chevron();
+        if ("1".equals(entree.readLine()))
+        {
+            v_mail=true;   
+        }
+        else
+        {
+            v_mail=false;
+        }
+        c.afficher("Entrez votre telephone :");
+        c.chevron();
+        String telephone = entree.readLine();
+        Boolean verifTel=reg.RegexTel(telephone);
+        c.afficher("Voulez-vous afficher votre numéro de Téléphone? 1-Oui, 0-Non :");
+        c.chevron();
+        Boolean v_tel=null;
+        if ("1".equals(entree.readLine()))
+        {
+            v_tel=true;   
+        }
+        else
+        {
+            v_tel=false;
+        }
+        c.afficher("Entrez votre numéro de competence : 1-Réseaux, 2-Télécoms, 3 Dévélopement : ");
+        c.chevron();
+        String id_competence = entree.readLine();
+        c.afficher("verifmail :"+verifMail+" mail: "+mail);
+        c.afficher("verifdate: "+verifDate+" date: "+date_naissance);
+        c.afficher("verifTel: "+verifTel+" tel: "+telephone);
+        c.afficher("verifPrenom: "+verifPrenom+"prenom : "+prenom);
+        c.afficher("verifNom: "+verifNom+"nom : "+nom);
+        c.afficher("");
+        c.afficher("");
+        if ((verifMail!=false) && (verifDate!=false) && (verifTel!=false) && (verifPrenom!=false) && (verifNom!=false))
+        {
+        String requete1 = "CREATION_PROFIL "+nom+" "+prenom+" "+date_naissance+" "+mail+" "+telephone+" "+id_competence+" "+id_compte;
+        c.afficher("Requete 1= "+requete1);
+        String requete2 = "CONFIDENTIALITE "+id_compte+" "+v_date_naissance+" "+v_mail+" "+v_tel;
+        c.afficher("Requete 2= "+requete2);
+        requete=requete1+"#"+requete2;
+        }
+        else
+        {
+            if(verifMail!=true)
+            {
+                c.afficher("Erreur saisie Mail. Format=xxxxx@xxxx.xx");
+            }
+            if(verifDate!=true)
+            {
+                c.afficher("Erreur saisie Date. Format= xx/xx/xxxx");
+            }
+            if(verifTel!=true)
+            {
+                c.afficher("Erreur saisie Numéro de téléphone");
+            }
+            if(verifPrenom!=true)
+            {
+                c.afficher("Erreur saisie Prénom");
+            }
+             if(verifNom!=true)
+            {
+                c.afficher("Erreur saisie Nom: Entrez le NOM en MAJUSCULES");
+            }
+             requete="erreur";
+        }
+        return requete;
+    }
 }
+
