@@ -115,10 +115,10 @@ public class client extends Object
                                                     if (!requete.equals("erreur"))
                                                     {
                                                         String [] param1 = requete.split("#");
-                                                        System.out.println("requete avant split="+requete);
+                                                        c.afficher("requete avant split="+requete);
                                                         String requeteCreation=param1[0];
                                                         String requeteConfidentialite=param1[1];
-                                                        System.err.println("requeteConfidentialite: "+requeteConfidentialite);
+                                                        c.afficher("requeteConfidentialite: "+requeteConfidentialite);
                                                         fluxSortieSocket.println(requeteCreation);	      
                                                         String retourCreationProfil = fluxEntreeSocket.readLine();	      
                                                         c.afficher("Reponse du serveur : "+retourCreationProfil);
@@ -152,57 +152,37 @@ public class client extends Object
                                                     {
                                                         // Modification du mail 
                                                         case "1" :
-                                                            c.banniere();
-                                                            c.afficher("Quel est votre nouveau mail ? :");
-                                                            c.chevron();
-                                                            String nouveauMail = entree.readLine();
-                                                            Boolean verifMail=reg.RegexMail(nouveauMail);
-                                                            if ((verifMail!=false))
-                                                            {
-                                                            requete = "MODIFICATION_MAIL "+nouveauMail+" "+id_compte;
-                                                            fluxSortieSocket.println(requete);	      
-                                                            String retourModificationMail = fluxEntreeSocket.readLine();	      
-                                                            c.afficher("Reponse du serveur : "+retourModificationMail); 
+                                                            requete=c.modificationMail(id_compte);
+                                                            if (!requete.equals("erreur"))
+                                                            { 
+                                                                fluxSortieSocket.println(requete);	      
+                                                                String retourModificationMail = fluxEntreeSocket.readLine();	      
+                                                                c.afficher("Reponse du serveur : "+retourModificationMail); 
                                                             }
-                                                            else
-                                                            {
-                                                            c.afficher("Erreur saisie Mail. Format=xxxxx@xxxx.xx");
-                                                            }
-                                                             
                                                             break;
 
                                                         // Modification du numéro de téléphone   
                                                         case "2" :
-                                                            c.banniere();
-                                                            c.afficher("Quel est votre nouveau numéro de téléphone ? :");
-                                                            c.chevron();
-                                                            String nouveauTelephone = entree.readLine();
-                                                             
-                                                            Boolean verifTel=reg.RegexTel(nouveauTelephone);
-                                                            if ((verifTel!=false))
-                                                            {
-                                                            requete = "MODIFICATION_TEL "+nouveauTelephone+" "+id_compte;
-                                                            fluxSortieSocket.println(requete);	      
-                                                            String retourModificationTel = fluxEntreeSocket.readLine();	      
-                                                            c.afficher("Reponse du serveur : "+retourModificationTel);
-                                                            }
-                                                            else
-                                                            {
-                                                            c.afficher("Erreur saisie n° Téléphone");
+                                                            requete=c.modificationTel(id_compte);
+                                                            if (!requete.equals("erreur"))
+                                                            { 
+                                                                fluxSortieSocket.println(requete);	      
+                                                                String retourModificationTel = fluxEntreeSocket.readLine();	      
+                                                                c.afficher("Reponse du serveur : "+retourModificationTel); 
                                                             }
                                                             break;
 
                                                         // Modification des compétences  
                                                         case "3" :
-                                                            c.banniere();
-                                                            c.afficher("Nouvelle competence ? (1-Réseaux, 2-Telecoms, 3-Developement) :");
-                                                            c.chevron();
-                                                            String nouveleCompetence = entree.readLine();
-                                                            requete = "MODIFICATION_COMPETENCE "+nouveleCompetence+" "+id_compte;
-                                                            fluxSortieSocket.println(requete);	      
-                                                            String retourModificationCompetence = fluxEntreeSocket.readLine();	      
-                                                            c.afficher("Reponse du serveur : "+retourModificationCompetence); 
+                                                            requete=c.modificationCompetence(id_compte);
+                                                            if (!requete.equals("erreur"))
+                                                            { 
+                                                                fluxSortieSocket.println(requete);	      
+                                                                String retourModificationCompetence = fluxEntreeSocket.readLine();	      
+                                                                c.afficher("Reponse du serveur : "+retourModificationCompetence); 
+                                                            }
                                                             break;
+                                                            
                                                             
                                                         case "4" : //Maj Paramètres de confidentialité
                                                             c.banniere();
@@ -1322,5 +1302,66 @@ public class client extends Object
         }
         return requete;
     }
+    
+    public String modificationMail(int id_compte) throws IOException
+    {
+        BufferedReader entree = new BufferedReader(new InputStreamReader(System.in));
+        client c = new client();
+        Regex reg               = new Regex();
+        String requete="";
+        c.banniere();
+        c.afficher("Quel est votre nouveau mail ? :");
+        c.chevron();
+        String nouveauMail = entree.readLine();
+        Boolean verifMail=reg.RegexMail(nouveauMail);
+        if ((verifMail!=false))
+        {
+        requete = "MODIFICATION_MAIL "+nouveauMail+" "+id_compte;
+        
+        }
+        else
+        {
+            c.afficher("Erreur saisie Mail. Format=xxxxx@xxxx.xx");
+            requete="erreur";
+        }
+        return requete;
+    }               
+    
+    public String modificationTel(int id_compte) throws IOException
+    {
+        BufferedReader entree = new BufferedReader(new InputStreamReader(System.in));
+        client c = new client();
+        Regex reg               = new Regex();
+        String requete="";
+        c.banniere();
+        c.afficher("Quel est votre nouveau numéro de téléphone ? :");
+        c.chevron();
+        String nouveauTelephone = entree.readLine();
+        Boolean verifTel=reg.RegexTel(nouveauTelephone);
+        if ((verifTel!=false))
+        {
+            requete = "MODIFICATION_TEL "+nouveauTelephone+" "+id_compte;
+        }
+        else
+        {
+            c.afficher("Erreur saisie n° Téléphone");
+            requete="erreur";
+        }
+        return requete;
+    }     
+    
+    public String modificationCompetence(int id_compte) throws IOException
+    {
+        BufferedReader entree = new BufferedReader(new InputStreamReader(System.in));
+        client c = new client();
+        Regex reg               = new Regex();
+        String requete="";
+        c.banniere();
+        c.afficher("Nouvelle competence ? (1-Réseaux, 2-Telecoms, 3-Developement) :");
+        c.chevron();
+        String nouveleCompetence = entree.readLine();
+        requete = "MODIFICATION_COMPETENCE "+nouveleCompetence+" "+id_compte;
+        return requete;
+    }         
+    
 }
-
