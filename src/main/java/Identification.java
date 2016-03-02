@@ -49,6 +49,8 @@ public class Identification
                 else 
                     {
                         id_compte_resultat=compteID.getInt("id_compte");
+                        InstantMessage im1 = new InstantMessage();
+                        im1.Connecte(id_compte_resultat);
                         
                     }
             } 
@@ -118,6 +120,3 @@ public class Identification
         
 }
     
-
-
-

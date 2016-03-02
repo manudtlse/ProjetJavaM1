@@ -1,9 +1,3 @@
-/*
- * EchoClient.java
- *
- * Created on 6 septembre 2000, 11:11
- */
- 
 import java.io.*;
 import static java.lang.System.exit;
 import java.net.*;
@@ -16,10 +10,7 @@ import java.util.logging.Logger;
 
 public class client extends Object        
 {   
-/**
-* @param args the command line arguments
-     * @throws java.io.IOException
-*/
+
 
     public static void main (String args[]) throws IOException, Exception
     {
@@ -40,8 +31,9 @@ public class client extends Object
         try 
         {
             fluxEntreeStandard = new BufferedReader(new InputStreamReader(System.in));
-            leSocket = new Socket("localhost", 2001); // socket sur echo
-            System.err.println("ConnectÃ© sur : "+leSocket);
+            // Localhost pour simplifier, possible avec de vraies adresses IP
+            leSocket = new Socket("localhost", 2001); 
+            System.err.println("Connecté sur : "+leSocket);
             fluxSortieSocket = new PrintStream(leSocket.getOutputStream());
             fluxEntreeSocket = new BufferedReader(new InputStreamReader(leSocket.getInputStream())); 
             String requete = "";
@@ -74,10 +66,13 @@ public class client extends Object
                                     c.afficher("Entrez votre mot de passe :");
                                     c.chevron();
                                     String pwdInscription = entree.readLine();
+                                    // Envoi de la requete
                                     requete = "INSCRIPTION "+loginInscription+" "+pwdInscription + " Utilisateur";
                                     c.afficher(requete);
+                                    // Envoie de la requete via la socket
                                     fluxSortieSocket.println(requete);	
 
+                                    // Réponse du serveur
                                     String retourInscription = fluxEntreeSocket.readLine();	      
                                     c.afficher("Reponse du serveur : "+retourInscription); 
                                     break;
@@ -92,8 +87,10 @@ public class client extends Object
                                     c.afficher("Entrez votre mot de passe :");
                                     c.chevron();
                                     String pwdConnexion = entree.readLine();
+                                    // Mise en forme de la requete
                                     requete = "CONNEXION "+loginConnexion+" "+pwdConnexion;
                                     c.afficher(requete);
+                                    // Envoie de la requete via la socket
                                     fluxSortieSocket.println(requete);	      
                                     String retourConnexion = fluxEntreeSocket.readLine();	      
                                     c.afficher("Reponse du serveur : "+retourConnexion);
@@ -123,9 +120,6 @@ public class client extends Object
                                             c.afficher("7/ Méssagerie Instantanée");
                                             c.afficher("8/ Boite de réception");
                                             c.afficher("9/ Exit");
-                                           /* String resInsertPortClient=IM.InsertPortClient(id_compte,localPort);
-                                            c.afficher("");
-                                            c.afficher("> Insertion Port Client : "+resInsertPortClient+" portClient= "+localPort);*/ //port=th.getlocalport
                                             //ON lit le choix
                                             c.chevron();
                                             String choix2 = entree.readLine();
@@ -138,14 +132,17 @@ public class client extends Object
                                                     c.afficher("Entrez votre NOM (MAJUSCULES):");
                                                     c.chevron();
                                                     String nom = entree.readLine();
+                                                    // Regex pour le nom
                                                     Boolean verifNom=reg.RegexNomPrenom(nom);
                                                     c.afficher("Entrez votre Prenom :");
                                                     c.chevron();
                                                     String prenom = entree.readLine();
+                                                    // Regex pour le prenom
                                                     Boolean verifPrenom=reg.RegexNomPrenom(prenom);
                                                     c.afficher("Entrez votre date de naissance (JJ/MM/YYYY) :");
                                                     c.chevron();
                                                     String date_naissance = entree.readLine();
+                                                    // Regex date naissance
                                                     Boolean verifDate=reg.RegexDate(date_naissance);
                                                     c.afficher("Voulez-vous afficher votre date de naissance? 1-Oui, 0-Non :");
                                                     Boolean v_date_naissance=null;
@@ -1225,14 +1222,16 @@ public class client extends Object
                                                 break;
 
 
-                                            // Recherche par comptence    
+                                            // Recherche par competence    
                                             case "4" : 
                                                 c.afficher("Entrez le numéro de la compétence recherchée (1-Réseau,2-Télécoms,3-Dévelopement) :");
                                                 c.chevron();
                                                 String competenceRecherche = entree.readLine();
+                                                // Mise en forme de la requete
                                                 requete = "RECHERCHE_ETUDIANT_COMPETENCE "+competenceRecherche;
                                                 fluxSortieSocket.println(requete);	      
-                                                String retourCompetenceRecherche = fluxEntreeSocket.readLine();	      
+                                                String retourCompetenceRecherche = fluxEntreeSocket.readLine();	     
+                                                // retour du serveur
                                                 c.afficher("Reponse du serveur : "+retourCompetenceRecherche); 
                                                 String [] param8 = retourCompetenceRecherche.split("  ");
                                                 int NbLigne4=Integer.parseInt(param8[1]);

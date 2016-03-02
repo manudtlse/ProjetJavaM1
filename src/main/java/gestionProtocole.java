@@ -611,5 +611,3 @@ public class gestionProtocole {
             return resultat; 
 	}	
 }
-
-

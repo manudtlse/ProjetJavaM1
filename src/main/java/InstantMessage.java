@@ -1,4 +1,3 @@
-
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
  */
 
 /**
- *
+ * 
  * @author many31
  */
 public class InstantMessage {
@@ -61,6 +60,7 @@ public class InstantMessage {
         return res;
     }
     
+    // Méthode qui retourne le numéro du port du client 
     public int recupPortClient(int id_compte) throws ClassNotFoundException
     {
         int RsPortClient=-1;
@@ -89,6 +89,7 @@ public class InstantMessage {
         return RsPortClient;
     }
     
+    // Permet de recup l'adresse du client
     public String recupAddressClient(int id_compte) throws ClassNotFoundException
     {
         String RsAddressClient="erreur";
@@ -117,6 +118,7 @@ public class InstantMessage {
         return RsAddressClient;
     }
     
+    // Retourne nom prenom client en fonction de l'id compte
      public String recupIdentiteClient(int id_compte) throws ClassNotFoundException
     {
         String RsIdentiteClient="erreur";
@@ -145,7 +147,7 @@ public class InstantMessage {
         return RsIdentiteClient;
     }
     
-    
+    // Permet de passer l'état à connecté lorsqu'un uilisateur se connecte
     public int Connecte(int id_compte) throws ClassNotFoundException
     {
         int RsConnecte=-1;
@@ -172,7 +174,7 @@ public class InstantMessage {
    
     
     
-    
+    // Pour test
     public static void main(String[] args) throws Exception 
     {
         

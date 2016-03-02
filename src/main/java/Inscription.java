@@ -10,7 +10,7 @@ import java.util.*;
 
 /**
  *
- * @author Emmanuel Ménat
+ * @author  Emmanuel Menat - Selim Yahi
  */
 public class Inscription
 {
@@ -30,6 +30,7 @@ public class Inscription
             this.droits=droits;
         }
         
+       // Constructeur
         public int Inscription()
         {  
             int resultat = 0;
@@ -64,6 +65,7 @@ public class Inscription
                 }
                 return resultat;
         }
+        // Pour test
         public static void main(String[] args) throws Exception 
         {
 	    Inscription in1;

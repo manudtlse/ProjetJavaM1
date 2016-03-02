@@ -67,6 +67,8 @@ public class Annuaire
             if (!Result.next())
             {
                 s.executeUpdate("INSERT INTO yahimenat.profil_etudiant(nom_etudiant,prenom_etudiant,date_naissance,mail,telephone,id_competence,id_compte,connecte) VALUES ('"+nom_etudiant+"','"+prenom_etudiant+"','"+date_naissance+"','"+mail+"','"+telephone+"','"+id_competence+"','"+id_compte+"','1');");
+               InstantMessage im1 = new InstantMessage();
+                        im1.Connecte(id_compte);
                 resultat=1;
             }
             else
@@ -167,7 +169,7 @@ public class Annuaire
         }
     }
         
-    
+    // Fonction qui affiche les informations d'un profil
     public String AfficherProfilCompte(String infos) 
     {
         try 
@@ -417,6 +419,7 @@ public class Annuaire
         }
     }
     
+    // Permet de gerer la confidentialité
     public boolean confidentialite(String infos) throws ClassNotFoundException    //Met les parametre de confidentialité dans la BD
     {
         boolean resultat = false;
@@ -446,6 +449,7 @@ public class Annuaire
         return resultat;
     }
     
+    // Permet de mettre à jour la confidentialité
     public boolean maj_confidentialite(String infos) throws ClassNotFoundException    //Met les parametre de confidentialité dans la BD
     {
         boolean resultat = false;
@@ -475,6 +479,7 @@ public class Annuaire
         return resultat;
     }
     
+    
     public int numIdCompte(int numEtudiant)
     {
         try 
@@ -499,6 +504,7 @@ public class Annuaire
         
     }
     
+    // Retour le numéro étudiant en fonction de l'id du compte
     public int numEtudiant(int id_compte)
     {
         try 
@@ -524,6 +530,7 @@ public class Annuaire
     }
     
     // PARTIE ANONYME ------------------------------------------------------------------------------------
+    // Affiche la liste des profils étudiant anonyme
     public String afficherListeProfilEtudiantAnonyme ()
     {
         try 
@@ -538,6 +545,7 @@ public class Annuaire
             int NbLignes=rs.getRow();
             rs.beforeFirst();
             resultat=NbLignes+"  ";
+            // Tant qu'il y a des lignes dans le Resultset
             while (rs.next())
             {
                    resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+"  ";       
@@ -624,7 +632,7 @@ public class Annuaire
     }
     
    
-        
+    // Pour test
     public static void main(String[] args) throws Exception 
     {
         String resultat;

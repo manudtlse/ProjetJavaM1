@@ -33,7 +33,6 @@ public class ThreadTchat extends Thread {
             while(true)
             {
                 String requeteRecue = fluxEntreeSocket.readLine();
-                //System.out.println("Requete Recu : "+requeteRecue);
                 this.reception(requeteRecue);
             } 
         }
@@ -48,7 +47,6 @@ public class ThreadTchat extends Thread {
             fluxSortieSocket.println(Message);
         }    
 
-      // Rajouter a 14:16 pour tester
         public void run()
             {
                 try 
@@ -61,62 +59,3 @@ public class ThreadTchat extends Thread {
                 }
              }   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//ht newthread
-//ht.put (id,thread);   id<---> ip,port
