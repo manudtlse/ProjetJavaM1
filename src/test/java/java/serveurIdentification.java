@@ -95,8 +95,7 @@ public class serveurIdentification extends Thread
             System.out.println("Requete Recu : "+requeteRecue);
             String resultat = gestion.travaille(requeteRecue);
             //Afficher requete de resultat
-            System.out.println("Réponse : "+resultat);
-            System.out.println(" ");
+            System.out.println("Réponse : "+requeteRecue);
             fluxSortieSocket.println(resultat);
             } 
         } catch (SQLException ex) {

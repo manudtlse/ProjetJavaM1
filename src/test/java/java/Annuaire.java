@@ -215,7 +215,7 @@ public class Annuaire
                 resultat=NbLignes+"  ";
             while (rs.next()) 
             {  
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                resultat=resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms, 3-Developement) :"+rs.getInt("id_competence")+"  ";
             } 
             return resultat;
         } 
@@ -243,7 +243,7 @@ public class Annuaire
                 resultat=NbLignes+"  ";
             while (rs.next()) 
             {  
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                resultat=resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms, 3-Developement) :"+rs.getInt("id_competence")+"  ";
             } 
             return resultat;
         } 
@@ -271,7 +271,7 @@ public class Annuaire
                 resultat=NbLignes+"  ";
             while (rs.next()) 
             {  
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                resultat=resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms, 3-Developement) :"+rs.getInt("id_competence")+"  ";
             } 
             return resultat;
         } 
@@ -299,7 +299,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             { 
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                resultat=resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")+", Compétence (1-Réseaux, 2-Telecoms, 3-Developement) :"+rs.getInt("id_competence")+"  ";
             } 
             return resultat;
         } 
@@ -328,7 +328,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms,3-Dev) :"+rs.getInt("id_competence")+", Connecté (1-Oui,2-Non) :"+rs.getInt("Connecte")+"  ";       
             }
             return resultat;
         } 
@@ -355,7 +355,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms, 3-Dev) :"+rs.getInt("id_competence")+", Connecté (1-Oui,2-Non) :"+rs.getInt("Connecte")+"  ";       
             }
             return resultat;
         } 
@@ -382,7 +382,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms, 3-Dev) :"+rs.getInt("id_competence")+", Connecté (1-Oui,2-Non) :"+rs.getInt("Connecte")+"  ";       
             }
             return resultat;
         } 
@@ -409,7 +409,7 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                   resultat = resultat+"Num Etudiant : "+rs.getInt("num_etudiant")+", Nom de l'étudiant : "+rs.getString("nom_etudiant")+", Prenom de l'étudiant : "+rs.getString("prenom_etudiant")/*+", Date de naissance : "+rs.getString("date_naissance")+", Mail : "+rs.getString("mail")+", Numéro de telephone : "+rs.getString("telephone")*/+", Compétence (1-Réseaux, 2-Telecoms, 3-Dev) :"+rs.getInt("id_competence")+"  ";       
             }
             return resultat;
         } 
@@ -642,7 +642,7 @@ public class Annuaire
             String resultat=NbLignes+"  ";
             while (rs.next())
             {
-                   resultat = resultat+rs.getInt("id_competence")+"/ "+rs.getString("label_competence")+"  ";       
+                   resultat = resultat+rs.getInt("id_competence")+": "+rs.getString("label_competence")+",  ";       
             }
             return resultat;
         } 

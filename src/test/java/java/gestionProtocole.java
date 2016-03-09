@@ -51,16 +51,16 @@ public class gestionProtocole {
                             Inscription id = new Inscription (login ,mdp, droits);
                             if (id.Inscription()== -1)
                             {
-                                resultat = "NON_OKINSCRIPTION";
+                                resultat = "NON OKINSCRIPTION";
                             }
                             else 
                             {
-                                resultat = "OK_INSCRIPTION";
+                                resultat = "OK INSCRIPTION";
                             }
                         }
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_INSCRIPTION";
+                            resultat = "ERREUR INSCRIPTION";
                         }
                         break;
                         
@@ -74,7 +74,7 @@ public class gestionProtocole {
                             Identification id = new Identification (login ,mdp); 
                             if (id.connexion()== -1)
                             {
-                                resultat = "NON_OKCONNEXION";
+                                resultat = "NON OKCONNEXION";
                             }
                             else 
                             {
@@ -84,7 +84,7 @@ public class gestionProtocole {
                         }
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_CONNEXION";
+                            resultat = "ERREUR CONNEXION";
                         }
                         break;
                         
@@ -104,16 +104,16 @@ public class gestionProtocole {
                             
                             if (resu==-1)
                             {
-                                resultat = "NON_OK_CREATION_PROFIL_ETUDIANT";
+                                resultat = "NON OK CREATION PROFIL ETUDIANT";
                             }
                             else 
                             {
-                                resultat = "OK_CREATION_PROFIL_ETUDIANT";
+                                resultat = "OK CREATION PROFIL ETUDIANT";
                             }
                         }    
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_CREATION_PROFIL";
+                            resultat = "ERREUR CREATION PROFIL";
                         }
                             break;
                     
@@ -123,11 +123,11 @@ public class gestionProtocole {
                             String id_compte = param[1];
                             String infos = id_compte;
                             String res=an1.AfficherProfilCompte(infos);
-                            resultat = "OK_AFFICHAGE_PROFIL_ETUDIANT_DU_COMPTE "+res;
+                            resultat = "OK AFFICHAGE PROFIL ETUDIANT DU COMPTE "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_AFFICHARGE_PROFIL_ETUDIANT_DU_COMPTE";
+                            resultat = "ERREUR AFFICHARGE PROFIL ETUDIANT DU COMPTE";
                         }
                         break;    
                     
@@ -138,11 +138,11 @@ public class gestionProtocole {
                             int id_compte = Integer.parseInt(param[2]);
                             String infos =nouveauMail+" "+id_compte;
                             an1.majInfoMail(infos);
-                            resultat = "OK_MODIFICATIONMAIL_PROFIL_ETUDIANT";
+                            resultat = "OK MODIFICATIONMAIL PROFIL ETUDIANT";
                         }
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_MODIFICATIONMAIL_PROFIL_ETUDIANT";
+                            resultat = "ERREUR MODIFICATIONMAIL PROFIL ETUDIANT";
                         }
                         break; 
                    
@@ -153,11 +153,11 @@ public class gestionProtocole {
                             int id_compte = Integer.parseInt(param[2]);
                             String infos =nouveauTel+" "+id_compte;
                             an1.majInfoTel(infos);
-                            resultat = "OK_MODIFICATIONTEL_PROFIL_ETUDIANT";
+                            resultat = "OK MODIFICATIONTEL PROFIL ETUDIANT";
                         }
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_MODIFICATIONTEL_PROFIL_ETUDIANT";
+                            resultat = "ERREUR MODIFICATIONTEL PROFIL ETUDIANT";
                         }
 
                         break;
@@ -169,11 +169,11 @@ public class gestionProtocole {
                             int id_compte = Integer.parseInt(param[2]);
                             String infos =nouvelleCompetence+" "+id_compte;
                             an1.majInfoCompetence(infos);
-                            resultat = "OK_MODIFICATION_COMPETENCE_DU_PROFIL_ETUDIANT";
+                            resultat = "OK MODIFICATION COMPETENCE DU PROFIL ETUDIANT";
                         }
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_MODIFICATION_COMPETENCE_PROFIL_ETUDIANT";
+                            resultat = "ERREUR MODIFICATION COMPETENCE PROFIL ETUDIANT";
                         }
 
                         break;
@@ -184,12 +184,12 @@ public class gestionProtocole {
                         try
                         {
                             String res = an1.afficherListeProfilEtudiantTriNom();
-                            resultat= "OK_AFFICHAGE_LISTE_PROFIL_TRI_NOM  "+res;
+                            resultat= "OK AFFICHAGE LISTE PROFILS TRI NOM  "+res;
                            
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON_OK_AFFICHAGE_LISTE_PROFIL_ETUDIANT";
+                            resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT";
                         }
                         break;    
                         
@@ -198,12 +198,12 @@ public class gestionProtocole {
                         try
                         {
                             String res = an1.afficherListeProfilEtudiantTriPrenom();
-                            resultat= "OK_AFFICHAGE_LISTE_PROFILS_TRI_PRENOM  "+res;
+                            resultat= "OK AFFICHAGE LISTE PROFILS TRI PRENOM  "+res;
                            
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON_OK_AFFICHAGE_LISTE_PROFIL_ETUDIANT_TRI_PRENOM";
+                            resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT TRI PRENOM";
                         }
                         break;    
                         
@@ -212,12 +212,12 @@ public class gestionProtocole {
                         try
                         {
                             String res = an1.afficherListeProfilEtudiantTriCompetence();
-                            resultat= "OK_AFFICHAGE_LISTE_PROFILS_TRI_COMPETENCE  "+res;
+                            resultat= "OK AFFICHAGE LISTE PROFILS TRI COMPETENCE  "+res;
                            
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON_OK_AFFICHAGE_LISTE_PROFIL_ETUDIANT_TRI_COMPETENCE";
+                            resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT TRI COMPETENCE";
                         }
                         break;       
                         
@@ -230,11 +230,11 @@ public class gestionProtocole {
                         {
                             String nomRecherche = param[1];
                             String res = an1.RechercherEtudiantNom(nomRecherche);
-                            resultat= "OK_RECHERCHE_PAR_NOM_ETUDIANT  "+res;
+                            resultat= "OK RECHERCHE PAR NOM ETUDIANT  "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON_OK_RECHERCHE_PAR_NOM_ETUDIANT";
+                            resultat = "NON OK RECHERCHE PAR NOM ETUDIANT";
                         }
                         break;
                     
@@ -244,11 +244,11 @@ public class gestionProtocole {
                         {
                             String prenomRecherche = param[1];
                             String res = an1.RechercherEtudiantPrenom(prenomRecherche);
-                            resultat= "OK_RECHERCHE_ETUDIANT_PAR_PRENOM  "+res;
+                            resultat= "OK RECHERCHE ETUDIANT PAR PRENOM  "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON_OK_RECHERCHE_ETUDIANT_PAR_PRENOM";
+                            resultat = "NON OK RECHERCHE ETUDIANT PAR PRENOM";
                         }
                         break;                        
                     
@@ -258,11 +258,11 @@ public class gestionProtocole {
                         {
                             String mailRecherche = param[1];
                             String res = an1.RechercherEtudiantMail(mailRecherche);
-                            resultat= "OK_RECHERCHE_ETUDIANT_PAR_MAIL  "+res;
+                            resultat= "OK RECHERCHE ETUDIANT PAR MAIL  "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON_OK_RECHERCHE_ETUDIANT_PAR_MAIL";
+                            resultat = "NON OK RECHERCHE ETUDIANT PAR MAIL";
                         }
                         break;                        
                      
@@ -272,11 +272,11 @@ public class gestionProtocole {
                         {
                             String competenceRecherche = param[1];
                             String res = an1.RechercherEtudiantCompetence(competenceRecherche);
-                            resultat= "OK_RECHERCHE_ETUDIANT_PAR_COMPETENCE  "+res;
+                            resultat= "OK RECHERCHE ETUDIANT PAR COMPETENCE  "+res;
                         }
                         catch (Exception e)
                         {
-                            resultat = "NON_OK_RECHERCHE_ETUDIANT_PAR_COMEPTENCE";
+                            resultat = "NON OK RECHERCHE ETUDIANT PAR COMEPTENCE";
                         }
                         break;                       
                             
@@ -294,11 +294,11 @@ public class gestionProtocole {
                                 Boolean res= id.ChangeMdp(infos);
                                 if (res==true)
                                 {
-                                    resultat = "OK_CHANGEMENT_MDP "+res;  
+                                    resultat = "OK CHANGEMENT MDP "+res;  
                                 }
                                 else
                                 {
-                                    resultat = "NON_OK_CHANGEMENT_MDP "+res;
+                                    resultat = "NON OK CHANGEMENT MDP "+res;
                                 }    
                             }
                             else
@@ -309,7 +309,7 @@ public class gestionProtocole {
                         }
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_CHANGEMENT_MDP";
+                            resultat = "ERREUR CHANGEMENT MDP";
                         }
                         break;
                         
@@ -325,16 +325,16 @@ public class gestionProtocole {
                             Boolean res= an.confidentialite(infos);
                             if (res==true)
                             {
-                                resultat = "OK_CONFIDENTIALITE ";  
+                                resultat = "OK CONFIDENTIALITE ";  
                             }
                             else
                             {
-                                resultat = "NON_OK_CONFIDENTIALITE ";
+                                resultat = "NON OK CONFIDENTIALITE ";
                             }    
                         } 
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_CONFIDENTIALITE";
+                            resultat = "ERREUR CONFIDENTIALITE";
                         }
                         break;
 
@@ -351,16 +351,16 @@ public class gestionProtocole {
                             Boolean res= an.maj_confidentialite(infos);
                             if (res==true)
                             {
-                                resultat = "OK_MAJ_CONFIDENTIALITE ";  
+                                resultat = "OK MAJ_CONFIDENTIALITE ";  
                             }
                             else
                             {
-                                resultat = "NON_OK_MAJ_CONFIDENTIALITE ";
+                                resultat = "NON OK MAJ_CONFIDENTIALITE ";
                             }    
                         } 
                         catch (Exception e) 
                         {
-                            resultat = "ERREUR_MAJ_CONFIDENTIALITE";
+                            resultat = "ERREUR MAJ_CONFIDENTIALITE";
                         }
                         break;
                         
@@ -433,7 +433,7 @@ public class gestionProtocole {
                             }
                             catch (Exception e)
                             {
-                                resultat="ERREUR_ENVOYER_MESSAGE";
+                                resultat="ERREUR_ENVOUER_MESSAGE";
                             }
                         break;
                            

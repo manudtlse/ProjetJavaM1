@@ -576,16 +576,7 @@ public class client extends Object
 
                                                                 // Recherche par comptence    
                                                                 case "4" : 
-                                                                    c.afficher("Entrez le numéro de la compétence recherchée :");
-                                                                    requete = "AFFICHER_LISTE_COMPETENCE ";
-                                                                    fluxSortieSocket.println(requete);	      
-                                                                    String retourAfficherListeCompetences = fluxEntreeSocket.readLine();
-                                                                    String [] param1= retourAfficherListeCompetences.split("  ");
-                                                                                    int nbLigne=Integer.parseInt(param1[1]);
-                                                                                    for (int i=2;i<=nbLigne+1;i++)
-                                                                                    {
-                                                                                         c.afficher(param1[i]);
-                                                                                    }
+                                                                    c.afficher("Entrez le numéro de la compétence recherchée (1-Réseau,2-Télécoms,3-Dévelopement) :");
                                                                     c.chevron();
                                                                     String competenceRecherche = entree.readLine();
                                                                     requete = "RECHERCHE_ETUDIANT_COMPETENCE "+competenceRecherche;
@@ -611,7 +602,7 @@ public class client extends Object
                                                                     switch (choix6)
                                                                     {
                                                                         case"1":
-                                                                            c.afficher("Recommander une compétence : 1 ,Supprimer une recommendation: 2 ,Liker : 3");
+                                                                            c.afficher("Recommander une compétence : 1 ,Liker : 2");
                                                                             c.chevron();
                                                                             String choix7=entree.readLine();
                                                                             switch(choix7)
@@ -620,30 +611,23 @@ public class client extends Object
                                                                                     requete=c.afficherListeCompetences();
                                                                                     fluxSortieSocket.println(requete);	
                                                                                     String retourafficherListeCompetences = fluxEntreeSocket.readLine();
-                                                                                    param1= retourafficherListeCompetences.split("  ");
-                                                                                    int rep=Integer.parseInt(param1[0]);
-                                                                                    if(0<rep)
+                                                                                    String [] param1= retourafficherListeCompetences.split("  ");
+                                                                                    int nbLigne=Integer.parseInt(param1[1]);
+                                                                                    for (int i=2;i<=nbLigne+1;i++)
                                                                                     {
-                                                                                        nbLigne=Integer.parseInt(param1[1]);
-                                                                                        for (int i=2;i<=nbLigne+1;i++)
-                                                                                        {
-                                                                                             c.afficher(param1[i]);
-                                                                                        }
-                                                                                        c.afficher(" ");
-                                                                                        requete=c.recommanderCompetence(num_etudiantLiker,num_etudiantLikeur);
-                                                                                        fluxSortieSocket.println(requete);	
-                                                                                        String retourrecommanderCompetence = fluxEntreeSocket.readLine();
-                                                                                        c.afficher("Reponse du serveur : "+retourrecommanderCompetence);
+                                                                                         c.afficher(param1[i]);
                                                                                     }
-                                                                                    
-                                                                                    break;
-                                                                                case "2":
+                                                                                    c.afficher(" ");
+                                                                                    requete=c.recommanderCompetence(num_etudiantLiker,num_etudiantLikeur);
+                                                                                    fluxSortieSocket.println(requete);	
+                                                                                    String retourrecommanderCompetence = fluxEntreeSocket.readLine();
+                                                                                    c.afficher("Reponse du serveur : "+retourrecommanderCompetence);
                                                                                     requete=c.supprimerRecommandationCompetence(num_etudiantLiker, num_etudiantLikeur);
                                                                                     fluxSortieSocket.println(requete);	
                                                                                     String retourSupprimerRecommandationCompetence = fluxEntreeSocket.readLine();
                                                                                     c.afficher("Reponse du serveur : "+retourSupprimerRecommandationCompetence);
                                                                                     break;
-                                                                                case "3":
+                                                                                case "2":
                                                                                     requete=c.liker_profil(num_etudiantLikeur, num_etudiantLiker);
                                                                                     fluxSortieSocket.println(requete);	
                                                                                     String retourliker_profil = fluxEntreeSocket.readLine();
@@ -736,7 +720,6 @@ public class client extends Object
                                                         {
                                                             conversation=0;
                                                         }
-                                                        
                                                      }
                                                     
                                                    //Ici fichier ancien truc de messagerie instannanté client.java
@@ -1690,6 +1673,7 @@ public class client extends Object
         c.afficher("Quel profil souhaitez-vous voir (n°etudiant)");
         c.chevron();
         int id_compte=Integer.parseInt(entree.readLine());
+        String nouveleCompetence = entree.readLine();
         requete = "AFFICHER_PROFIL_COMPLET "+id_compte;
         return requete;
     } 
