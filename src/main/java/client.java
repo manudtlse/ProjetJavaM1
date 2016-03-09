@@ -621,7 +621,7 @@ public class client extends Object
                                                                                     fluxSortieSocket.println(requete);	
                                                                                     String retourafficherListeCompetences = fluxEntreeSocket.readLine();
                                                                                     param1= retourafficherListeCompetences.split("  ");
-                                                                                    int rep=Integer.parseInt(param1[0]);
+                                                                                    int rep=Integer.parseInt(param1[1]);
                                                                                     if(0<rep)
                                                                                     {
                                                                                         nbLigne=Integer.parseInt(param1[1]);
