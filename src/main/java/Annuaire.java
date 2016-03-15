@@ -74,7 +74,7 @@ public class Annuaire
             else
                 resultat=-1;
             } 
-        catch(Exception ex) 
+        catch(NumberFormatException | ClassNotFoundException | SQLException ex) 
         {
         // il y a eu une erreur
         ex.printStackTrace();
@@ -320,7 +320,9 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from profil_etudiant ORDER BY nom_etudiant");
-            
+            ResultSet rs2;
+            Statement s2 = con.createStatement();
+            String label_competence;
             String resultat="";
             rs.last();
             int NbLignes=rs.getRow();
@@ -328,7 +330,13 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                int id_competence= rs.getInt("id_competence");
+                rs2=s2.executeQuery("select label_competence from competence WHERE id_competence='"+id_competence+"';");
+                if(rs2.next());
+                {
+                    label_competence=rs2.getString("label_competence");
+                }
+                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence: "+label_competence+"  ";
             }
             return resultat;
         } 
@@ -347,7 +355,9 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from profil_etudiant ORDER BY prenom_etudiant");
-            
+            ResultSet rs2;
+            Statement s2 = con.createStatement();
+            String label_competence;
             String resultat="";
             rs.last();
             int NbLignes=rs.getRow();
@@ -355,7 +365,13 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                int id_competence= rs.getInt("id_competence");
+                rs2=s2.executeQuery("select label_competence from competence WHERE id_competence='"+id_competence+"';");
+                if(rs2.next());
+                {
+                    label_competence=rs2.getString("label_competence");
+                }
+                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence: "+label_competence+"  ";
             }
             return resultat;
         } 
@@ -374,7 +390,9 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from profil_etudiant ORDER BY id_competence");
-            
+            ResultSet rs2;
+            Statement s2 = con.createStatement();
+            String label_competence;
             String resultat="";
             rs.last();
             int NbLignes=rs.getRow();
@@ -382,7 +400,13 @@ public class Annuaire
             resultat=NbLignes+"  ";
             while (rs.next())
             {
-                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")+","+/* Numéro de telephone : "+rs.getString("telephone")+","*/"Compétence :"+rs.getInt("id_competence")+"  ";
+                int id_competence= rs.getInt("id_competence");
+                rs2=s2.executeQuery("select label_competence from competence WHERE id_competence='"+id_competence+"';");
+                if(rs2.next());
+                {
+                    label_competence=rs2.getString("label_competence");
+                }
+                resultat=resultat+"N°Etudiant : "+rs.getInt("num_etudiant")+", Compétence: "+label_competence+", NOM : "+rs.getString("nom_etudiant")+", Prenom : "+rs.getString("prenom_etudiant")+", "+/*Date de naissance : "+rs.getString("date_naissance")+", */"Mail : "+rs.getString("mail")/* Numéro de telephone : "+rs.getString("telephone")+","*/  +"  ";
             }
             return resultat;
         } 
@@ -715,14 +739,16 @@ public class Annuaire
             Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
             Statement s = con.createStatement();
             Statement s2 = con.createStatement();
-            ResultSet rs = s.executeQuery("select id_competence from profil_competence WHERE num_etudiant='"+num_etudiant+"' ORDER BY id_competence ;");
+            Statement s3 = con.createStatement();
+            ResultSet rs = s.executeQuery("select distinct(id_competence) from profil_competence WHERE num_etudiant='"+num_etudiant+"' ORDER BY id_competence ;");
             ResultSet rs2;
+            ResultSet rs3;
             /*rs.last();
             int NbLignes=rs.getRow();
             rs.beforeFirst();*/
             String resultat=/*NbLignes+"  "*/"";
             int id_competence=0;
-            String S_id_competence="";
+            int nbLike;
             String label_competence="";
             while (rs.next())
             {
@@ -730,9 +756,14 @@ public class Annuaire
                 rs2=s2.executeQuery("select label_competence from competence WHERE id_competence='"+id_competence+"';");
                 if(rs2.next());
                 {
+                   rs3= s3.executeQuery("SELECT count(id_competence) AS nbLike FROM profil_competence where id_competence='"+id_competence+"';");
+                   if(rs3.next());
+                   {
+                      nbLike= rs3.getInt("nbLike"); 
+                   }
                     label_competence=rs2.getString("label_competence");
                 }
-                resultat = resultat+label_competence+"("+id_competence+")"+" ";
+                resultat = resultat+label_competence+"("+nbLike+"♥)"+" ";
                 rs2.beforeFirst();
                 
             } 
@@ -853,7 +884,7 @@ public class Annuaire
         Boolean result;
         Annuaire an1;
         an1 = new Annuaire();
-        String res=an1.afficherProfilEtudiantComplet(1);
+        String res=an1.afficherListeProfilEtudiantTriNom();
         System.out.println(res);
     }		
 }

@@ -578,16 +578,16 @@ public class gestionProtocole {
                         
                         // ------------------------------ PARTIE ANONYME-----------------------------
                         
-                        case "AFFICHER_LISTE_PROFIL_ETUDIANT_ANONYLE" :
+                        case "AFFICHER_LISTE_PROFIL_ETUDIANT_ANONYME" :
                         try
                         {
                             String res = an1.afficherListeProfilEtudiantAnonyme();
-                            resultat= "OK AFFICHAGE LISTE PROFILS  "+res;
+                            resultat= "OK_AFFICHAGE_LISTE_PROFILS_ANONYME  "+res;
                            
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON OK AFFICHAGE LISTE PROFIL ETUDIANT";
+                            resultat = "NON_OK_AFFICHAGE_LISTE_PROFIL_ETUDIANT_ANONYME";
                         }
                         break;    
                          
@@ -601,7 +601,7 @@ public class gestionProtocole {
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON OK RECHERCHE NOM ANONYME ETUDIANT";
+                            resultat = "NON_OK_RECHERCHE_NOM_ANONYME_ETUDIANT";
                         }
                         break;
                         
@@ -612,11 +612,11 @@ public class gestionProtocole {
                         {
                             String prenomRecherche = param[1];
                             String res = an1.RechercherEtudiantAnonymePrenom (prenomRecherche);
-                            resultat= "OK RECHERCHE ANONYME PRENOM ETUDIANT  "+res;
+                            resultat= "OK_RECHERCHE_ANONYME_PRENOM_ETUDIANT  "+res;
                         }
                         catch (Exception e) 
                         {
-                            resultat = "NON OK ANONYME RECHERCHE PRENOM ETUDIANT";
+                            resultat = "NON_OK_ANONYME_RECHERCHE_PRENOM_ETUDIANT";
                         }
                         break;
                         

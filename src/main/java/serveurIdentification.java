@@ -43,7 +43,6 @@ public class serveurIdentification extends Thread
             System.err.println("Impossible de creer un socket serveur : "+ex);
             }
         }
-     
         if(leServeur != null)
         {
             try 
@@ -107,4 +106,4 @@ public class serveurIdentification extends Thread
             Logger.getLogger(serveurIdentification.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }
-}
+} 
