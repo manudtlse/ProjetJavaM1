@@ -562,7 +562,7 @@ public class gestionProtocole {
                                }
                                else
                                {
-                                  resultat= "NON_OK_NUM_ETUDIANT ";
+                                  resultat= "-1";
                                }
                                
                             }

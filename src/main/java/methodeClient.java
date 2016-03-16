@@ -653,10 +653,18 @@ public class methodeClient {
             c.banniere();
             String requete = "NUM_ETUDIANT "+id_compte_notifie;
             String retournum_etudiant=c.envoieData(leSocket, requete);
+            if (Integer.parseInt(retournum_etudiant)>0)
+            {
             requete = "NOTIFICATIONLIKE "+retournum_etudiant;  
             c.afficher(requete);
             String retourNotificationLike=c.envoieData(leSocket, requete);
             c.TraitementAfficherListe(retourNotificationLike);
+            }
+            else
+            {
+                System.out.println("Vous n'avez pas de profil etudiant, veuillez en créer un");
+                 
+            }
         }
    
    
