@@ -79,6 +79,10 @@ public class client extends Object
                                             ts.start();
                                             //On affiche le menu principal
                                             c.banniere();
+                                            c.afficher("Notifications :");
+                                            c.notificationLike(leSocket,id_compte);
+                                            c.afficher("");
+                                            c.banniere();
                                             c.afficher(" ////////// Veuillez tapez votre choix  \\\\\\\\\\\\\\");
                                             c.afficher("1/ Créer profil étudiant");
                                             c.afficher("2/ Modifier informations de mon profil étudiant");

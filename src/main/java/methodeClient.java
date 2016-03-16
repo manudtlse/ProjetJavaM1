@@ -579,7 +579,16 @@ public class methodeClient {
             c.TraitementAfficherListe(retourRechercheCompetence);
         }
     
-    
+    public String envoieData(Socket leSocket, String requete) throws IOException
+    {
+        PrintStream         fluxSortieSocket;
+        BufferedReader      fluxEntreeSocket;
+        fluxSortieSocket = new PrintStream(leSocket.getOutputStream());
+        fluxEntreeSocket = new BufferedReader(new InputStreamReader(leSocket.getInputStream())); 
+        fluxSortieSocket.println(requete);	      
+        String retourConnexion = fluxEntreeSocket.readLine();
+        return retourConnexion;
+    }
     
     
      //___________________________________________________________ANONYME________________________________________________________________________________________________
@@ -638,7 +647,17 @@ public class methodeClient {
    }
    
    
-   
+   public void notificationLike(Socket leSocket,int id_compte_notifie) throws IOException
+        {
+            methodeClient c=new methodeClient();
+            c.banniere();
+            String requete = "NUM_ETUDIANT "+id_compte_notifie;
+            String retournum_etudiant=c.envoieData(leSocket, requete);
+            requete = "NOTIFICATIONLIKE "+retournum_etudiant;  
+            c.afficher(requete);
+            String retourNotificationLike=c.envoieData(leSocket, requete);
+            c.TraitementAfficherListe(retourNotificationLike);
+        }
    
    
    
@@ -710,14 +729,5 @@ public class methodeClient {
         return requete;
     }
     
-    public String envoieData(Socket leSocket, String requete) throws IOException
-    {
-        PrintStream         fluxSortieSocket;
-        BufferedReader      fluxEntreeSocket;
-        fluxSortieSocket = new PrintStream(leSocket.getOutputStream());
-        fluxEntreeSocket = new BufferedReader(new InputStreamReader(leSocket.getInputStream())); 
-        fluxSortieSocket.println(requete);	      
-        String retourConnexion = fluxEntreeSocket.readLine();
-        return retourConnexion;
-    }
+    
 }

@@ -574,19 +574,20 @@ public class Annuaire
                     
                     s.executeUpdate("UPDATE profil_etudiant set nb_like='"+nb_like+"' where num_etudiant='"+num_etudiantLiker+"';");
                     s.executeUpdate("INSERT INTO Like_profil (num_etudiantLikeur,num_etudiantLiker) values ('"+num_etudiantLikeur+"','"+num_etudiantLiker+"');");
+                    s.executeUpdate("INSERT INTO notification (id_notifie,id_likeur) VALUES ('"+num_etudiantLiker+"','"+num_etudiantLikeur+"');");
+
                     resultat= 1;
                 }
             }
             else
             {
                 resultat=2;
-            }   
+            }  
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {
             resultat=-1;
         }
-        System.out.println("resultat: "+resultat);
         return resultat;
     }
     
@@ -695,6 +696,7 @@ public class Annuaire
                 //competence deja recommander pour ce profil
                 resultat=2;
             }
+            s.executeUpdate("INSERT INTO notification (id_notifie,id_recommandeur,id_competence) VALUES ('"+numEtudiantRecommander+"','"+numEtudiantRecommandeur+"','"+id_competence+"');");
         } 
         catch(ClassNotFoundException | SQLException ex) 
         {
@@ -773,6 +775,42 @@ public class Annuaire
         {
             return null;
         }
+    }
+    
+    public String notificationLike(int num_etudiant)
+    { 
+        String resultat="";
+        try 
+        {	
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
+            Statement s = con.createStatement();
+            Statement s2 = con.createStatement();
+            ResultSet rs=s.executeQuery("SELECT * FROM notification where id_notifie='"+num_etudiant+"';");
+            rs.last();
+            int NbLignes=rs.getRow();
+            rs.beforeFirst();
+            resultat=NbLignes+"  ";
+            while (rs.next())
+            {
+                int num_etudiantLikeur=rs.getInt("id_likeur");
+                System.out.println("id_likeur: "+num_etudiantLikeur);
+                ResultSet rs2 = s2.executeQuery("select * from profil_etudiant WHERE num_etudiant='"+num_etudiantLikeur+"';");
+                while (rs2.next())
+                {
+                    String nom_likeur=rs2.getString("nom_etudiant");
+                    String prenom_likeur=rs2.getString("prenom_etudiant");
+                    resultat = resultat+nom_likeur+" "+prenom_likeur+" a liké votre profil"+"  "; 
+                }  
+            } 
+            s2.executeUpdate("DELETE FROM notification WHERE id_notifie="+num_etudiant+";");
+              
+        } 
+        catch(ClassNotFoundException | SQLException ex) 
+        {
+            resultat="erreur"; 
+        }
+        return resultat;
     }
     // PARTIE ANONYME ------------------------------------------------------------------------------------
     // Affiche la liste des profils étudiant anonyme
@@ -882,9 +920,13 @@ public class Annuaire
     {
         String resultat;
         Boolean result;
+        methodeClient c=new methodeClient();
         Annuaire an1;
         an1 = new Annuaire();
-        String res=an1.afficherListeProfilEtudiantTriNom();
-        System.out.println(res);
+        int res=an1.liker_profil(1,2);
+        an1.liker_profil(5,2);
+        
+        
+        
     }		
 }

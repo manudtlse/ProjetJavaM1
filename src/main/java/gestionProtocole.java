@@ -549,7 +549,50 @@ public class gestionProtocole {
                             {
                                 resultat="NON_OK_LIKER_PROFIL";
                             }
-                        break;                   
+                        break;    
+                        
+                        case "NUM_ETUDIANT":
+                            try
+                            {
+                               int id_compte= Integer.parseInt(param[1]);
+                               int num_etudiant=an1.numEtudiant(id_compte);
+                               if (num_etudiant!=-1)
+                               {
+                                  resultat= ""+num_etudiant;
+                               }
+                               else
+                               {
+                                  resultat= "NON_OK_NUM_ETUDIANT ";
+                               }
+                               
+                            }
+                            catch (Exception e)
+                            {
+                                resultat="ERREUR_NUM_ETUDIANT";
+                            }
+                        break;    
+                        
+                        case "NOTIFICATIONLIKE":
+                            try
+                            {
+                               int id_notifie= Integer.parseInt(param[1]);
+                               String res=an1.notificationLike(id_notifie);
+                               if (!res.equals("erreur"))
+                               {
+                                  resultat= "OK_NOTIFICATION_LIKE  "+res;
+                               }
+                               else 
+                               {
+                                  resultat= "NOK_NOTIFICATION_LIKE";
+                               }
+                               
+                               
+                            }
+                            catch (Exception e)
+                            {
+                                resultat="ERREUR_NOTIFICATION_LIKE";
+                            }
+                        break;         
                         
 /*#################################################################################################################################################                          
 ###################################################################################################################################################                        
