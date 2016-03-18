@@ -1,4 +1,5 @@
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -445,7 +446,7 @@ public class methodeClient {
     public void TraitementAfficherListe (String RetourAffichageListe)
     {
         methodeClient c = new methodeClient();
-        String[] AffichageRetourAffichageListe= RetourAffichageListe.split("  ");
+        String [] AffichageRetourAffichageListe= RetourAffichageListe.split("  ");
         int nbLigne=Integer.parseInt(AffichageRetourAffichageListe[1]);
         for (int i=2;i<=nbLigne+1;i++)
         {
@@ -590,7 +591,63 @@ public class methodeClient {
         return retourConnexion;
     }
     
-    
+     
+   public void notificationLike(Socket leSocket,int id_compte_notifie) throws IOException
+        {
+            methodeClient c=new methodeClient();
+            String requete = "NUM_ETUDIANT "+id_compte_notifie;
+            String retournum_etudiant=c.envoieData(leSocket, requete);
+            if (Integer.parseInt(retournum_etudiant)>0)
+            {
+            requete = "NOTIFICATIONLIKE "+retournum_etudiant;  
+            //c.afficher(requete);
+            String retourNotificationLike=c.envoieData(leSocket, requete);
+            c.TraitementAfficherListe(retourNotificationLike);
+            }
+            else
+            {
+                System.out.println("Vous n'avez pas de profil etudiant, veuillez en créer un");
+                 
+            }
+        }
+   
+   public void notificationRecommandation(Socket leSocket,int id_compte_notifie) throws IOException
+        {
+            methodeClient c=new methodeClient();
+            String requete = "NUM_ETUDIANT "+id_compte_notifie;
+            String retournum_etudiant=c.envoieData(leSocket, requete);
+            if (Integer.parseInt(retournum_etudiant)>0)
+            {
+            requete = "NOTIFICATIONRECOMMANDATION "+retournum_etudiant;  
+            //c.afficher(requete);
+            String retourNotificationRecommandation=c.envoieData(leSocket, requete);
+            c.TraitementAfficherListe(retourNotificationRecommandation);
+            }
+            else
+            {
+                System.out.println("Vous n'avez pas de profil etudiant, veuillez en créer un");
+                 
+            }
+        }
+   
+   public void notificationMessage(Socket leSocket,int id_compte_notifie) throws IOException
+        {
+            methodeClient c=new methodeClient();
+            String requete = "NUM_ETUDIANT "+id_compte_notifie;
+            String retournum_etudiant=c.envoieData(leSocket, requete);
+            if (Integer.parseInt(retournum_etudiant)>0)
+            {
+            requete = "NOTIFICATIONMESSAGE "+retournum_etudiant;  
+            //c.afficher(requete);
+            String retourNotificationMessage=c.envoieData(leSocket, requete);
+            c.TraitementAfficherListe(retourNotificationMessage);
+            }
+            else
+            {
+                System.out.println("Vous n'avez pas de profil etudiant, veuillez en créer un");
+                 
+            }
+        }
      //___________________________________________________________ANONYME________________________________________________________________________________________________
    public String afficherListeProfilEtudiantAnonyme()
    {
@@ -646,26 +703,7 @@ public class methodeClient {
         c.afficher("Reponse du serveur : "+retourEtatConnecte);
    }
    
-   
-   public void notificationLike(Socket leSocket,int id_compte_notifie) throws IOException
-        {
-            methodeClient c=new methodeClient();
-            c.banniere();
-            String requete = "NUM_ETUDIANT "+id_compte_notifie;
-            String retournum_etudiant=c.envoieData(leSocket, requete);
-            if (Integer.parseInt(retournum_etudiant)>0)
-            {
-            requete = "NOTIFICATIONLIKE "+retournum_etudiant;  
-            c.afficher(requete);
-            String retourNotificationLike=c.envoieData(leSocket, requete);
-            c.TraitementAfficherListe(retourNotificationLike);
-            }
-            else
-            {
-                System.out.println("Vous n'avez pas de profil etudiant, veuillez en créer un");
-                 
-            }
-        }
+  
    
    
    

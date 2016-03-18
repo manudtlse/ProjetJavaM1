@@ -81,6 +81,8 @@ public class client extends Object
                                             c.banniere();
                                             c.afficher("Notifications :");
                                             c.notificationLike(leSocket,id_compte);
+                                            c.notificationRecommandation(leSocket, id_compte);
+                                            c.notificationMessage(leSocket, id_compte);
                                             c.afficher("");
                                             c.banniere();
                                             c.afficher(" ////////// Veuillez tapez votre choix  \\\\\\\\\\\\\\");
@@ -424,33 +426,6 @@ public class client extends Object
 
                                                                 // Recherche par comptence    
                                                                 case "4" : 
-                                                                    /*c.afficher("Entrez le numéro de la compétence recherchée :");
-                                                                    requete = "AFFICHER_LISTE_COMPETENCE ";
-                                                                    fluxSortieSocket.println(requete);	      
-                                                                    String retourAfficherListeCompetences = fluxEntreeSocket.readLine();
-                                                                    c.TraitementAfficherListe(retourAfficherListeCompetences);
-                                                                    c.chevron();
-                                                                    String competenceRecherche = entree.readLine();
-                                                                    requete = "RECHERCHE_ETUDIANT_COMPETENCE "+competenceRecherche;
-                                                                    fluxSortieSocket.println(requete);	      
-                                                                    String retourCompetenceRecherche = fluxEntreeSocket.readLine();	      
-                                                                    c.afficher("Reponse du serveur : "+retourCompetenceRecherche); 
-                                                                    String [] param5 = retourCompetenceRecherche.split("  ");
-                                                                    int NbLigne4=Integer.parseInt(param5[1]);
-                                                                    for (int i=2;i<=NbLigne4+1;i++)
-                                                                    {
-                                                                         c.afficher(param5[i]);
-                                                                    }
-                                                                    requete=c.Afficher_profil_complet(leSocket);
-                                                                    fluxSortieSocket.println(requete);	
-                                                                    retourAfficher_profil_complet = fluxEntreeSocket.readLine();
-                                                                    c.afficher("Reponse du serveur : "+retourAfficher_profil_complet);
-                                                                    param4 = requete.split(" ");
-                                                                    num_etudiantLiker= Integer.parseInt(param4[1]);
-                                                                    num_etudiantLikeur=an1.numEtudiant(id_compte);
-                                                                    c.afficher("Voulez vous recommander une compétence, supprimez une recommandation ou likez ce profil? 1/Oui, 2/Non");
-                                                                    c.chevron();
-                                                                    choix6=entree.readLine();*/
                                                                     
                                                                     c.rechercheEtudiantCompetence(leSocket);
                                                                     retourAfficher_profil_complet=c.Afficher_profil_complet(leSocket);

@@ -25,6 +25,7 @@ public class gestionProtocole {
         String loginBDD         = "yahimenat";
         String passwordBDD      = "odaime";
         Annuaire an1            = new Annuaire();
+        NotificationCotesServ no1=new NotificationCotesServ();
         InstantMessage im1      = new InstantMessage();
         MessageDiffere mes1     = new MessageDiffere();
         
@@ -576,7 +577,7 @@ public class gestionProtocole {
                             try
                             {
                                int id_notifie= Integer.parseInt(param[1]);
-                               String res=an1.notificationLike(id_notifie);
+                               String res=no1.notificationLike(id_notifie);
                                if (!res.equals("erreur"))
                                {
                                   resultat= "OK_NOTIFICATION_LIKE  "+res;
@@ -593,6 +594,48 @@ public class gestionProtocole {
                                 resultat="ERREUR_NOTIFICATION_LIKE";
                             }
                         break;         
+                        
+                        
+                        case "NOTIFICATIONRECOMMANDATION":
+                            try
+                            {
+                                int id_notifie= Integer.parseInt(param[1]);
+                                String res=no1.notificationRecommandation(id_notifie);
+                                if (!res.equals("erreur"))
+                                {
+                                    resultat="OK_NOTIFICATION_RECOMMANDATION  "+res;
+                                }
+                                else
+                                {
+                                    resultat="NOK_NOTIFICATION_RECOMMANDATION";
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                resultat="ERREUR_NOTIFICATION_RECOMMANDATION";
+                            }
+                        break;      
+                        
+                        case "NOTIFICATIONMESSAGE":
+                            try
+                            {
+                                int id_notifie = Integer.parseInt(param[1]);
+                                String res=no1.notificationMessage(id_notifie);
+                                if (!res.equals("erreur"))
+                                {
+                                    resultat="OK_NOTIFICATION_MESSAGE  "+res;
+                                }
+                                else
+                                {
+                                    resultat="NOK_NOTIFICATION_MESSAGE";
+                                }   
+                            }
+                            catch (Exception e)
+                            {
+                                        
+                                resultat="ERREUR_NOTIFICATION_MESSAGE";
+                            }
+                    break;  
                         
 /*#################################################################################################################################################                          
 ###################################################################################################################################################                        

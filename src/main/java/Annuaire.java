@@ -690,6 +690,7 @@ public class Annuaire
             {
                 s.executeUpdate("INSERT INTO profil_competence (num_etudiant,id_competence,nb_recommandation,num_etudiant_recommandeur) values ('"+numEtudiantRecommander+"','"+id_competence+"','1','"+numEtudiantRecommandeur+"');");
                 resultat=1; //Recommander competence OK
+                s.executeUpdate("INSERT INTO notification (id_notifie,id_recommandeur) VALUES ('"+numEtudiantRecommander+"','"+numEtudiantRecommandeur+"');");
             }
             else
             {
@@ -777,41 +778,7 @@ public class Annuaire
         }
     }
     
-    public String notificationLike(int num_etudiant)
-    { 
-        String resultat="";
-        try 
-        {	
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(url2,bdlogin,bdmdp);
-            Statement s = con.createStatement();
-            Statement s2 = con.createStatement();
-            ResultSet rs=s.executeQuery("SELECT * FROM notification where id_notifie='"+num_etudiant+"';");
-            rs.last();
-            int NbLignes=rs.getRow();
-            rs.beforeFirst();
-            resultat=NbLignes+"  ";
-            while (rs.next())
-            {
-                int num_etudiantLikeur=rs.getInt("id_likeur");
-                System.out.println("id_likeur: "+num_etudiantLikeur);
-                ResultSet rs2 = s2.executeQuery("select * from profil_etudiant WHERE num_etudiant='"+num_etudiantLikeur+"';");
-                while (rs2.next())
-                {
-                    String nom_likeur=rs2.getString("nom_etudiant");
-                    String prenom_likeur=rs2.getString("prenom_etudiant");
-                    resultat = resultat+nom_likeur+" "+prenom_likeur+" a liké votre profil"+"  "; 
-                }  
-            } 
-            s2.executeUpdate("DELETE FROM notification WHERE id_notifie="+num_etudiant+";");
-              
-        } 
-        catch(ClassNotFoundException | SQLException ex) 
-        {
-            resultat="erreur"; 
-        }
-        return resultat;
-    }
+    
     // PARTIE ANONYME ------------------------------------------------------------------------------------
     // Affiche la liste des profils étudiant anonyme
     public String afficherListeProfilEtudiantAnonyme ()
